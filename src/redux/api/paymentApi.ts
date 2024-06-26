@@ -34,6 +34,16 @@ export const paymentApi = baseApi.injectEndpoints({
         params: { page, limit },
       }),
     }),
+    getAllUsersForDashboard: build.query({
+      query: ({ token, page, limit }) => ({
+        url: `/users//get/all/user`,
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: { page, limit },
+      }),
+    }),
   }),
 });
 
@@ -42,4 +52,5 @@ export const {
   useGetSinglePaymentQuery,
   useGetDiscountForPaymentQuery,
   useGetAllCouponPaymentQuery,
+  useGetAllUsersForDashboardQuery,
 } = paymentApi;
