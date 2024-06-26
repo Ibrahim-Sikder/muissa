@@ -41,7 +41,7 @@ const PaymentForm = () => {
     data: discountAmount,
     error,
     isLoading: discountLoading,
-  } = useGetDiscountForPaymentQuery({});
+  }:any = useGetDiscountForPaymentQuery({});
 
   const handleBankChange = (event: { target: { value: string } }) => {
     setSelectedValue(event.target.value);
