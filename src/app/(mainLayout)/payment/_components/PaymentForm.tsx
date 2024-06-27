@@ -41,8 +41,7 @@ const PaymentForm = () => {
     data: discountAmount,
     error,
     isLoading: discountLoading,
-  } = useGetDiscountForPaymentQuery({});
-  console.log('discount amount ',discountAmount)
+  }:any = useGetDiscountForPaymentQuery({});
 
   const handleBankChange = (event: { target: { value: string } }) => {
     setSelectedValue(event.target.value);
@@ -77,9 +76,9 @@ const PaymentForm = () => {
         router.push("/profile");
         setIsLoading(false);
       }
-      console.log("Response:", response);
+      
     } catch (error: any) {
-      console.log(error);
+      
       if (error?.response) {
         const { status, data } = error.response;
         if ([400, 401, 409, 404, 500].includes(status)) {
