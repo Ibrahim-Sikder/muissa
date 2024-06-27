@@ -1,4 +1,5 @@
-"use client";
+'use client'
+
 import Container from "@/components/ui/HomePage/Container/Container";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -8,9 +9,12 @@ import ReactHtmlParser from 'react-html-parser';
 import Image from 'next/image';
 import ForwardIcon from '@mui/icons-material/Forward';
 import { useMediaQuery, useTheme } from '@mui/material';
-import React, { useState } from 'react';
-import './services.css';
+import React, { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic'; // Import dynamic from 'next/dynamic' for client-side rendering
+import '../services.css'; // Assuming you have custom styles here
+import { useRouter } from "next/navigation";
 
+// Function to render HTML parsed elements
 const renderElement = (element: any, index: number) => {
   if (typeof element === 'string') {
     return element;
@@ -96,80 +100,77 @@ const renderElement = (element: any, index: number) => {
   }
 };
 
+// Function to parse and render content from HTML string
 const renderContent = (content: string) => {
   const parsedContent = ReactHtmlParser(content);
   return parsedContent.map((element, index) => renderElement(element, index));
 };
 
-
+// Interface for TabPanel props
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
 }
 
+// Component for custom tab panel
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
   return (
-      <div
-          role="tabpanel"
-          hidden={value !== index}
-          id={`vertical-tabpanel-${index}`}
-          aria-labelledby={`vertical-tab-${index}`}
-          {...other}
-      >
-          {value === index && <Box sx={{ p: { sm: 1, md: 3 } }}>{children}</Box>}
-      </div>
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: { sm: 1, md: 3 } }}>{children}</Box>}
+    </div>
   );
 }
 
+// Function to provide accessibility props for tabs
 function a11yProps(index: number) {
   return {
-      id: `vertical-tab-${index}`,
-      'aria-controls': `vertical-tabpanel-${index}`,
+    id: `vertical-tab-${index}`,
+    'aria-controls': `vertical-tabpanel-${index}`,
   };
 }
 
+// Main Service Page Component
+const ServicePage = () => {
+  const router = typeof window !== 'undefined' ? useRouter() : null; // Initialize router hook conditionally
+  const { tab } = router?.query || {}; // Extract query parameter safely
+  const [value, setValue] = useState(0); // State for current tab value
+  const { data: serviceData } = useGetAllServicesQuery({}); // Fetch service data
+  const theme = useTheme(); // Get current theme
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md")); // Check for small screen
 
+  // Effect to set initial tab based on query parameter
+  useEffect(() => {
+    if (tab && serviceData) {
+      const tabIndex = serviceData.services.findIndex(
+        (service: any) => service.category === tab
+      );
+      if (tabIndex !== -1) {
+        setValue(tabIndex);
+      }
+    }
+  }, [tab, serviceData]);
 
-const tabStyles = {
-  border: "none",
-  textAlign: "left",
-  pl: {
-    sm: 1,
-    lg: 2
-  },
-  "& .MuiTab-wrapper": {
-    justifyContent: "flex-start",
-  },
-  "&.Mui-selected": {
-    borderLeft: "2px solid #002140",
-    borderRight: "none",
-    borderTop: "none",
-    borderBottom: "none",
-    color: "#fff",
-    background: "#1591A3",
-    textAlign: 'left',
-  },
-};
-
-
-const Page = () => {
-  const [value, setValue] = useState(0);
-  const { data: serviceData } = useGetAllServicesQuery({});
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
-
+  // Handle tab change
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    setValue(newValue); // Update tab value
+    router.push(`?tab=${serviceData.services[newValue].category}`, undefined, { shallow: true }); // Update URL with new tab value
   };
 
+  // Render loading if service data is not available
   if (!serviceData) {
     return <div>Loading...</div>;
   }
 
-
+  // Render service page content
   return (
     <>
       <div className="serviceDetailsWrap aboutWraps">
@@ -195,7 +196,6 @@ const Page = () => {
                 key={service.id}
                 label={service.category}
                 {...a11yProps(index)}
-                sx={tabStyles}
               />
             ))}
           </Tabs>
@@ -203,13 +203,13 @@ const Page = () => {
           {serviceData?.services?.map((service: any, index: number) => (
             <CustomTabPanel key={service.id} value={value} index={index}>
               <div className='lg:mt-0 mt-5'>
-                <div className="w-full h-96 serviceCoverImgWrap  relative">
+                <div className="w-full h-96 serviceCoverImgWrap relative">
                   <Image
                     src={service.service_image}
                     alt='services'
                     width={500}
                     height={475}
-                    className="rounded-t-lg  aspect-video h-full w-full object-cover absolute"
+                    className="rounded-t-lg aspect-video h-full w-full object-cover absolute"
                   />
                 </div>
               </div>
@@ -224,4 +224,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default ServicePage; // Export the service page component

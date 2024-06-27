@@ -58,6 +58,7 @@ const Service = async () => {
                 ) : i === 3 ? (
                   <Storefront sx={iconStyle} />
                 ) : null}
+
               </div>
               <div className="serviceContent">
                 <h4>{data?.category}</h4>
