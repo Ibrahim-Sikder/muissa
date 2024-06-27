@@ -38,10 +38,7 @@ const Footer = () => {
                   </a>
                 </div>
 
-                <div className="flex items-center gap-2 justify-center md:justify-start">
-                  <EnvelopeIcon className="h-6 w-6" />
-                  <p>muissaltd@gmail.com</p>
-                </div>
+                
                 <div>
                   <Link
                     href="https://wa.me/8801403852850?text=Hi! how can we help you ?"
@@ -113,7 +110,7 @@ const Footer = () => {
                   <Link href="/contact">Contact Us</Link>
                 </li>
                 <li>
-                  <Link href="/blog">Blog</Link>
+                  <Link href="/news/6678112da2253429001e0e11">Blog</Link>
                 </li>
                 <li>
                   <Link href="/faq">FAQs</Link>

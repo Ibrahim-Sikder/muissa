@@ -27,30 +27,17 @@ const About = () => {
               <h1> সফলতার পথে</h1>
               <h1>  ভবিষ্যতের স্বপ্ন</h1>
             </div>
-           
+
 
 
 
             <p className="mt-5 leading-9">
-            আমাদের লক্ষ্য হলো স্থানীয় এবং আন্তর্জাতিক পর্যায়ে ব্যবসায়িক প্রতিষ্ঠানগুলিকে তাদের লক্ষ্যে পৌঁছাতে সহায়তা করা এবং তাদের সাফল্যের পথে একটি শক্তিশালী সহযোগী হিসেবে নিজেদের প্রতিষ্ঠিত করা।
+              আমাদের লক্ষ্য হলো স্থানীয় এবং আন্তর্জাতিক পর্যায়ে ব্যবসায়িক প্রতিষ্ঠানগুলিকে তাদের লক্ষ্যে পৌঁছাতে সহায়তা করা এবং তাদের সাফল্যের পথে একটি শক্তিশালী সহযোগী হিসেবে নিজেদের প্রতিষ্ঠিত করা।
             </p>
 
             <div className="grid gap-10 mt-8 grid-cols-1 place-content-center place-items-center lg:grid-cols-3">
-              <div className="text-center">
-                <CircleProgressBar />
-                <h4 className="mt-3">Work </h4>
-                <h4 className="mt-3">Development </h4>
-              </div>
-              <div className="text-center">
-                <CircleProgressBar />
-                <h4 className="mt-3">Plan </h4>
-                <h4 className="mt-3">Fulfilled </h4>
-              </div>
-              <div className="text-center">
-                <CircleProgressBar />
-                <h4 className="mt-3">Work </h4>
-                <h4 className="mt-3">Development </h4>
-              </div>
+              <CircleProgressBar />
+
             </div>
           </div>
           <div className="order-1 xl:order-2">
@@ -58,6 +45,7 @@ const About = () => {
           </div>
         </div>
         <WorkingProcess />
+
       </Container>
       <Award />
       <TeamSection />

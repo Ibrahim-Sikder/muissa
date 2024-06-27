@@ -21,8 +21,6 @@ import { z } from "zod";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import MUIMultiSelect from "@/components/Forms/MultiSelect";
-import { role, subCategories, supportServices, support_items } from "@/types";
 import MUITextArea from "@/components/Forms/TextArea";
 import MUIFileUploader from "@/components/Forms/FileUpload";
 import DocUploader from "@/components/Forms/DocUploader";
@@ -47,6 +45,8 @@ import {
 } from "@/redux/api/memeberApi";
 import Loader from "@/components/Loader";
 import userImg from '../../../assets/logo/profile.png'
+import MUIMultiValue from "@/components/Forms/MultiPleValue";
+import { support_items } from "@/types";
 
 // const validationSchema = z.object({
 //   user: z.string().email("একটি বৈধ ইমেল ঠিকানা প্রদান করুন!").optional(),
@@ -498,19 +498,11 @@ const Profile = () => {
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6} lg={12}>
-                          {/* <MUIMultiSelect
-                            items={supportServices}
-                            name="need_of_service"
+
+                          <MUIMultiValue name="need_of_service"
                             label="পরিষেবার প্রয়োজনীয়তা"
-                            fullWidth
-                            size="medium"
-                          /> */}
-                          <INTSelect
-                            name="need_of_service"
-                            label="পরিষেবার প্রয়োজনীয়তা"
-                           fullWidth 
-                           items={support_items}
-                          />
+                            options={support_items} />
+
                         </Grid>
 
                         <Grid item xs={12} sm={6} md={12} lg={12}>

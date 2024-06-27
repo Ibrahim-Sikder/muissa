@@ -10,6 +10,7 @@ import './Company.css';
 const Company = () => {
   return (
     <div className="sectionMargin">
+    
       <div>
         <div className="slidersWraps md:mt-10 lg:mt-16">
           <Marquee gradient={false} speed={30}>

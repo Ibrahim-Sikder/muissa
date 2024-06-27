@@ -85,7 +85,6 @@ const UpdateService = ({ id }: { id: string }) => {
 
     data.service_image = imageUrl;
     data.priority = Number(data.priority);
-    console.log("values", id);
     try {
       const response = await axios.put(
         `${process.env.NEXT_PUBLIC_BASE_API_URL}/services/${id}`,
@@ -96,25 +95,15 @@ const UpdateService = ({ id }: { id: string }) => {
           },
         }
       );
- 
+
       if (response?.status === 200) {
         toast.success(response?.data?.message);
         setSuccessMessage(response?.data?.message);
         refetch();
-        refetchService()
+        refetchService();
         router.push("/dashboard/services");
         setLoading(false);
       }
-      // refetch();
-      // router.push("/dashboard/services");
-      // if (response?.status === "success") {
-      //   toast.success(response?.message);
-      //   setSuccessMessage(response?.message);
-      //   refetch();
-      //   router.push("/dashboard/services");
-      // } else {
-      //   throw new Error("Unexpected response status");
-      // }
     } catch (error: any) {
       console.log(error);
 

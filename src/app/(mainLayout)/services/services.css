@@ -49,4 +49,7 @@
     width: 100%;
 
   }
+  .serviceDetailsWrap {
+    height: 230px;
+  }
 }
