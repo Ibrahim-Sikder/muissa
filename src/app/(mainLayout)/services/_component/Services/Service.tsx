@@ -18,7 +18,8 @@ const Service = async () => {
 
 
 
-  const sortedServices: TServices[] = servicesData?.data.services?.sort((a: TServices, b: TServices) => a.priority - b.priority);
+
+ const sortedServices: TServices[] = servicesData?.data.services?.sort((a: TServices, b: TServices) => a.priority - b.priority);
 
   const iconStyle = {
     fontSize: {

@@ -224,13 +224,14 @@ const ServicePage = () => {
             <CustomTabPanel key={service.id} value={value} index={index}>
               <div className='lg:mt-0 mt-5'>
                 <div className="w-full h-96 serviceCoverImgWrap relative">
-                  <Image
+                <Image
                     src={service.service_image}
                     alt='services'
-                    width={500}
-                    height={475}
-                    className="rounded-t-lg aspect-video h-full w-full object-cover absolute"
+                   width={500}
+                   height={500}
+                  
                   />
+                  
                 </div>
               </div>
               <h4 className='mt-10'>{service.title}</h4>

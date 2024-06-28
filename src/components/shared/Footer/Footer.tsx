@@ -1,4 +1,6 @@
-import React from "react";
+
+
+
 import { Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,8 +15,16 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import NewsLetter from "./NewsLetter";
+import { TServices } from "@/types";
 
-const Footer = () => {
+const Footer = async () => {
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/services/get-services`, {
+    cache: "no-store",
+  });
+  const servicesData = await res.json();
+  const sortedServices: TServices[] = servicesData?.data.services?.sort((a: TServices, b: TServices) => a.priority - b.priority);
+
   return (
     <>
       <NewsLetter />
@@ -38,7 +48,7 @@ const Footer = () => {
                   </a>
                 </div>
 
-                
+
                 <div>
                   <Link
                     href="https://wa.me/8801403852850?text=Hi! how can we help you ?"
@@ -91,7 +101,7 @@ const Footer = () => {
                 <li>Careers</li>
               </ul>
             </div>
-            <div className="md:text-left w-full md:w-auto px-4">
+            {/* <div className="md:text-left w-full md:w-auto px-4">
               <h4>Services</h4>
               <ul className="space-y-5 mt-5">
                 <li>Product Support</li>
@@ -102,6 +112,19 @@ const Footer = () => {
                 <li>Funding Support</li>
                 <li>Investment Support</li>
               </ul>
+            </div> */}
+            <div className="md:text-left w-full md:w-auto px-4">
+              <h4>Services</h4>
+
+              {
+                sortedServices.map((data) => (
+                  <ul key={data._id} className="space-y-5 mt-5">
+                    <Link href={`/services/${data._id}`}>  <li>{data?.category}</li></Link>
+                  </ul>
+                ))
+
+              }
+
             </div>
             <div className="md:text-left w-full md:w-auto px-4">
               <h4>Resources</h4>
