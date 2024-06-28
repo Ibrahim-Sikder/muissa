@@ -19,6 +19,7 @@ const NewsSection = () => {
 
   const { data: blogData, error, isLoading, refetch } = useGetAllBlogsQuery({
  
+    
   });
   if (isLoading) {
     return <Loader/>

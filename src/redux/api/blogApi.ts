@@ -18,7 +18,7 @@ export const blogApi = baseApi.injectEndpoints({
         url: `/blogs/${id}`,
         method: "GET",
       }),
-      providesTags: (result, error, id) => [{ type: "blogs", id }],
+      providesTags:['blogs'],
     }),
 
     updateBlog: build.mutation({

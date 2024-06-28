@@ -131,7 +131,7 @@ const News = async ({ params }: BlogId) => {
 
 
 
-   const formatDate = (dateString: string) => {
+  const formatDate = (dateString: string) => {
     const options = {
       year: "numeric",
       month: "long",
@@ -159,7 +159,7 @@ const News = async ({ params }: BlogId) => {
                   <div className="flex items-center justify-between w-full ">
                     <div className="flex items-center ">
                       <HiChevronRight />
-                      <p>ফান্ডিং সাপোর্ট </p>
+                      <Link href='/services'> <p>ফান্ডিং সাপোর্ট </p></Link>
                     </div>
                     <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
                       5
@@ -173,7 +173,8 @@ const News = async ({ params }: BlogId) => {
                   <div className="flex items-center justify-between w-full ">
                     <div className="flex items-center ">
                       <HiChevronRight />
-                      <p>ইনভেস্টমেন্ট সাপোর্ট</p>
+
+                      <Link href='/services'><p>ইনভেস্টমেন্ট সাপোর্ট</p></Link>
                     </div>
                     <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
                       10
@@ -185,7 +186,8 @@ const News = async ({ params }: BlogId) => {
                   <div className="flex items-center justify-between w-full ">
                     <div className="flex items-center ">
                       <HiChevronRight />
-                      <p>মার্কেটিং সাপোর্ট</p>
+
+                      <Link href='/services'> <p>মার্কেটিং সাপোর্ট</p></Link>
                     </div>
                     <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
                       7
@@ -197,7 +199,8 @@ const News = async ({ params }: BlogId) => {
                   <div className="flex items-center justify-between w-full ">
                     <div className="flex items-center ">
                       <HiChevronRight />
-                      <p>আইটি সাপোর্ট</p>
+
+                      <Link href='/services'> <p>আইটি সাপোর্ট</p></Link>
                     </div>
                     <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
                       7
@@ -216,20 +219,24 @@ const News = async ({ params }: BlogId) => {
 
                     {
                       blogDetails?.data?.blogs?.slice(0, 3)?.map((blogInfo: TBlog) => (
-                        <div key={blogInfo._id} className="flex flex-col md:flex-row items-center justify-between gap-10 ">
-                          <Image
-                            className="w-full object-fill h-auto sm:w-20 sm:h-20 md:w-30 md:h-30 lg:w-28 lg:h-28 rounded-full"
-                            src={blogInfo?.blog_image}
-                            alt="news"
-                            width={500}
-                            height={500}
-                          />
-                          <div>
-                            <h5 className="font-semibold">
-                              {blogInfo?.title}
-                            </h5>
-                            <small>{formatDate(blogInfo.createdAt)}</small>
-                          </div>
+                        <div key={blogInfo._id}>
+                          <Link href={`/news/${blogInfo._id}`}>
+                            <div className="flex flex-col md:flex-row items-center justify-between gap-10 ">
+                              <Image
+                                className="w-full object-fill h-auto sm:w-20 sm:h-20 md:w-30 md:h-30 lg:w-28 lg:h-28 rounded-full"
+                                src={blogInfo?.blog_image}
+                                alt="news"
+                                width={500}
+                                height={500}
+                              />
+                              <div>
+                                <h5 className="font-semibold">
+                                  {blogInfo?.title}
+                                </h5>
+                                <small>{formatDate(blogInfo.createdAt)}</small>
+                              </div>
+                            </div>
+                          </Link>
                         </div>
                       ))
                     }
@@ -283,7 +290,7 @@ const News = async ({ params }: BlogId) => {
               </div>
             </div>
             <Divider sx={{ marginTop: "20px" }} />
-              <UserComment id={newsId}/>
+            <UserComment id={newsId} />
             <CommentForm id={newsId} />
           </div>
         </div>

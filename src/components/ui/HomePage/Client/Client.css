@@ -128,8 +128,8 @@
 @media only screen and (max-width: 375px) {
   .clientWrap {
     bottom: -87px;
-    left: 17%;
-  }
+    left: 32%;
+}
 
   .clientCard {
     height: 226px;

@@ -2,15 +2,23 @@
 
 import { Button } from '@mui/material';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HiChevronRight } from 'react-icons/hi';
 import user from "../../../../assets/logo/user.png";
 import { useGetSingleBlogQuery } from '@/redux/api/blogApi';
 import Loader from '@/components/Loader';
+import { usePathname } from 'next/navigation';
 
 const UserComment = ({ id }: any) => {
+    const pathname = usePathname();
 
-    const { data: commentData, error, isLoading, } = useGetSingleBlogQuery({ id })
+
+    const { data: commentData, error, isLoading, refetch } = useGetSingleBlogQuery({ id })
+
+    useEffect(() => {
+        refetch()
+    }, [pathname, refetch]);
+
 
     if (isLoading) {
         return <Loader />
@@ -48,9 +56,9 @@ const UserComment = ({ id }: any) => {
                         />
                         <div className="commentCard">
                             <div className="absolute top-3 right-3">
-                                <Button sx={{ width: "70px", height: "35px" }}>
+                                {/* <Button sx={{ width: "70px", height: "35px" }}>
                                     Reply <HiChevronRight className="text-[#fff]" />
-                                </Button>
+                                </Button> */}
                             </div>
                             <div>
                                 <h4>{data?.user?.name}</h4>
