@@ -25,6 +25,11 @@ const Footer = async () => {
   const servicesData = await res.json();
   const sortedServices: TServices[] = servicesData?.data.services?.sort((a: TServices, b: TServices) => a.priority - b.priority);
 
+   if (!sortedServices || !servicesData) {
+    return <h1 className="mt-10 flex items-center justify-center text-3xl capitalize ">Oops! Services data not found! </h1>
+
+  }
+
   return (
     <>
       <NewsLetter />

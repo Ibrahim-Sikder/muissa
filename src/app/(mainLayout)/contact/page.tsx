@@ -48,7 +48,7 @@ console.log(data)
       const res = await createClient(data).unwrap;
       console.log(res);
       router.push('/')
-      toast.success('/Thank you for contact us!')
+      toast.success('Thank you for contact us!')
     } catch (err) {
       console.log(err);
     }

@@ -12,6 +12,7 @@ import { useMediaQuery, useTheme } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import '../services.css';
 import { useRouter, useSearchParams } from "next/navigation";
+import Loader from "@/components/Loader";
 
 
 const renderElement = (element: any, index: number) => {
@@ -142,7 +143,7 @@ const ServicePage = () => {
   const searchParams = useSearchParams(); 
   const tab = searchParams.get('tab'); 
   const [value, setValue] = useState(0); 
-  const { data: serviceData } = useGetAllServicesQuery({}); 
+  const { data: serviceData, isLoading, error } = useGetAllServicesQuery({}); 
   const theme = useTheme(); 
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -164,9 +165,6 @@ const ServicePage = () => {
   };
 
 
-  if (!serviceData) {
-    return <div>Loading...</div>;
-  }
 
   const tabStyles = {
     border: "none",
@@ -188,6 +186,15 @@ const ServicePage = () => {
       textAlign: 'left',
     },
   };
+
+  if (!serviceData || error) {
+    return <h1 className="mt-10 flex items-center justify-center text-3xl capitalize ">Oops! Services data not found! </h1>
+
+  }
+
+  if (isLoading) {
+    return <Loader />
+  }
 
 
   return (

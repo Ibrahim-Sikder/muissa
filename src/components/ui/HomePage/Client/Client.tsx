@@ -15,6 +15,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Autoplay } from "swiper/modules";
 import { useGetAllReviewsQuery } from "@/redux/api/reviewApi";
+import Loader from "@/components/Loader";
 
 
 type Treview = {
@@ -25,6 +26,7 @@ type Treview = {
   _id: string,
 
 }
+
 const Client = () => {
 
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -33,11 +35,13 @@ const Client = () => {
 
   const { data: reviewData, error, isLoading, refetch } = useGetAllReviewsQuery({});
   if (isLoading) {
-    return <p>Loading</p>
+    return <Loader />
   }
 
-  if (error) {
-    return <p>someting went wrong</p>
+
+  if (error || !reviewData) {
+    return <h1 className="mt-10 flex items-center justify-center text-3xl capitalize ">Oops! Reviews data not found! </h1>
+
   }
 
 

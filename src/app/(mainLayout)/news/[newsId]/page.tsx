@@ -114,6 +114,7 @@ interface BlogId {
 
 
 
+
 const News = async ({ params }: BlogId) => {
   const { newsId } = params;
 
@@ -128,6 +129,10 @@ const News = async ({ params }: BlogId) => {
   const blogDetails = await response.json()
   console.log('blog details data ', blogDetails)
 
+  if (!blog || !blogDetails) {
+    return <h1 className="mt-10 flex items-center justify-center text-3xl capitalize ">Oops! Blog data not found! </h1>
+
+  }
 
 
   const buttonStyle = {
@@ -293,7 +298,7 @@ const News = async ({ params }: BlogId) => {
             </div>
 
             <div className="socialMedia flex-col md:flex-row gap-5 lg:gap-0  flex justify-end flex-end   mt-10 ">
-             
+
               <div className="flex  items-center space-x-3 ">
                 <span>Share: </span>
                 <Link href='/https://www.facebook.com/profile.php?id=61558510933789'><Image className="w-10" src={facebook} alt="facebook" /></Link>

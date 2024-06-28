@@ -10,6 +10,7 @@ import ForwardIcon from '@mui/icons-material/Forward';
 import { useMediaQuery, useTheme } from '@mui/material';
 import React, { useState } from 'react';
 import './services.css';
+import Loader from "@/components/Loader";
 
 const renderElement = (element: any, index: number) => {
   if (typeof element === 'string') {
@@ -112,22 +113,22 @@ function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
   return (
-      <div
-          role="tabpanel"
-          hidden={value !== index}
-          id={`vertical-tabpanel-${index}`}
-          aria-labelledby={`vertical-tab-${index}`}
-          {...other}
-      >
-          {value === index && <Box sx={{ p: { sm: 1, md: 3 } }}>{children}</Box>}
-      </div>
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: { sm: 1, md: 3 } }}>{children}</Box>}
+    </div>
   );
 }
 
 function a11yProps(index: number) {
   return {
-      id: `vertical-tab-${index}`,
-      'aria-controls': `vertical-tabpanel-${index}`,
+    id: `vertical-tab-${index}`,
+    'aria-controls': `vertical-tabpanel-${index}`,
   };
 }
 
@@ -157,7 +158,7 @@ const tabStyles = {
 
 const Page = () => {
   const [value, setValue] = useState(0);
-  const { data: serviceData } = useGetAllServicesQuery({});
+  const { data: serviceData, isLoading, error } = useGetAllServicesQuery({});
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -165,9 +166,15 @@ const Page = () => {
     setValue(newValue);
   };
 
-  if (!serviceData) {
-    return <div>Loading...</div>;
+  if (!serviceData || error) {
+    return <h1 className="mt-10 flex items-center justify-center text-3xl capitalize ">Oops! Services data not found! </h1>
+
   }
+
+  if (isLoading) {
+    return <Loader />
+  }
+
 
 
   return (
