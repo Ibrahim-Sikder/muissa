@@ -107,14 +107,18 @@ const Membership = () => {
     member_type,
     id,
   });
-  console.log(memberShipData, "this is member ship page from ");
+  
 
   const defaultValues = {
     profile_pic: memberShipData?.user?.profile_pic || "",
     name: memberShipData?.user?.name || "",
     email: memberShipData?.user?.auth || "",
     additional_info: memberShipData?.additional_info || "",
-    need_of_service: memberShipData?.need_of_service || "",
+    need_of_service: Array.isArray(memberShipData?.need_of_service)
+    ? memberShipData.need_of_service.map((service:any) => ({ title: service.title || service }))   
+    : typeof memberShipData?.need_of_service === 'string'
+    ? memberShipData.need_of_service.split(',').map((service:any) => ({ title: service.trim() }))
+    : [],
     business_description: memberShipData?.business_description || "",
     website: memberShipData?.website || "",
     business_address: memberShipData?.business_address || "",
@@ -123,6 +127,9 @@ const Membership = () => {
   };
 
   const handleSubmit = async (data: FieldValues) => {
+    if (Array.isArray(data.need_of_service)) {
+      data.need_of_service = data.need_of_service.map(item => item.title); 
+    }
     data.upload_file = uploadedImage;
     data.member_type = userType;
 
@@ -161,7 +168,7 @@ const Membership = () => {
       ) {
         toast.success(response.data.message);
         setSuccessMessage(response.data.message);
-        setLoading(false);
+     
 
         router.push(
           `/${response.data.data.redirectUrl}?member_type=${userType}&id=${response.data.data.userId}`
@@ -170,7 +177,7 @@ const Membership = () => {
       if (response.status === 200 && response.data.data.success === false) {
         toast.error(response.data.data.message);
         setErrorMessage([response.data.data.message]);
-        setLoading(false);
+        
 
         router.push(
           `/${response.data.data.redirectUrl}?member_type=${userType}&id=${response.data.data.userId}`

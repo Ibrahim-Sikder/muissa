@@ -21,6 +21,7 @@ import React from "react";
 import CommentForm from "../_components/CommentForm";
 import ReactHtmlParser from "react-html-parser";
 import Link from "next/link";
+import { toast } from "sonner";
 
 const renderContent = (content: string) => {
   const parsedContent = ReactHtmlParser(content);
@@ -122,12 +123,13 @@ const News = async ({ params }: BlogId) => {
     cache: "no-store",
   });
   const blog = await res.json();
+  console.log('blog details data ', blog)
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/blogs/get-blogs`, {
     cache: "no-store",
   });
   const blogDetails = await response.json()
-  console.log('blog details data ', blogDetails)
+  // console.log('blog details data ', blogDetails)
 
   if (!blog || !blogDetails) {
     return <h1 className="mt-10 flex items-center justify-center text-3xl capitalize ">Oops! Blog data not found! </h1>
@@ -166,8 +168,8 @@ const News = async ({ params }: BlogId) => {
     return new Date(dateString).toLocaleDateString("en-US");
   };
 
-
-
+ 
+console.log(blog?.comments)
   return (
     <>
       <div className="serviceDetailsWrap aboutWraps">
@@ -314,7 +316,7 @@ const News = async ({ params }: BlogId) => {
                 <h4 className="mb-8 text-[#1591A3]">5 Comments </h4>
               </div>
               <div className="grid grid-rows-1 gap-10">
-                {commentData.map((data) => (
+                {blog?.comments?.map((data:any) => (
                   <div
                     key={data.id}
                     className="flex flex-col  justify-between gap-10 "
