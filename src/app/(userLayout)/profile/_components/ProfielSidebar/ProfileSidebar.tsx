@@ -13,6 +13,7 @@ const ProfileSidebar = () => {
     setActiveLink(pathname);
   }, [pathname]);
 
+  
   const isActive = (path: string) => activeLink === path;
 
   return (
