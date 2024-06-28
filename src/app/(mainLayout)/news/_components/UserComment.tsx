@@ -20,6 +20,7 @@ const UserComment = ({ id }: any) => {
     }, [pathname, refetch]);
 
 
+
     if (isLoading) {
         return <Loader />
     }
@@ -41,7 +42,7 @@ const UserComment = ({ id }: any) => {
     return (
         <div className="comment sectionMargin ">
             <div className="mt-5">
-                <h4 className="mb-8 text-[#1591A3]">5 Comments </h4>
+                <h4 className="mb-8 text-[#1591A3]">{commentData?.comments?.length} Comments </h4>
             </div>
             <div className="grid grid-rows-1 gap-10">
                 {commentData?.comments?.map((data: any) => (

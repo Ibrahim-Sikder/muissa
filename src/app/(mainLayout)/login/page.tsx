@@ -16,7 +16,7 @@ import { SuccessMessage } from "@/components/success-message";
 import { ErrorMessage } from "@/components/error-message";
 import { setCookie } from "@/helpers/Cookies";
 
-// Define the validation schema using Zod
+
 const validationSchema = z.object({
   auth: z.string({ required_error: "This field is required." }).refine(
     (value) => {

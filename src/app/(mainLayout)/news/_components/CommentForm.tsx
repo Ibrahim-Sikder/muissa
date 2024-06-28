@@ -4,7 +4,6 @@ import MUIForm from "@/components/Forms/Form";
 import MUITextArea from "@/components/Forms/TextArea";
 import { ErrorMessage } from "@/components/error-message";
 import { getCookie } from "@/helpers/Cookies";
-import { useCreateCommentMutation } from "@/redux/api/commentApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Grid } from "@mui/material";
 import axios from "axios";
@@ -12,23 +11,15 @@ import React, { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
 
 const validationSchema = z.object({
   comment: z.string(),
 });
+
 const CommentForm = ({ id }: any) => {
   const token = getCookie("mui-token");
-
-  // const [createComment] = useCreateCommentMutation();
-  // const handleSubmit = async (data: FieldValues) => {
-  //   console.log(data, "post comment data ");
-  //   try {
-  //     const res = await createComment({ token, data, id }).unwrap();
-  //     console.log(res, "post res data ");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const router = useRouter();
 
   const [errorMessage, setErrorMessage] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -49,11 +40,10 @@ const CommentForm = ({ id }: any) => {
 
       if (response?.status === 200) {
         toast.success(response?.data?.message);
-
         setLoading(false);
+        window.location.reload()
       }
     } catch (error: any) {
-   
       if (error?.response) {
         const { status, data } = error.response;
         if ([400, 404, 500].includes(status)) {

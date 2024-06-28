@@ -141,6 +141,7 @@ const News = async ({ params }: BlogId) => {
   };
 
 
+
   console.log('blog comments data', blog?.comments)
   return (
     <>
@@ -245,19 +246,6 @@ const News = async ({ params }: BlogId) => {
                 </div>
               </div>
             </div>
-
-
-            {/* <div className="mt-100 px-10 mt-5">
-              <h4 className="mb-5">Gallery </h4>
-              <div>
-                {blogDetails?.data?.blogs.map((data) => (
-                  <div key={data._id} className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    <Image width={40} height={40} src={data?.blog_image} alt="gallery" />
-                    
-                  </div>
-                ))}
-              </div>
-            </div> */}
           </div>
           <div className="lg:col-span-8 ">
             <div className="newsDetailsRightSideWrap text-[15px]">
