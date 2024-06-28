@@ -6,22 +6,15 @@ import { Button, Divider, Grid } from "@mui/material";
 import { FaCalendarAlt, FaUser } from "react-icons/fa";
 import facebook from "../../../../assets/icon/facebook.png";
 import linkedIn from "../../../../assets/icon/linkedin.png";
-import twitter from "../../../../assets/icon/twitter.png";
 import user from "../../../../assets/news/user.jpg";
 import instagram from "../../../../assets/icon/instagram.png";
-import gallery from "../../../../assets/news/gallery.jpg";
-import gallery2 from "../../../../assets/news/gallery2.jpg";
-import gallery3 from "../../../../assets/news/gallery3.jpg";
-import gallery4 from "../../../../assets/news/gallery4.jpg";
-import gallery5 from "../../../../assets/news/gallery5.jpg";
-import gallery6 from "../../../../assets/icon/instagram.png";
 import { HiChevronRight } from "react-icons/hi";
 
 import React from "react";
 import CommentForm from "../_components/CommentForm";
 import ReactHtmlParser from "react-html-parser";
 import Link from "next/link";
-import { toast } from "sonner";
+import UserComment from "../_components/UserComment";
 
 const renderContent = (content: string) => {
   const parsedContent = ReactHtmlParser(content);
@@ -129,7 +122,7 @@ const News = async ({ params }: BlogId) => {
     cache: "no-store",
   });
   const blogDetails = await response.json()
-  // console.log('blog details data ', blogDetails)
+
 
   if (!blog || !blogDetails) {
     return <h1 className="mt-10 flex items-center justify-center text-3xl capitalize ">Oops! Blog data not found! </h1>
@@ -137,29 +130,8 @@ const News = async ({ params }: BlogId) => {
   }
 
 
-  const buttonStyle = {
-    background: "#ddd",
-    color: "black",
-    borderRadius: "5px",
-  };
-  const commentData = [
-    {
-      id: 1,
-      name: "Riva Collins",
-      date: "Jun 9, 2024 - 2:07 am",
-      description:
-        "It’s no secret that the digital industry is booming. From   exciting startups to need ghor global and brands, companies    are reaching out.",
-    },
-    {
-      id: 1,
-      name: "Riva Collins",
-      date: "Jun 9, 2024 - 2:07 am",
-      description:
-        "It’s no secret that the digital industry is booming. From   exciting startups to need ghor global and brands, companies    are reaching out.",
-    },
-  ];
 
-  const formatDate = (dateString: string) => {
+   const formatDate = (dateString: string) => {
     const options = {
       year: "numeric",
       month: "long",
@@ -168,8 +140,8 @@ const News = async ({ params }: BlogId) => {
     return new Date(dateString).toLocaleDateString("en-US");
   };
 
- 
-console.log(blog?.comments)
+
+  console.log('blog comments data', blog?.comments)
   return (
     <>
       <div className="serviceDetailsWrap aboutWraps">
@@ -311,39 +283,8 @@ console.log(blog?.comments)
               </div>
             </div>
             <Divider sx={{ marginTop: "20px" }} />
-            <div className="comment sectionMargin ">
-              <div className="mt-5">
-                <h4 className="mb-8 text-[#1591A3]">5 Comments </h4>
-              </div>
-              <div className="grid grid-rows-1 gap-10">
-                {blog?.comments?.map((data:any) => (
-                  <div
-                    key={data.id}
-                    className="flex flex-col  justify-between gap-10 "
-                  >
-                    <Image
-                      className="w-20 h-20 rounded-full "
-                      src={user}
-                      alt="user"
-                    />
-                    <div className="commentCard">
-                      <div className="absolute top-3 right-3">
-                        <Button sx={{ width: "70px", height: "35px" }}>
-                          Reply <HiChevronRight className="text-[#fff]" />
-                        </Button>
-                      </div>
-                      <div>
-                        <h4>{data.name}</h4>
-                        <small>{data.date}</small>
-                      </div>
-                      <p className="mt-5 ">{data.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <CommentForm id={newsId} />
-            </div>
+              <UserComment id={newsId}/>
+            <CommentForm id={newsId} />
           </div>
         </div>
       </Container>

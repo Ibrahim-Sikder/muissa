@@ -9,6 +9,7 @@ import {
 type TFormConfig = {
   resolver?: any;
   defaultValues?: Record<string, any>;
+  methods: any;  // Add methods prop to receive useForm methods
 };
 
 type TInputProps = {
@@ -21,21 +22,13 @@ const MUIForm = ({
   onSubmit,
   resolver,
   defaultValues,
+  methods,  // Destructure methods prop
 }: TInputProps) => {
-  const formConfig: TFormConfig = {};
-
-  if (formConfig) {
-    formConfig["resolver"] = resolver;
-  }
-  if (defaultValues) {
-    formConfig["defaultValues"] = defaultValues;
-  }
-  const methods = useForm(formConfig);
   const { handleSubmit, reset } = methods;
 
   const submit: SubmitHandler<FieldValues> = (data: FieldValues) => {
-    // console.log(data);
     onSubmit(data);
+    reset();  // Reset the form here
   };
 
   return (
