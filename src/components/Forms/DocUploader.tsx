@@ -16,7 +16,7 @@ type INTFileUploaderProps = {
 
 const DocUploader = ({ name, sx, setUploadedImage, uploadedImage }: INTFileUploaderProps) => {
   const { control, setValue, watch } = useFormContext();
-  // const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+   
   const [loading, setLoading] = useState<boolean>(false);
 
   const selectedFile = watch(name);
@@ -108,7 +108,7 @@ const DocUploader = ({ name, sx, setUploadedImage, uploadedImage }: INTFileUploa
               <Box mt={2}>
                 <label
                   htmlFor="files"
-                  // onClick={handleUpload}
+                  
                   style={{
                     padding: "10px 15px",
                     border: "none",
