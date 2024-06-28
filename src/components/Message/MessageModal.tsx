@@ -260,8 +260,7 @@ const MessageModal = ({ close }: TProps) => {
                   alt="logo"
                   height={100}
                 />
-                <small className="">Question ? </small>
-                <small> chat with us !</small>
+                
 
                 {userDetails && <span>{userDetails?.name}</span>}
                 {onlineStatus ? "online" : "offline"}

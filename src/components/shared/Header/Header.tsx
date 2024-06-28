@@ -80,6 +80,11 @@ const Header = () => {
     return `${count} notifications`;
   }
 
+  const buttonStyle = {
+    width:"80px",
+    fontSize:'12px'
+  }
+
 
   return (
     <header>
@@ -211,7 +216,7 @@ const Header = () => {
                       <li onClick={logOut} className="cursor-pointer text-white">
                         <p>Logout</p>
                       </li>
-                      <Box sx={{margin:'0px 10px '}} component={Link} href='/profile'> <AccountCircle /></Box>
+                      <Box sx={{ margin: '0px 10px ' }} component={Link} href='/profile'> <AccountCircle /></Box>
                     </>
                   ) : (
                     <li>
@@ -225,16 +230,16 @@ const Header = () => {
 
 
                 </ul>
-               <div className="hidden lg:block ml-2">
-               <IconButton aria-label={notificationsLabel(100)}>
-                  <Badge badgeContent={100} color="primary">
-                    <Notifications
-                      className="notificationIcon"
-                      sx={{ fontSize: "30px", color: "#fff" }}
-                    />
-                  </Badge>
-                </IconButton>
-               </div>
+                <div className="hidden lg:block ml-2">
+                  <IconButton aria-label={notificationsLabel(100)}>
+                    <Badge badgeContent={100} color="primary">
+                      <Notifications
+                        className="notificationIcon"
+                        sx={{ fontSize: "30px", color: "#fff" }}
+                      />
+                    </Badge>
+                  </IconButton>
+                </div>
               </div>
             </nav>
             <div className="membershipBtn">
@@ -289,31 +294,35 @@ const Header = () => {
               <li>
                 <Link href="/contact" onClick={toggleMobileMenu}>Contact </Link>
               </li>
-              <li>
-                <Link href="/profile" onClick={toggleMobileMenu}>Profile </Link>
-              </li>
-              
+
+
             </ul>
           </nav>
           <div>
             <Divider />
             <ul className="mt-3">
-            {authenticated ? (
-                <li onClick={logOut} 
-                className="cursor-pointer"><p>Logout</p>
-                
-                </li>
+              {authenticated ? (
+                <>
+                  <li>
+                    <Link href="/profile" onClick={toggleMobileMenu}>My Profile </Link>
+                  </li>
+                  <li>
+                    <Link href="/profile" onClick={toggleMobileMenu}>My Account</Link>
+                  </li>
+                  <li>
+                    <Link href="/profile/service" onClick={toggleMobileMenu}>My services</Link>
+                  </li>
+                  <li onClick={logOut}
+                    className="cursor-pointer"><Button sx={buttonStyle}>Logout</Button>
+
+                  </li>
+                </>
               ) : (
                 <li>
-                  <Link href="/login" onClick={toggleMobileMenu}>Login</Link>
+                  <Link href="/login" onClick={toggleMobileMenu}><Button sx={buttonStyle}>Login</Button></Link>
                 </li>
               )}
-              <li>
-                <Link href="/profile" onClick={toggleMobileMenu}>Account</Link>
-              </li>
-              <li>
-                <Link href="/profile/service" onClick={toggleMobileMenu}>My services</Link>
-              </li>
+
             </ul>
           </div>
         </div>

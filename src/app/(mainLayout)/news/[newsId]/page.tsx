@@ -6,20 +6,15 @@ import { Button, Divider, Grid } from "@mui/material";
 import { FaCalendarAlt, FaUser } from "react-icons/fa";
 import facebook from "../../../../assets/icon/facebook.png";
 import linkedIn from "../../../../assets/icon/linkedin.png";
-import twitter from "../../../../assets/icon/twitter.png";
 import user from "../../../../assets/news/user.jpg";
 import instagram from "../../../../assets/icon/instagram.png";
-import gallery from "../../../../assets/news/gallery.jpg";
-import gallery2 from "../../../../assets/news/gallery2.jpg";
-import gallery3 from "../../../../assets/news/gallery3.jpg";
-import gallery4 from "../../../../assets/news/gallery4.jpg";
-import gallery5 from "../../../../assets/news/gallery5.jpg";
-import gallery6 from "../../../../assets/icon/instagram.png";
 import { HiChevronRight } from "react-icons/hi";
 
 import React from "react";
 import CommentForm from "../_components/CommentForm";
 import ReactHtmlParser from "react-html-parser";
+import Link from "next/link";
+import UserComment from "../_components/UserComment";
 
 const renderContent = (content: string) => {
   const parsedContent = ReactHtmlParser(content);
@@ -94,6 +89,17 @@ const renderContent = (content: string) => {
   });
 };
 
+type TBlog = {
+  title: string,
+  blog_image: string,
+  description: string,
+  short_description: string,
+  author: string,
+  _id: string,
+  createdAt: string,
+
+}
+
 interface BlogId {
   params: {
     newsId: string;
@@ -102,37 +108,28 @@ interface BlogId {
 
 
 
+
 const News = async ({ params }: BlogId) => {
   const { newsId } = params;
 
-  console.log("blog id erere", newsId);
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/blogs/${newsId}`, {
     cache: "no-store",
   });
   const blog = await res.json();
-  console.log("blog data ", blog);
+  console.log('blog details data ', blog)
 
-  const buttonStyle = {
-    background: "#ddd",
-    color: "black",
-    borderRadius: "5px",
-  };
-  const commentData = [
-    {
-      id: 1,
-      name: "Riva Collins",
-      date: "Jun 9, 2024 - 2:07 am",
-      description:
-        "It’s no secret that the digital industry is booming. From   exciting startups to need ghor global and brands, companies    are reaching out.",
-    },
-    {
-      id: 1,
-      name: "Riva Collins",
-      date: "Jun 9, 2024 - 2:07 am",
-      description:
-        "It’s no secret that the digital industry is booming. From   exciting startups to need ghor global and brands, companies    are reaching out.",
-    },
-  ];
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/blogs/get-blogs`, {
+    cache: "no-store",
+  });
+  const blogDetails = await response.json()
+
+
+  if (!blog || !blogDetails) {
+    return <h1 className="mt-10 flex items-center justify-center text-3xl capitalize ">Oops! Blog data not found! </h1>
+
+  }
+
+
 
   const formatDate = (dateString: string) => {
     const options = {
@@ -143,6 +140,9 @@ const News = async ({ params }: BlogId) => {
     return new Date(dateString).toLocaleDateString("en-US");
   };
 
+
+
+  console.log('blog comments data', blog?.comments)
   return (
     <>
       <div className="serviceDetailsWrap aboutWraps">
@@ -154,13 +154,13 @@ const News = async ({ params }: BlogId) => {
         <div className="grid grid-cols-1 md:grid-cols-12 mt-10  gap-10 ">
           <div className="lg:col-span-4   ">
             <div className="px-10 ">
-              <h4 className="mb-5">Categories </h4>
+              <h3 className="mb-5 capitalize">পপুলার সার্ভিস </h3>
               <div className="space-y-5">
                 <div>
                   <div className="flex items-center justify-between w-full ">
                     <div className="flex items-center ">
                       <HiChevronRight />
-                      <p>Business & Strategy </p>
+                      <Link href='/services'> <p>ফান্ডিং সাপোর্ট </p></Link>
                     </div>
                     <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
                       5
@@ -168,11 +168,14 @@ const News = async ({ params }: BlogId) => {
                   </div>
                   <Divider sx={{ marginTop: "10px" }} />
                 </div>
+
+
                 <div>
                   <div className="flex items-center justify-between w-full ">
                     <div className="flex items-center ">
                       <HiChevronRight />
-                      <p>Business & Strategy </p>
+
+                      <Link href='/services'><p>ইনভেস্টমেন্ট সাপোর্ট</p></Link>
                     </div>
                     <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
                       10
@@ -184,7 +187,21 @@ const News = async ({ params }: BlogId) => {
                   <div className="flex items-center justify-between w-full ">
                     <div className="flex items-center ">
                       <HiChevronRight />
-                      <p>Business & Strategy </p>
+
+                      <Link href='/services'> <p>মার্কেটিং সাপোর্ট</p></Link>
+                    </div>
+                    <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
+                      7
+                    </div>
+                  </div>
+                  <Divider sx={{ marginTop: "10px" }} />
+                </div>
+                <div>
+                  <div className="flex items-center justify-between w-full ">
+                    <div className="flex items-center ">
+                      <HiChevronRight />
+
+                      <Link href='/services'> <p>আইটি সাপোর্ট</p></Link>
                     </div>
                     <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
                       7
@@ -199,57 +216,34 @@ const News = async ({ params }: BlogId) => {
                 <h4 className="mb-5">Recent News </h4>
                 <div className="space-y-5">
                   <div className="space-y-8">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-10 ">
-                      <Image
-                        className="w-20 h-20 rounded-full object-cover "
-                        src={news}
-                        alt="news"
-                      />
-                      <div>
-                        <h5 className="font-semibold">
-                          Strategy for Norway’s Peion to Fund Global.{" "}
-                        </h5>
-                        <small>June 5, 2024</small>
-                      </div>
-                    </div>
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-10 ">
-                      <Image
-                        className="w-20 h-20 rounded-full object-cover "
-                        src={news}
-                        alt="news"
-                      />
-                      <div>
-                        <h5 className="font-semibold">
-                          Strategy for Norway’s Peion to Fund Global.{" "}
-                        </h5>
-                        <small>June 5, 2024</small>
-                      </div>
-                    </div>
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-10 ">
-                      <Image
-                        className="w-20 h-20 rounded-full object-cover "
-                        src={news}
-                        alt="news"
-                      />
-                      <div>
-                        <h5 className="font-semibold">
-                          Strategy for Norway’s Peion to Fund Global.{" "}
-                        </h5>
-                        <small>June 5, 2024</small>
-                      </div>
-                    </div>
+
+
+                    {
+                      blogDetails?.data?.blogs?.slice(0, 3)?.map((blogInfo: TBlog) => (
+                        <div key={blogInfo._id}>
+                          <Link href={`/news/${blogInfo._id}`}>
+                            <div className="flex flex-col md:flex-row items-center justify-between gap-10 ">
+                              <Image
+                                className="w-full object-fill h-auto sm:w-20 sm:h-20 md:w-30 md:h-30 lg:w-28 lg:h-28 rounded-full"
+                                src={blogInfo?.blog_image}
+                                alt="news"
+                                width={500}
+                                height={500}
+                              />
+                              <div>
+                                <h5 className="font-semibold">
+                                  {blogInfo?.title}
+                                </h5>
+                                <small>{formatDate(blogInfo.createdAt)}</small>
+                              </div>
+                            </div>
+                          </Link>
+                        </div>
+                      ))
+                    }
+
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="mt-100 px-10">
-              <h4 className="mb-5">Gallery </h4>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                <Image className="w-28" src={gallery2} alt="gallery" />
-                <Image className="w-28" src={gallery3} alt="gallery2" />
-                <Image className="w-28" src={gallery4} alt="gallery3" />
-                <Image className="w-28" src={gallery5} alt="gallery4" />
-                <Image className="w-28" src={gallery} alt="gallery5" />
               </div>
             </div>
           </div>
@@ -272,55 +266,20 @@ const News = async ({ params }: BlogId) => {
               </div>
             </div>
 
-            <div className="socialMedia flex-col md:flex-row gap-5 lg:gap-0  flex justify-between   mt-10 ">
-              <div className="flex flex-wrap gap-2 space-x-2 items-center ">
-                <b>Tags:</b>
-                <Button sx={buttonStyle}>Builder </Button>
-                <Button sx={buttonStyle}>Cloud </Button>
-                <Button sx={buttonStyle}>Map</Button>
-              </div>
+            <div className="socialMedia flex-col md:flex-row gap-5 lg:gap-0  flex justify-end flex-end   mt-10 ">
+
               <div className="flex  items-center space-x-3 ">
                 <span>Share: </span>
-                <Image className="w-10" src={facebook} alt="facebook" />
-                <Image className="w-10" src={instagram} alt="facebook" />
-                <Image className="w-10" src={twitter} alt="facebook" />
-                <Image className="w-10" src={linkedIn} alt="facebook" />
+                <Link href='/https://www.facebook.com/profile.php?id=61558510933789'><Image className="w-10" src={facebook} alt="facebook" /></Link>
+                <Link href='/https://www.instagram.com/muissaltd/?igsh=Nnp4M2d1M2pvMGtr'> <Image className="w-10" src={instagram} alt="facebook" /></Link>
+                <Link href='/https://www.linkedin.com/company/muissa-business-consulting-ltd/'><Image className="w-10" src={linkedIn} alt="facebook" /></Link>
+
+
               </div>
             </div>
             <Divider sx={{ marginTop: "20px" }} />
-            <div className="comment sectionMargin ">
-              <div className="mt-5">
-                <h4 className="mb-8 text-[#1591A3]">5 Comments </h4>
-              </div>
-              <div className="grid grid-rows-1 gap-10">
-                {commentData.map((data) => (
-                  <div
-                    key={data.id}
-                    className="flex flex-col  justify-between gap-10 "
-                  >
-                    <Image
-                      className="w-20 h-20 rounded-full "
-                      src={user}
-                      alt="user"
-                    />
-                    <div className="commentCard">
-                      <div className="absolute top-3 right-3">
-                        <Button sx={{ width: "70px", height: "35px" }}>
-                          Reply <HiChevronRight className="text-[#fff]" />
-                        </Button>
-                      </div>
-                      <div>
-                        <h4>{data.name}</h4>
-                        <small>{data.date}</small>
-                      </div>
-                      <p className="mt-5 ">{data.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <CommentForm id={newsId} />
-            </div>
+            <UserComment id={newsId} />
+            <CommentForm id={newsId} />
           </div>
         </div>
       </Container>

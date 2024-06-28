@@ -31,7 +31,7 @@ import DocUploader from "@/components/Forms/DocUploader";
 import MUITextArea from "@/components/Forms/TextArea";
 import MUIInput from "@/components/Forms/Input";
 import MUIMultiSelect from "@/components/Forms/MultiSelect";
-import { supportServices } from "@/types";
+import { supportServices, support_items } from "@/types";
 import MUIForm from "@/components/Forms/Form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -45,6 +45,7 @@ import { ErrorMessage } from "@/components/error-message";
 import consult from "../../../assets/news/sub.png";
 import { useGetDiscountForPaymentQuery } from "@/redux/api/paymentApi";
 import Loader from "@/components/Loader";
+import MUIMultiValue from "@/components/Forms/MultiPleValue";
 
 const validationSchema = z.object({
   // businessOwner: z.string().min(1, "ব্যবসার মালিকের নাম আবশ্যক").optional(),
@@ -88,8 +89,7 @@ const defaultValues = {
 const Membership = () => {
   const [uploadedImage, setUploadedImage] = useState<string>("");
   const [userType, setUserType] = useState("business_owner");
-  const { data: discountData, isLoading } = useGetDiscountForPaymentQuery({})
-
+  const { data: discountData, isLoading } = useGetDiscountForPaymentQuery({});
 
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string[]>([]);
@@ -97,6 +97,7 @@ const Membership = () => {
 
   const token = getCookie("mui-token");
   const router = useRouter();
+  
 
   const serviceData = [
     {
@@ -150,6 +151,9 @@ const Membership = () => {
     },
   ];
   const handleSubmit = async (data: FieldValues) => {
+    if (Array.isArray(data.need_of_service)) {
+      data.need_of_service = data.need_of_service.map((item) => item.title);
+    }
     data.upload_file = uploadedImage;
     data.member_type = userType;
 
@@ -157,7 +161,6 @@ const Membership = () => {
       const investmentAmount = Number(data.investment_amount);
       data.investment_amount = investmentAmount;
     }
-
 
     setSuccessMessage("");
     setErrorMessage([]);
@@ -189,7 +192,6 @@ const Membership = () => {
       ) {
         toast.success(response.data.message);
         setSuccessMessage(response.data.message);
-        setLoading(false);
 
         router.push(
           `/${response.data.data.redirectUrl}?member_type=${userType}&id=${response.data.data.userId}`
@@ -198,8 +200,6 @@ const Membership = () => {
       if (response.status === 200 && response.data.data.success === false) {
         toast.error(response.data.data.message);
         setErrorMessage([response.data.data.message]);
-        setLoading(false);
-
         router.push(
           `/${response.data.data.redirectUrl}?member_type=${userType}&id=${response.data.data.userId}`
         );
@@ -227,6 +227,10 @@ const Membership = () => {
     backgroundColor: "#1591A3",
     borderRadius: "3px",
     color: "#fff",
+    fontSize: {
+      sm: "12px",
+      md: "15px",
+    },
     margin: "0 auto",
     marginBottom: {
       xs: "10px",
@@ -244,7 +248,7 @@ const Membership = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
   const originalPrice = 500;
   const discountedPrice = originalPrice - discountData?.discount_amount;
@@ -252,11 +256,16 @@ const Membership = () => {
   const convertedDiscountedPrice = convertToBengaliNumerals(discountedPrice);
 
   function convertToBengaliNumerals(num: number): string {
-    const bengaliNumerals = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-    return num.toString().split('').map(digit => bengaliNumerals[Number(digit)]).join('');
+    const bengaliNumerals = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+    return num
+      .toString()
+      .split("")
+      .map((digit) => bengaliNumerals[Number(digit)])
+      .join("");
   }
 
-  console.log(discountData)
+
+  
 
   return (
     <>
@@ -278,9 +287,19 @@ const Membership = () => {
                 <h2> আমাদের সদস্যতা সাবস্ক্রিপশনের </h2>
               </div>
             </div>
-            <Button sx={{ marginTop: '10px', fontSize: '30px' }}>
-      ফি মাত্র <del className="mx-2">{convertedOriginalPrice}</del> {convertedDiscountedPrice} টাকা।
-    </Button>
+            <Button
+              sx={{
+                marginTop: "10px",
+                fontSize: {
+                  sm: "20px",
+                  md: "20px",
+                  lg: "30px",
+                },
+              }}
+            >
+              ফি মাত্র <del className="mx-2">{convertedOriginalPrice}</del>{" "}
+              {convertedDiscountedPrice} টাকা।
+            </Button>
             <p className="mt-10">
               আমাদের ব্যবসা পরামর্শদান সেবার সদস্য হয়ে বিশেষ সুবিধাগুলি উপভোগ
               করুন। আজই মাত্র ৫০০ টাকার বিনিময়ে সদস্যতা সাবস্ক্রিপশন নিন এবং
@@ -425,12 +444,17 @@ const Membership = () => {
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6} lg={12}>
-                          <MUIMultiSelect
+                          {/* <MUIMultiSelect
                             items={supportServices}
                             name="need_of_service"
                             label="পরিষেবার প্রয়োজনীয়তা"
                             fullWidth
                             size="medium"
+                          /> */}
+                          <MUIMultiValue
+                            name="need_of_service"
+                            label="পরিষেবার প্রয়োজনীয়তা"
+                            options={support_items}
                           />
                         </Grid>
 

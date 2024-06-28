@@ -1,159 +1,69 @@
-"use client";
+'use client'
 
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import { Forward } from "@mui/icons-material";
+import React from 'react';
+import './service.css'
+import icon from '../../../../assets/services/consultant.png'
+import Image from 'next/image';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { getCookie } from '@/helpers/Cookies';
+import { useGetMemberForPaymentQuery } from '@/redux/api/memeberApi';
+import Loader from '@/components/Loader';
 
-const Services = () => {
-  const [value, setValue] = React.useState("1");
+type TService = {
+  _id: string,
+  need_of_service: string,
+}
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-  };
+const UserServicePage = () => {
+  const token = getCookie("mui-token");
+  const router = useRouter();
+  const params = useSearchParams();
 
-  const tabStyle = {
-    fontSize: "20px",
-    fontWeight: "semibold",
-    "&.Mui-selected": {
-      borderLeft: "2px solid #1591A3",
-      borderRight: "none",
-      borderTop: "none",
-      borderBottom: "none",
-      color: "#1591A3",
-      background: "#E9FDFF",
-      opacity: "0.5",
-    },
+  const member_type = params.get("member_type");
+  const id = params.get("id");
+
+  const { data: memberShipData, isLoading } = useGetMemberForPaymentQuery({
+    token,
+    member_type,
+    id,
+  });
+
+  if (isLoading) {
+    return <Loader />
+  }
+
+  console.log(memberShipData);
+
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    };
+    return new Date(dateString).toLocaleDateString("en-GB", options);
   };
 
   return (
-    <Box sx={{ width: "100%", typography: "body1" }}>
-      <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <TabList
-            onChange={handleChange}
-            scrollButtons="auto"
-            variant="scrollable"
-            aria-label="scrollable auto tabs example"
-            centered
-          >
-            <Tab sx={tabStyle} label="ফান্ডিং সাপোর্ট" value="1" />
-            <Tab sx={tabStyle} label="মার্কেটিং সাপোর্ট" value="2" />
-            <Tab sx={tabStyle} label="আইটি সাপোর্ট" value="3" />
-            <Tab sx={tabStyle} label="প্রোডাক্ট সাপোর্ট" value="4" />
-            <Tab sx={tabStyle} label="বিক্রয় সাপোর্ট" value="5" />
-            <Tab sx={tabStyle} label="ডেলিভারি সাপোর্ট" value="6" />
-          </TabList>
-        </Box>
-        <TabPanel value="1">
-          <div className="investmentContent">
-            <ul className="space-y-5">
-              <li className="flex items">
-                <Forward />
-                <span className="ml-2">সরকারি অনুদান ও সহায়তা</span>
-              </li>
-              <li className="flex items">
-                <Forward />
-                <span className="ml-2">ব্যাংক ও আর্থিক প্রতিষ্ঠান</span>
-              </li>
-              <li className="flex items">
-                <Forward />
-                <span className="ml-2">বেসরকারি প্রতিষ্ঠান ও দাতা সংস্থা</span>
-              </li>
-              <li className="flex items">
-                <Forward />
-                <span className="ml-2">উদ্যোক্তা ও স্টার্টআপ সহায়তা</span>
-              </li>
-              <li className="flex items">
-                <Forward />
-                <span className="ml-2">আন্তর্জাতিক অনুদান ও সহায়তা</span>
-              </li>
-              <li className="flex items">
-                <Forward />
-                <span className="ml-2">ব্যক্তিগত ও সামাজিক সহায়তা</span>
-              </li>
-              <li className="flex items">
-                <Forward />
-                <span className="ml-2">শিক্ষা ও গবেষণা অনুদান</span>
-              </li>
-              <li className="flex items">
-                <Forward />
-                <span className="ml-2">অনলাইন ও ডিজিটাল মার্কেটিং সহায়তা</span>
-              </li>
-            </ul>
+    <div>
+      <h1>My services </h1>
+      <div className='grid grid-cols-1  lg:grid-cols-2 gap-10 mt-10 '>
+        {memberShipData?.need_of_service?.map((service: string, index: number) => (
+          <div key={index} className='profileServiceCard p-5 border rounded-lg shadow-md'>
+            <div className="flex items-center gap-8">
+              <Image width={50} height={50} src={icon} alt='services' />
+              <div>
+                <h4>{service}</h4>
+                <small className='text-semibold'>{formatDate(memberShipData?.createdAt)}</small>
+              </div>
+            </div>
+            <div className="flex items-center justify-end mt-10">
+              <b className=''>{memberShipData?.member_type} </b>
+            </div>
           </div>
-        </TabPanel>
-        <TabPanel value="2">
-          <div className="investmentContent">
-            <ul className="space-y-3">
-              <li className="flex items">
-                {" "}
-                <Forward />{" "}
-                <span className="ml-2">
-                  ব্যবসায়ের জরুরী ফান্ড তৈরিতে পরামর্শ ও সহযোগিতা করা।
-                </span>
-              </li>
-              <li className="flex items">
-                {" "}
-                <Forward />{" "}
-                <span className="ml-2">
-                  প্রতিষ্ঠানের কাগজাদি তৈরিতে পরামর্শ ও সহযোগিতা করা।
-                </span>
-              </li>
-              <li className="flex items">
-                {" "}
-                <Forward />{" "}
-                <span className="ml-2">ফান্ডিং প্রোপোজাল তৈরি করা।</span>
-              </li>
-              <li className="flex items">
-                {" "}
-                <Forward />{" "}
-                <span className="ml-2">
-                  ইনভেস্টরের জন্য একটি শক্তিশালী বক্তব্য তৈরী ও পরামর্শ প্রদান।
-                </span>
-              </li>
-              <li className="flex items">
-                {" "}
-                <Forward />{" "}
-                <span className="ml-2">
-                  ব্যবসায়ের মার্কেট Analysis এর মাধ্যমে বাজার তৈরি করা ও পরামর্শ
-                  প্রদান
-                </span>
-              </li>
-              <li className="flex items">
-                {" "}
-                <Forward />{" "}
-                <span className="ml-2">
-                  প্রতিষ্ঠানের Analysis Report তৈরিতে সহযোগিতা করা।
-                </span>
-              </li>
-              <li className="flex items">
-                {" "}
-                <Forward />{" "}
-                <span className="ml-2">
-                  প্রতিষ্ঠানের Monitoring Report File তৈরি করা।
-                </span>
-              </li>
-              <li className="flex items">
-                {" "}
-                <Forward />{" "}
-                <span className="ml-2">
-                  প্রতিষ্ঠানের কার্যপদ্ধতি নির্ধারণে পরামর্শ প্রদান।
-                </span>
-              </li>
-            </ul>
-          </div>
-        </TabPanel>
-        <TabPanel value="3">আইটি সাপোর্ট content</TabPanel>
-        <TabPanel value="4">প্রোডাক্ট সাপোর্ট content</TabPanel>
-        <TabPanel value="5">বিক্রয় সাপোর্ট content</TabPanel>
-        <TabPanel value="6">ডেলিভারি সাপোর্ট content</TabPanel>
-      </TabContext>
-    </Box>
+        ))}
+      </div>
+    </div>
   );
 };
 
-export default Services;
+export default UserServicePage;

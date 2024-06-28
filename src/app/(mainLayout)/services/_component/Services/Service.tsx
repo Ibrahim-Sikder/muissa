@@ -18,7 +18,8 @@ const Service = async () => {
 
 
 
-  const sortedServices: TServices[] = servicesData?.data.services?.sort((a: TServices, b: TServices) => a.priority - b.priority);
+
+  const sortedServices: TServices[] = servicesData?.data?.services?.sort((a: TServices, b: TServices) => a.priority - b.priority);
 
   const iconStyle = {
     fontSize: {
@@ -41,6 +42,10 @@ const Service = async () => {
     height: "30px",
     padding: "0px",
   };
+  if (!sortedServices || !servicesData) {
+    return <h1 className="mt-10 flex items-center justify-center text-3xl capitalize ">Oops! Services data not found! </h1>
+
+  }
 
   return (
     <Container>
@@ -58,6 +63,7 @@ const Service = async () => {
                 ) : i === 3 ? (
                   <Storefront sx={iconStyle} />
                 ) : null}
+
               </div>
               <div className="serviceContent">
                 <h4>{data?.category}</h4>

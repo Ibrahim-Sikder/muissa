@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import React from "react";
@@ -98,8 +99,7 @@ export default function Example() {
                       Weekly articles
                     </Typography>
                     <Typography variant="body2" color="textSecondary">
-                      Non laboris consequat cupidatat laborum magna. Eiusmod non
-                      irure cupidatat duis commodo amet.
+                      To know more about us, read our weekly articles.
                     </Typography>
                   </Box>
                 </Box>
@@ -126,8 +126,7 @@ export default function Example() {
                       No spam
                     </Typography>
                     <Typography variant="body2" color="textSecondary">
-                      Officia excepteur ullamco ut sint duis proident non
-                      adipisicing. Voluptate incididunt anim.
+                      Here don't found anyting spam we are registered by govt of Bangladesh.
                     </Typography>
                   </Box>
                 </Box>

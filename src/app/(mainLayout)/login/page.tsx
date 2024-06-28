@@ -16,7 +16,7 @@ import { SuccessMessage } from "@/components/success-message";
 import { ErrorMessage } from "@/components/error-message";
 import { setCookie } from "@/helpers/Cookies";
 
-// Define the validation schema using Zod
+
 const validationSchema = z.object({
   auth: z.string({ required_error: "This field is required." }).refine(
     (value) => {
@@ -81,8 +81,8 @@ const Login = () => {
       if (response?.status === 200) {
         toast.success(response?.data?.message);
         setSuccessMessage(response?.data?.message);
-        setCookie("mui-token", response?.data?.data?.token, '10d');
-        router.push(`/`);
+        setCookie("mui-token", response?.data?.data?.token, { expires: 10 });
+        window.location.href = "/membership"
         setLoading(false);
       }
     } catch (error: any) {

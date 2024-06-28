@@ -1,3 +1,52 @@
+// import React from "react";
+// import {
+//   FieldValues,
+//   FormProvider,
+//   SubmitHandler,
+//   useForm,
+// } from "react-hook-form";
+
+// type TFormConfig = {
+//   resolver?: any;
+//   defaultValues?: Record<string, any>;
+// };
+
+// type TInputProps = {
+//   children: React.ReactNode;
+//   onSubmit: SubmitHandler<FieldValues>;
+// } & TFormConfig;
+
+// const MUIForm = ({
+//   children,
+//   onSubmit,
+//   resolver,
+//   defaultValues,
+// }: TInputProps) => {
+//   const formConfig: TFormConfig = {};
+
+//   if (resolver) {
+//     formConfig["resolver"] = resolver;
+//   }
+//   if (defaultValues) {
+//     formConfig["defaultValues"] = defaultValues;
+//   }
+//   const methods = useForm(formConfig);
+//   const { handleSubmit, reset } = methods;
+
+//   const submit: SubmitHandler<FieldValues> = (data: FieldValues) => {
+//     onSubmit(data);
+//     reset(); // Reset the form here
+//   };
+
+//   return (
+//     <FormProvider {...methods}>
+//       <form onSubmit={handleSubmit(submit)}>{children}</form>
+//     </FormProvider>
+//   );
+// };
+
+// export default MUIForm;
+
 import React from "react";
 import {
   FieldValues,
@@ -24,7 +73,7 @@ const MUIForm = ({
 }: TInputProps) => {
   const formConfig: TFormConfig = {};
 
-  if (formConfig) {
+  if (resolver) {
     formConfig["resolver"] = resolver;
   }
   if (defaultValues) {
@@ -33,9 +82,9 @@ const MUIForm = ({
   const methods = useForm(formConfig);
   const { handleSubmit, reset } = methods;
 
-  const submit: SubmitHandler<FieldValues> = (data: FieldValues) => {
-    // console.log(data);
-    onSubmit(data);
+  const submit: SubmitHandler<FieldValues> = async (data: FieldValues) => {
+    await onSubmit(data);
+    reset(); // Reset the form here
   };
 
   return (

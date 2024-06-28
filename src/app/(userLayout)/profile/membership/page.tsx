@@ -26,7 +26,7 @@ import DocUploader from "@/components/Forms/DocUploader";
 import MUITextArea from "@/components/Forms/TextArea";
 import MUIInput from "@/components/Forms/Input";
 import MUIMultiSelect from "@/components/Forms/MultiSelect";
-import { supportServices } from "@/types";
+import { supportServices, support_items } from "@/types";
 import MUIForm from "@/components/Forms/Form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { serviceData } from "./serviceData";
@@ -37,6 +37,7 @@ import { toast } from "sonner";
 import { useGetMemberForPaymentQuery } from "@/redux/api/memeberApi";
 import { SuccessMessage } from "@/components/success-message";
 import { ErrorMessage } from "@/components/error-message";
+import MUIMultiValue from "@/components/Forms/MultiPleValue";
 
 const validationSchema = z.object({
   user: z.string().email("একটি বৈধ ইমেল ঠিকানা প্রদান করুন!").optional(),
@@ -106,14 +107,19 @@ const Membership = () => {
     member_type,
     id,
   });
-  console.log(memberShipData, "this is member ship page from ");
+  
+  
 
   const defaultValues = {
     profile_pic: memberShipData?.user?.profile_pic || "",
     name: memberShipData?.user?.name || "",
     email: memberShipData?.user?.auth || "",
     additional_info: memberShipData?.additional_info || "",
-    need_of_service: memberShipData?.need_of_service || "",
+    need_of_service: Array.isArray(memberShipData?.need_of_service)
+    ? memberShipData.need_of_service.map((service:any) => ({ title: service.title || service }))   
+    : typeof memberShipData?.need_of_service === 'string'
+    ? memberShipData.need_of_service.split(',').map((service:any) => ({ title: service.trim() }))
+    : [],
     business_description: memberShipData?.business_description || "",
     website: memberShipData?.website || "",
     business_address: memberShipData?.business_address || "",
@@ -122,6 +128,9 @@ const Membership = () => {
   };
 
   const handleSubmit = async (data: FieldValues) => {
+    if (Array.isArray(data.need_of_service)) {
+      data.need_of_service = data.need_of_service.map(item => item.title); 
+    }
     data.upload_file = uploadedImage;
     data.member_type = userType;
 
@@ -139,8 +148,8 @@ const Membership = () => {
         userType === "business_owner"
           ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-business-owner`
           : userType === "investor"
-          ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-investor`
-          : null;
+            ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-investor`
+            : null;
 
       if (!endpoint) {
         throw new Error("Invalid user type");
@@ -160,7 +169,7 @@ const Membership = () => {
       ) {
         toast.success(response.data.message);
         setSuccessMessage(response.data.message);
-        setLoading(false);
+     
 
         router.push(
           `/${response.data.data.redirectUrl}?member_type=${userType}&id=${response.data.data.userId}`
@@ -169,7 +178,7 @@ const Membership = () => {
       if (response.status === 200 && response.data.data.success === false) {
         toast.error(response.data.data.message);
         setErrorMessage([response.data.data.message]);
-        setLoading(false);
+        
 
         router.push(
           `/${response.data.data.redirectUrl}?member_type=${userType}&id=${response.data.data.userId}`
@@ -200,6 +209,7 @@ const Membership = () => {
     backgroundColor: "#1591A3",
     borderRadius: "3px",
     color: "#fff",
+   
     margin: "5px auto",
     justifyContent: "center",
     "&.Mui-selected": {
@@ -340,15 +350,11 @@ const Membership = () => {
                               size="medium"
                             />
                           </Grid>
-                          {/* <Grid item xs={12} sm={6} md={6} lg={12}>
-                          <MUIMultiSelect
-                            items={supportServices}
-                            name="need_of_service"
-                            label="পরিষেবার প্রয়োজনীয়তা"
-                            fullWidth
-                            size="medium"
-                          />
-                        </Grid> */}
+                          <Grid item xs={12} sm={6} md={6} lg={12}>
+                            <MUIMultiValue name="need_of_service"
+                              label="পরিষেবার প্রয়োজনীয়তা"
+                              options={support_items} />
+                          </Grid>
 
                           <Grid item xs={12} sm={6} md={12} lg={12}>
                             <MUITextArea

@@ -62,9 +62,10 @@
 }
 
 @media only screen and (max-width: 500px) {
+
   .awardWraps {
-    height: 650px;
-  }
+    height: 385px;
+}
 }
 @media only screen and (max-width: 1024px) {
   .awardCircle {

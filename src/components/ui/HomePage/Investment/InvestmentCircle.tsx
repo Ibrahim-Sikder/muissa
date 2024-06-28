@@ -18,9 +18,7 @@ const InvestmentCircle = () => {
       <Container maxWidth="lg">
         <Grid container spacing={4} alignItems="center">
           <Grid item xs={12} md={5}>
-            <Typography variant="h4" component="h2" sx={{ fontWeight: "bold" }}>
-            আমাদের সাথে আপনার যাত্রা শুরু করুন
-            </Typography>
+           <h2> আমাদের সাথে আপনার যাত্রা শুরু করুন</h2>
             {/* <Typography
               variant="h6"
               component="h3"

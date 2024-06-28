@@ -1,24 +1,16 @@
 import { jwtDecode } from "jwt-decode";
+
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-const AuthRoutes = ["/login", "/register",];
-
-
-
-// const roleBasedPrivateRoutes = {
-//   user: [/^\/profile(\/[^\/]+)?$/],
-//   admin: [
-//     /^\/profile(\/[^\/]+)?$/,
-//     /^\/dashboard(\/[^\/]+)?$/,  
-//   ],
-// };
+const AuthRoutes = ["/login", "/register"];
 
 const roleBasedPrivateRoutes = {
-  user: [/^\/profile(\/.*)?$/],
+  user: [/^\/profile(\/.*)?$/, /^\/membership(\/.*)?$/],
   admin: [
     /^\/profile(\/.*)?$/,
     /^\/dashboard(\/.*)?$/,
+    /^\/membership(\/.*)?$/,
   ],
 };
 
@@ -44,23 +36,23 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  const role = decodedData?.role;
-  if (role && roleBasedPrivateRoutes[role as Role]) {
-    const routes = roleBasedPrivateRoutes[role as Role];
-    if (routes.some((route) => pathname.match(route))) {
+  const role = decodedData?.role as Role;
+  if (role && roleBasedPrivateRoutes[role]) {
+    const routes = roleBasedPrivateRoutes[role];
+    if (routes.some((route) => route.test(pathname))) {
       return NextResponse.next();
     }
   }
-
-  if (pathname === "/membership" && !accessToken) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-
-
 
   return NextResponse.redirect(new URL("/", request.url));
 }
 
 export const config = {
-  matcher: ["/login", "/register", "/profile/:path*", "/dashboard/:path*", "/membership"],
+  matcher: [
+    "/login",
+    "/register",
+    "/profile/:path*",
+    "/dashboard/:path*",
+    "/membership/:path*",
+  ],
 };

@@ -29,11 +29,11 @@ const HeroSection = () => {
   return (
     <div className="heroSectionWrap">
       <Swiper
-        // autoplay={{
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // }}
-        // speed={1500}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        speed={1500}
         loop={true}
         spaceBetween={30}
         centeredSlides={true}

@@ -13,24 +13,20 @@ import SectionTitle from "@/components/shared/SectionTitle/SectionTitle";
 import Link from "next/link";
 import { useGetAllBlogsQuery } from "@/redux/api/blogApi";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import Loader from "@/components/Loader";
 
 const NewsSection = () => {
-  const page = 0;
-  const rowsPerPage = 5;
-
-
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const [limit, setLimit] = React.useState(10);
 
   const { data: blogData, error, isLoading, refetch } = useGetAllBlogsQuery({
-    page,
-    limit: rowsPerPage,
+ 
+    
   });
   if (isLoading) {
-    return <p>Loading........</p>
+    return <Loader/>
   }
-  if (error) {
-    return <p>Something went to wrong.</p>
+  if (error || !blogData) {
+    return <h1 className="mt-10 flex items-center justify-center text-3xl capitalize ">Oops! Blogs data not found! </h1>
+
   }
 
   const buttonStyle = {

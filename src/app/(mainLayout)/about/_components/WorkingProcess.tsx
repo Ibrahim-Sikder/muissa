@@ -7,6 +7,8 @@ import icon3 from "../../../../assets/about/icon4.png";
 import icon4 from "../../../../assets/about/icon5.png";
 import icon5 from "../../../../assets/about/icon6.png";
 import icon6 from "../../../../assets/about/icon.png";
+import icon7 from "../../../../assets/about/call-center.png";
+import icon8 from "../../../../assets/about/funding.png";
 import Image from "next/image";
 
 const WorkingProcess = () => {
@@ -19,37 +21,44 @@ const WorkingProcess = () => {
       img: icon2,
     },
     {
-      id: 1,
+      id: 2,
       title: "বাজার বিশ্লেষক",
       description: "বাজার গবেষণা এবং নতুন সুযোগ সনাক্ত করার বিশেষজ্ঞ।    ",
       img: icon,
     },
     {
-      id: 1,
+      id: 3,
       title: "আইটি বিশেষজ্ঞ",
       description:
         "তথ্য প্রযুক্তি সংক্রান্ত সকল সমস্যার সমাধান প্রদানকারী এবং আইটি সেবা উন্নতকারী।",
       img: icon6,
     },
     {
-      id: 1,
+      id: 4,
       title: "বিক্রয় ও মার্কেটিং বিশেষজ্ঞ",
       description:
         " বিক্রয় বৃদ্ধির কৌশল এবং কার্যকরী মার্কেটিং পরিকল্পনা প্রস্তুতকারী।",
       img: icon4,
     },
     {
-      id: 1,
+      id: 5,
       title: "ফান্ডিং বিশেষজ্ঞ: ",
-      description: "সঠিক বিনিয়োগ পরিকল্পনা এবং তহবিল সংগ্রহে সহায়ক।",
+      description: "আমরা বাংলাদেশী ছোট, মাঝারী, বড় ও নতুন ব্যবসা প্রতিষ্ঠান গুলোকে মূলধন যোগানে পরামর্শ প্রদানকারী",
       img: icon3,
     },
     {
-      id: 1,
-      title: "ব্যবসায়িক কৌশল বিশেষজ্ঞ",
+      id: 6,
+      title: "বিনিয়োগ সমর্থন",
       description:
-        "দীর্ঘমেয়াদী কৌশলগত পরিকল্পনা এবং কার্যকরী সমাধান প্রদানকারী।",
-      img: icon2,
+        "আমরা Investment Support এর মাধ্যমে বিনিয়োগে আগ্রহী Client দের বিনিয়োগ বিষয়ক পরামর্শ ও রিসোর্স প্রদানকারী।",
+      img: icon8,
+    },
+    {
+      id: 7,
+      title: "ডেলিভারি সাপোর্ট",
+      description:
+        "আমরা পণ্য ডেলিভারি বিষয়ক পরামর্শ ও প্রয়োজনীয় সার্ভিস প্রদানকারী ।",
+      img: icon7,
     },
   ];
   return (
@@ -68,11 +77,12 @@ const WorkingProcess = () => {
         </div>
       </div>
       <div className="workingWraps">
-        <div className="grid grid-cols-1 place-content-center place-items-start lg:grid-cols-3 md:grid-cols-2  gap-5 mt-16">
-          {workingData.map((data) => (
-            <div key={data.id} className="workingCard ">
+        <div className="grid grid-cols-1 lg:grid-cols-3 place-items-center justify-center   gap-5 mt-16">
+          {workingData.map((data, index:number) => (
+            <div key={data.id} className={`workingCard ${
+                  index === workingData.length - 1 ? "lg:col-span-3" : ""
+                }`}>
               <Image className="w-16" src={data.img} alt="icon" />
-              {/* <FaArtstation className="text-[#1591A3]" size={50} /> */}
               <div className="space-y-3 mt-8">
                 <h4>{data.title}</h4>
                 <p className="text-s">{data.description}</p>

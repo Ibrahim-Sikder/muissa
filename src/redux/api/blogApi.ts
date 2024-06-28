@@ -1,4 +1,3 @@
-import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi";
 
 export const blogApi = baseApi.injectEndpoints({
@@ -14,11 +13,11 @@ export const blogApi = baseApi.injectEndpoints({
       providesTags: ["blogs"],
     }),
     getSingleBlog: build.query({
-      query: (id) => ({
+      query: ({id}) => ({
         url: `/blogs/${id}`,
         method: "GET",
       }),
-      providesTags: (result, error, id) => [{ type: "blogs", id }],
+      providesTags:['blogs'],
     }),
 
     updateBlog: build.mutation({

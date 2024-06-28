@@ -12,8 +12,3 @@ export const tagTypesList = [
   "user",
   "admin",
 ];
-//  export const tagTypesList = [
-//     tagTypes.user,
-//     tagTypes.admin,
-
-//  ];
