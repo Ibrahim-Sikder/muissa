@@ -44,7 +44,7 @@ import {
   useGetMemberForPaymentQuery,
 } from "@/redux/api/memeberApi";
 import Loader from "@/components/Loader";
-import userImg from '../../../assets/logo/profile.png'
+import userImg from "../../../assets/logo/profile.png";
 import MUIMultiValue from "@/components/Forms/MultiPleValue";
 import { support_items } from "@/types";
 
@@ -79,11 +79,18 @@ interface UserData {
   userId: string;
   name: string;
   auth: string;
+  email: string;
+  phone: string;
   role: string;
   status: string;
   isVerified: boolean;
   isCompleted: boolean;
   profile_pic: string;
+  street_address: string;
+  city: string;
+  state: string;
+  postal_code: string;
+  country: string;
 }
 
 interface MemberShip {
@@ -130,95 +137,120 @@ const Profile = () => {
     userId: "",
     name: "",
     auth: "",
+    email: "",
+    phone: "",
     role: "",
     status: "",
+    street_address: " ",
+    city: " ",
+    state: "",
+    postal_code: "",
+    country: "",
     profile_pic: "",
     isVerified: false,
     isCompleted: false,
   });
 
   const token = getCookie("mui-token");
-  console.log(token)
+
   const router = useRouter();
   const params = useSearchParams();
 
   const member_type = params.get("member_type");
   const id = params.get("id");
 
-  const { data: memberShipData, isLoading } = useGetMemberForPaymentQuery({
+  const { data: memberShipData, isLoading }: any = useGetMemberForPaymentQuery({
     token,
     member_type,
     id,
   });
 
-  // useEffect(() => {
-  //   const fetchedData = async () => {
-  //     setSuccessMessage("");
-  //     setErrorMessage([]);
-  //     setLoading(true);
+  useEffect(() => {
+    const fetchedData = async () => {
+      setSuccessMessage("");
+      setErrorMessage([]);
+      setLoading(true);
 
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.NEXT_PUBLIC_BASE_API_URL}/users/single-user`,
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         }
-  //       );
-  //       if (response?.status === 200) {
-  //         setUserData(response?.data?.data);
-  //         toast.success(response?.data?.message);
-  //       }
-  //     } catch (error: any) {
-  //       console.error("Error fetching data:", error);
-  //       if (error?.response) {
-  //         const { status, data } = error.response;
-  //         if ([400, 404, 409, 500].includes(status)) {
-  //           setErrorMessage(data.message);
-  //         } else {
-  //           setErrorMessage(["An unexpected error occurred."]);
-  //         }
-  //       } else {
-  //         setErrorMessage(["Network error occurred."]);
-  //       }
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_API_URL}/users/single-user`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response?.status === 200) {
+          setUserData(response?.data?.data);
+        }
+      } catch (error: any) {
+        if (error?.response) {
+          const { status, data } = error.response;
+          if ([400, 404, 409, 500].includes(status)) {
+            setErrorMessage(data.message);
+          } else {
+            setErrorMessage(["An unexpected error occurred."]);
+          }
+        } else {
+          setErrorMessage(["Network error occurred."]);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  //   fetchedData();
+    fetchedData();
 
-  //   return () => {
-  //     setLoading(false);
-  //   };
-  // }, [token]);
-
-  const defaultValues = {
-    profile_pic: memberShipData?.user?.profile_pic || "",
-    name: memberShipData?.user?.name || "",
-    email: memberShipData?.user?.auth || "",
-    additional_info: memberShipData?.additional_info || "",
-    need_of_service: memberShipData?.need_of_service || "",
-    business_description: memberShipData?.business_description || "",
-    website: memberShipData?.website || "",
-    business_address: memberShipData?.business_address || "",
-    business_name: memberShipData?.business_name || "",
-    business_type: memberShipData?.business_type || "",
-  };
+    return () => {
+      setLoading(false);
+    };
+  }, [token]);
 
   let email;
   let phone;
 
   if (userData) {
-    if (isEmailValid(userData.auth)) {
-      email = userData.auth;
-    } else if (isPhoneValid(userData.auth)) {
-      phone = userData.auth;
-    }
+    email = isEmailValid(userData.auth) ? userData.auth : userData.email;
+    phone = isPhoneValid(userData.auth) ? userData.auth : userData.phone;
   }
 
+  const need_of_service = Array.isArray(memberShipData?.need_of_service)
+  ? memberShipData.need_of_service.map((service: any) => ({
+      title: service.title || service,
+    }))
+  : typeof memberShipData?.need_of_service === "string"
+  ? memberShipData.need_of_service
+      .split(",")
+      .map((service: any) => ({ title: service.trim() }))
+  : []
+ 
+
+  const defaultValues = {
+    profile_pic: userData?.profile_pic || "",
+    name: userData?.name || "",
+    auth: email || phone || "",
+    phone: phone || "",
+    email: email || "",
+    street_address: userData?.street_address || "",
+    city: userData?.city || "",
+    state: userData?.state || "",
+    postal_code: userData?.postal_code || "",
+    country: userData?.country || "",
+    additional_info: memberShipData?.additional_info || "",
+    need_of_service: need_of_service,
+    business_description: memberShipData?.business_description || "",
+    website: memberShipData?.website || "",
+    business_address: memberShipData?.business_address || "",
+    business_name: memberShipData?.business_name || "",
+    business_type: memberShipData?.business_type || "",
+    upload_file: memberShipData?.upload_file || "",
+  };
+
   const submitHandler = async (data: FieldValues) => {
+    if (Array.isArray(data.need_of_service)) {
+      data.need_of_service = data.need_of_service.map((item) => item.title);
+    }
+
     data.profile_pic = imageUrl;
     data.upload_file = uploadedImage;
     data.member_type = userType;
@@ -237,8 +269,8 @@ const Profile = () => {
         userType === "business_owner"
           ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-business-owner`
           : userType === "investor"
-            ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-investor`
-            : null;
+          ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-investor`
+          : null;
 
       if (!endpoint) {
         throw new Error("Invalid user type");
@@ -249,7 +281,7 @@ const Profile = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response);
+      
       if (
         response.status === 200 &&
         response.data.success === true &&
@@ -258,7 +290,7 @@ const Profile = () => {
         toast.success(response.data.message);
         setSuccessMessage(response.data.message);
         setLoading(false);
-        console.log(response);
+     
 
         if (response?.data?.data?.redirectUrl === "payment") {
           router.push(
@@ -270,7 +302,7 @@ const Profile = () => {
         toast.error(response.data.data.message);
         setErrorMessage([response.data.data.message]);
         setLoading(false);
-        console.log(response);
+      
         if (response?.data?.data?.redirectUrl === "payment") {
           router.push(
             `/${response.data.data.redirectUrl}?member_type=${userType}&id=${response.data.data.userId}`
@@ -279,7 +311,7 @@ const Profile = () => {
       }
     } catch (error: any) {
       if (error.response) {
-        console.log(error);
+     
         const { status, data } = error.response;
         if ([400, 404, 401, 409, 500].includes(status)) {
           setErrorMessage(data.message);
@@ -326,7 +358,6 @@ const Profile = () => {
   if (isLoading) {
     return <Loader />;
   }
-  console.log(memberShipData);
 
   return (
     <>
@@ -340,7 +371,7 @@ const Profile = () => {
           <div className="flex flex-col md:flex-row justify-center text-center gap-5 items-center">
             <Image
               className="w-40 rounded-full "
-              src={imageUrl ? imageUrl : userImg}
+              src={imageUrl || userData?.profile_pic || userImg}
               alt="profile"
               height={100}
               width={100}
@@ -386,17 +417,8 @@ const Profile = () => {
                   label="ফোন নাম্বার"
                   fullWidth
                   size="medium"
+                  disabled={isPhoneValid(userData.auth)}
                 />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={6}
-                lg={6}
-                sx={{ marginRight: "0px" }}
-              >
-                <MUIInput name="email" label="ইমেইল " fullWidth size="medium" />
               </Grid>
               <Grid
                 item
@@ -407,13 +429,94 @@ const Profile = () => {
                 sx={{ marginRight: "0px" }}
               >
                 <MUIInput
-                  name="address"
-                  label="ঠিকানা"
+                  name="email"
+                  label="ইমেইল "
+                  fullWidth
+                  size="medium"
+                  disabled={isEmailValid(userData.auth)}
+                />
+              </Grid>
+              
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={6}
+                lg={6}
+                sx={{ marginRight: "0px" }}
+              >
+                <MUIInput
+                  name="street_address"
+                  label="রাস্তার ঠিকানা"
+                  type="text"
                   fullWidth
                   size="medium"
                 />
               </Grid>
-
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={6}
+                lg={6}
+                sx={{ marginRight: "0px" }}
+              >
+                <MUIInput
+                  name="city"
+                  label="শহর"
+                  type="text"
+                  fullWidth
+                  size="medium"
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={6}
+                lg={6}
+                sx={{ marginRight: "0px" }}
+              >
+                <MUIInput
+                  name="state"
+                  label="অবস্থান"
+                  type="text"
+                  fullWidth
+                  size="medium"
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={6}
+                lg={6}
+                sx={{ marginRight: "0px" }}
+              >
+                <MUIInput
+                  name="postal_code"
+                  label="পোস্ট কোড"
+                  type="text"
+                  fullWidth
+                  size="medium"
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={6}
+                lg={6}
+                sx={{ marginRight: "0px" }}
+              >
+                <MUIInput
+                  name="country"
+                  label="দেশ"
+                  type="text"
+                  fullWidth
+                  size="medium"
+                />
+              </Grid>
 
               <Box
                 sx={{
@@ -456,7 +559,6 @@ const Profile = () => {
                       spacing={{ xs: 1, md: 3, lg: 3 }}
                     >
                       <Grid container spacing={1}>
-
                         <Grid item xs={12} sm={6} md={6} lg={12}>
                           <MUIInput
                             name="business_name"
@@ -498,11 +600,11 @@ const Profile = () => {
                           />
                         </Grid>
                         <Grid item xs={12} sm={6} md={6} lg={12}>
-
-                          <MUIMultiValue name="need_of_service"
+                          <MUIMultiValue
+                            name="need_of_service"
                             label="পরিষেবার প্রয়োজনীয়তা"
-                            options={support_items} />
-
+                            options={support_items}
+                          />
                         </Grid>
 
                         <Grid item xs={12} sm={6} md={12} lg={12}>
@@ -522,7 +624,7 @@ const Profile = () => {
                           sx={{ fontSize: "20px" }}
                           name="upload_file"
                           setUploadedImage={setUploadedImage}
-                          uploadedImage={uploadedImage}
+                          uploadedImage={uploadedImage || memberShipData?.upload_file}
                         />
                         <div className="my-1">
                           {successMessage && (

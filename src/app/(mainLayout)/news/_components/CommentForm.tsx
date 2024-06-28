@@ -2,12 +2,15 @@
 
 import MUIForm from "@/components/Forms/Form";
 import MUITextArea from "@/components/Forms/TextArea";
+import { ErrorMessage } from "@/components/error-message";
 import { getCookie } from "@/helpers/Cookies";
 import { useCreateCommentMutation } from "@/redux/api/commentApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Grid } from "@mui/material";
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const validationSchema = z.object({
@@ -16,16 +19,54 @@ const validationSchema = z.object({
 const CommentForm = ({ id }: any) => {
   const token = getCookie("mui-token");
 
-  const [createComment] = useCreateCommentMutation();
+  // const [createComment] = useCreateCommentMutation();
+  // const handleSubmit = async (data: FieldValues) => {
+  //   console.log(data, "post comment data ");
+  //   try {
+  //     const res = await createComment({ token, data, id }).unwrap();
+  //     console.log(res, "post res data ");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  const [errorMessage, setErrorMessage] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
   const handleSubmit = async (data: FieldValues) => {
-    console.log(data, "post comment data ");
+    setErrorMessage([]);
+    setLoading(true);
     try {
-      const res = await createComment({ token, data, id }).unwrap();
-      console.log(res, "post res data ");
-    } catch (err) {
-      console.log(err);
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_API_URL}/comments/create-comment?id=${id}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response?.status === 200) {
+        toast.success(response?.data?.message);
+
+        setLoading(false);
+      }
+    } catch (error: any) {
+   
+      if (error?.response) {
+        const { status, data } = error.response;
+        if ([400, 404, 500].includes(status)) {
+          setErrorMessage(data.message);
+        } else {
+          setErrorMessage(["An unexpected error occurred."]);
+        }
+      }
+    } finally {
+      setLoading(false);
     }
   };
+
   return (
     <div className="mt-10">
       <h4 className="mb-8 text-[#1591A3]">Give Your Feedback </h4>
@@ -33,7 +74,7 @@ const CommentForm = ({ id }: any) => {
         onSubmit={handleSubmit}
         resolver={zodResolver(validationSchema)}
         defaultValues={{
-          commentjfgdewq: "",
+          comment: "",
         }}
       >
         <Grid container spacing={1}>
@@ -48,8 +89,13 @@ const CommentForm = ({ id }: any) => {
               }}
             />
           </Grid>
+          <div className="my-1">
+            {errorMessage && <ErrorMessage message={errorMessage} />}
+          </div>
           <Grid item lg={12} sx={{ marginRight: "0px" }}>
-            <Button type="submit">Submit</Button>
+            <Button disabled={loading} type="submit">
+              Submit
+            </Button>
           </Grid>
         </Grid>
       </MUIForm>

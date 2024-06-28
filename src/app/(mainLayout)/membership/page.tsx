@@ -89,8 +89,7 @@ const defaultValues = {
 const Membership = () => {
   const [uploadedImage, setUploadedImage] = useState<string>("");
   const [userType, setUserType] = useState("business_owner");
-  const { data: discountData, isLoading } = useGetDiscountForPaymentQuery({})
-
+  const { data: discountData, isLoading } = useGetDiscountForPaymentQuery({});
 
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string[]>([]);
@@ -151,6 +150,9 @@ const Membership = () => {
     },
   ];
   const handleSubmit = async (data: FieldValues) => {
+    if (Array.isArray(data.need_of_service)) {
+      data.need_of_service = data.need_of_service.map((item) => item.title);
+    }
     data.upload_file = uploadedImage;
     data.member_type = userType;
 
@@ -158,7 +160,6 @@ const Membership = () => {
       const investmentAmount = Number(data.investment_amount);
       data.investment_amount = investmentAmount;
     }
-
 
     setSuccessMessage("");
     setErrorMessage([]);
@@ -169,8 +170,8 @@ const Membership = () => {
         userType === "business_owner"
           ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-business-owner`
           : userType === "investor"
-            ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-investor`
-            : null;
+          ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-investor`
+          : null;
 
       if (!endpoint) {
         throw new Error("Invalid user type");
@@ -190,7 +191,6 @@ const Membership = () => {
       ) {
         toast.success(response.data.message);
         setSuccessMessage(response.data.message);
-        setLoading(false);
 
         router.push(
           `/${response.data.data.redirectUrl}?member_type=${userType}&id=${response.data.data.userId}`
@@ -199,8 +199,6 @@ const Membership = () => {
       if (response.status === 200 && response.data.data.success === false) {
         toast.error(response.data.data.message);
         setErrorMessage([response.data.data.message]);
-        setLoading(false);
-
         router.push(
           `/${response.data.data.redirectUrl}?member_type=${userType}&id=${response.data.data.userId}`
         );
@@ -229,8 +227,8 @@ const Membership = () => {
     borderRadius: "3px",
     color: "#fff",
     fontSize: {
-      sm: '12px',
-      md: '15px'
+      sm: "12px",
+      md: "15px",
     },
     margin: "0 auto",
     marginBottom: {
@@ -249,7 +247,7 @@ const Membership = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
   const originalPrice = 500;
   const discountedPrice = originalPrice - discountData?.discount_amount;
@@ -257,11 +255,13 @@ const Membership = () => {
   const convertedDiscountedPrice = convertToBengaliNumerals(discountedPrice);
 
   function convertToBengaliNumerals(num: number): string {
-    const bengaliNumerals = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-    return num.toString().split('').map(digit => bengaliNumerals[Number(digit)]).join('');
+    const bengaliNumerals = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+    return num
+      .toString()
+      .split("")
+      .map((digit) => bengaliNumerals[Number(digit)])
+      .join("");
   }
-
-  console.log(discountData)
 
   return (
     <>
@@ -283,14 +283,18 @@ const Membership = () => {
                 <h2> আমাদের সদস্যতা সাবস্ক্রিপশনের </h2>
               </div>
             </div>
-            <Button sx={{
-              marginTop: '10px', fontSize: {
-                sm: '20px',
-                md: '20px',
-                lg: '30px'
-              }
-            }}>
-              ফি মাত্র <del className="mx-2">{convertedOriginalPrice}</del> {convertedDiscountedPrice} টাকা।
+            <Button
+              sx={{
+                marginTop: "10px",
+                fontSize: {
+                  sm: "20px",
+                  md: "20px",
+                  lg: "30px",
+                },
+              }}
+            >
+              ফি মাত্র <del className="mx-2">{convertedOriginalPrice}</del>{" "}
+              {convertedDiscountedPrice} টাকা।
             </Button>
             <p className="mt-10">
               আমাদের ব্যবসা পরামর্শদান সেবার সদস্য হয়ে বিশেষ সুবিধাগুলি উপভোগ
@@ -313,8 +317,9 @@ const Membership = () => {
             {serviceData.map((data, index) => (
               <div
                 key={data.id}
-                className={`membarshipCard ${index === serviceData.length - 1 ? "lg:col-span-2" : ""
-                  }`}
+                className={`membarshipCard ${
+                  index === serviceData.length - 1 ? "lg:col-span-2" : ""
+                }`}
               >
                 <Image
                   className="w-[65px] mx-auto "
@@ -341,8 +346,8 @@ const Membership = () => {
 
           <MUIForm
             onSubmit={handleSubmit}
-          // resolver={zodResolver(validationSchema)}
-          // defaultValues={defaultValues}
+            // resolver={zodResolver(validationSchema)}
+            // defaultValues={defaultValues}
           >
             <Grid container spacing={1}>
               <Box
@@ -442,9 +447,11 @@ const Membership = () => {
                             fullWidth
                             size="medium"
                           /> */}
-                          <MUIMultiValue name="need_of_service"
+                          <MUIMultiValue
+                            name="need_of_service"
                             label="পরিষেবার প্রয়োজনীয়তা"
-                            options={support_items} />
+                            options={support_items}
+                          />
                         </Grid>
 
                         <Grid item xs={12} sm={6} md={12} lg={12}>

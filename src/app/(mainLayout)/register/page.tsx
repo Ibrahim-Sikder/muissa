@@ -92,7 +92,7 @@ const Register = () => {
         toast.success(response?.data?.message);
         setSuccessMessage(response?.data?.message);
         // router.push(`/verify?auth=${data.auth}`);
-        setCookie("mui-token", response?.data?.data?.token, '10d');
+        setCookie("mui-token", response?.data?.data?.token, { expires: 10 });
         router.push(`/`);
         setLoading(false);
       }
