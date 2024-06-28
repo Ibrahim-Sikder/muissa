@@ -33,6 +33,7 @@ export async function middleware(request: NextRequest) {
     decodedData = jwtDecode(accessToken) as any;
   } catch (error) {
     console.error("Error decoding token:", error);
+ window.location.href = "/membership"
     return NextResponse.redirect(new URL("/login", request.url));
   }
 

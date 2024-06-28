@@ -22,7 +22,7 @@ const CircleProgressBar = () => {
 
   return (
     <Container>
-      <div className='flex flex-col md:flex-row  items-center justify-between text-center md:w-[600px]'>
+      <div className='flex flex-col md:flex-row gap-10  items-center justify-between text-center md:w-[600px]'>
         
         <div className='flex flex-col items-center'>
           <div style={{ width: '170px' }}>

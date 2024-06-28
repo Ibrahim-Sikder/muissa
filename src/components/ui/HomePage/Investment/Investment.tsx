@@ -576,7 +576,10 @@ export default function Investment() {
                         timeout={500}
                         classNames="fade"
                       >
-                        <TabPanel value={tab.value} sx={{ border: "none" }}>
+                        <TabPanel value={tab.value} sx={{ 
+                            border: "none",
+                            padding: isSmallScreen ? '5px' : '24px'  // Default padding of TabPanel is 24px
+                          }}>
                           <div
                             className="investmentCardWrap"
                             style={{ backgroundImage: `url(${tab.image})` }}

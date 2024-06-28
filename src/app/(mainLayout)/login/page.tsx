@@ -82,7 +82,7 @@ const Login = () => {
         toast.success(response?.data?.message);
         setSuccessMessage(response?.data?.message);
         setCookie("mui-token", response?.data?.data?.token, { expires: 10 });
-        router.push(`/`);
+        window.location.href = "/membership"
         setLoading(false);
       }
     } catch (error: any) {

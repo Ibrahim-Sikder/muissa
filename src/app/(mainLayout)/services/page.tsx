@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import Container from "@/components/ui/HomePage/Container/Container";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -8,9 +9,11 @@ import ReactHtmlParser from 'react-html-parser';
 import Image from 'next/image';
 import ForwardIcon from '@mui/icons-material/Forward';
 import { useMediaQuery, useTheme } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './services.css';
+import { useRouter, useSearchParams } from "next/navigation";
 import Loader from "@/components/Loader";
+
 
 const renderElement = (element: any, index: number) => {
   if (typeof element === 'string') {
@@ -97,6 +100,7 @@ const renderElement = (element: any, index: number) => {
   }
 };
 
+
 const renderContent = (content: string) => {
   const parsedContent = ReactHtmlParser(content);
   return parsedContent.map((element, index) => renderElement(element, index));
@@ -125,6 +129,7 @@ function CustomTabPanel(props: TabPanelProps) {
   );
 }
 
+
 function a11yProps(index: number) {
   return {
     id: `vertical-tab-${index}`,
@@ -133,37 +138,54 @@ function a11yProps(index: number) {
 }
 
 
-
-const tabStyles = {
-  border: "none",
-  textAlign: "left",
-  pl: {
-    sm: 1,
-    lg: 2
-  },
-  "& .MuiTab-wrapper": {
-    justifyContent: "flex-start",
-  },
-  "&.Mui-selected": {
-    borderLeft: "2px solid #002140",
-    borderRight: "none",
-    borderTop: "none",
-    borderBottom: "none",
-    color: "#fff",
-    background: "#1591A3",
-    textAlign: 'left',
-  },
-};
-
-
-const Page = () => {
-  const [value, setValue] = useState(0);
-  const { data: serviceData, isLoading, error } = useGetAllServicesQuery({});
-  const theme = useTheme();
+const ServicePage = () => {
+  const router = useRouter(); 
+  const searchParams = useSearchParams(); 
+  const tab = searchParams.get('tab'); 
+  const [value, setValue] = useState(0); 
+  const { data: serviceData, isLoading, error } = useGetAllServicesQuery({}); 
+  const theme = useTheme(); 
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+  useEffect(() => {
+    if (tab && serviceData) {
+      const tabIndex = serviceData.services.findIndex(
+        (service: any) => service.category === tab
+      );
+      if (tabIndex !== -1) {
+        setValue(tabIndex);
+      }
+    }
+  }, [tab, serviceData]);
+
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    router.push(`?tab=${serviceData.services[newValue].category}`); 
+  };
+
+
+  
+
+  const tabStyles = {
+    border: "none",
+    textAlign: "left",
+    pl: {
+      sm: 1,
+      lg: 2
+    },
+    "& .MuiTab-wrapper": {
+      justifyContent: "flex-start",
+    },
+    "&.Mui-selected": {
+      borderLeft: "2px solid #002140",
+      borderRight: "none",
+      borderTop: "none",
+      borderBottom: "none",
+      color: "#fff",
+      background: "#1591A3",
+      textAlign: 'left',
+    },
   };
 
   if (!serviceData || error) {
@@ -174,7 +196,6 @@ const Page = () => {
   if (isLoading) {
     return <Loader />
   }
-
 
 
   return (
@@ -199,10 +220,10 @@ const Page = () => {
           >
             {serviceData?.services.map((service: any, index: number) => (
               <Tab
+                sx={tabStyles}
                 key={service.id}
                 label={service.category}
                 {...a11yProps(index)}
-                sx={tabStyles}
               />
             ))}
           </Tabs>
@@ -210,14 +231,15 @@ const Page = () => {
           {serviceData?.services?.map((service: any, index: number) => (
             <CustomTabPanel key={service.id} value={value} index={index}>
               <div className='lg:mt-0 mt-5'>
-                <div className="w-full h-96 serviceCoverImgWrap  relative">
-                  <Image
+                <div className="w-full h-96 serviceCoverImgWrap relative">
+                <Image
                     src={service.service_image}
                     alt='services'
-                    width={500}
-                    height={475}
-                    className="rounded-t-lg  aspect-video h-full w-full object-cover absolute"
+                   width={500}
+                   height={500}
+                  
                   />
+                  
                 </div>
               </div>
               <h4 className='mt-10'>{service.title}</h4>
@@ -231,4 +253,5 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default ServicePage; 
+
