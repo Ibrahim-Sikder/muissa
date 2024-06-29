@@ -9,6 +9,20 @@ import Company from "@/components/ui/HomePage/Company/Company";
 import WorkingProcess from "./_components/WorkingProcess";
 import Award from "./_components/Award/Award";
 import TeamSection from "./_components/TeamSection/TeamSectin";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "Muissa Consulting | About ",
+  description: '"Learn about Muissa Consulting, our mission, and the expert team driving success for our clients. Discover our values, approach, and how we deliver exceptional consulting services to empower your business."',
+  keywords: "Muissa Consulting,Mission and vision, About Muissa, Consulting services, Business consulting, Expert team, Company values, Consulting approach, Empowering businesses, Client success ",
+}
+
+
+
+
+
+
 const About = () => {
   const value = 66;
   return (
@@ -27,9 +41,6 @@ const About = () => {
               <h1> সফলতার পথে</h1>
               <h1>  ভবিষ্যতের স্বপ্ন</h1>
             </div>
-
-
-
 
             <p className="mt-5 leading-9">
               আমাদের লক্ষ্য হলো স্থানীয় এবং আন্তর্জাতিক পর্যায়ে ব্যবসায়িক প্রতিষ্ঠানগুলিকে তাদের লক্ষ্যে পৌঁছাতে সহায়তা করা এবং তাদের সাফল্যের পথে একটি শক্তিশালী সহযোগী হিসেবে নিজেদের প্রতিষ্ঠিত করা।
