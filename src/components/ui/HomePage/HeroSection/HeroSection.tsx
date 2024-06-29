@@ -25,7 +25,7 @@ const HeroSection = () => {
   };
 
 
-  
+
   return (
     <div className="heroSectionWrap">
       <Swiper

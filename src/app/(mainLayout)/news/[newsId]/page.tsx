@@ -6,7 +6,6 @@ import { Button, Divider, Grid } from "@mui/material";
 import { FaCalendarAlt, FaUser } from "react-icons/fa";
 import facebook from "../../../../assets/icon/facebook.png";
 import linkedIn from "../../../../assets/icon/linkedin.png";
-import user from "../../../../assets/news/user.jpg";
 import instagram from "../../../../assets/icon/instagram.png";
 import { HiChevronRight } from "react-icons/hi";
 
@@ -15,6 +14,14 @@ import CommentForm from "../_components/CommentForm";
 import ReactHtmlParser from "react-html-parser";
 import Link from "next/link";
 import UserComment from "../_components/UserComment";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "Muissa Consulting | News ",
+  description: '"Stay updated with the latest news and insights from Muissa Consulting. Explore industry trends, expert opinions, and company updates to keep your business informed and ahead in the consulting world."',
+  "keywords": "News, Muissa Consulting News, Industry updates, Business insights, Consulting trends, Expert opinions, Company news, Market analysis, Business blog, Consulting updates, Latest developments"
+}
 
 const renderContent = (content: string) => {
   const parsedContent = ReactHtmlParser(content);
@@ -116,7 +123,7 @@ const News = async ({ params }: BlogId) => {
     cache: "no-store",
   });
   const blog = await res.json();
-  console.log('blog details data ', blog)
+
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/blogs/get-blogs`, {
     cache: "no-store",

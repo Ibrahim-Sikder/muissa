@@ -29,6 +29,7 @@ import { AccountCircle, Notifications, TrendingFlat } from "@mui/icons-material"
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import MailIcon from "@mui/icons-material/Mail";
+import TopBar from "./TopBar";
 
 
 const Header = () => {
@@ -81,40 +82,14 @@ const Header = () => {
   }
 
   const buttonStyle = {
-    width:"80px",
-    fontSize:'12px'
+    width: "80px",
+    fontSize: '12px'
   }
 
 
   return (
     <header>
-      <div className=" bg-[#152644] h-10 hidden xl:block">
-        <div className=" topBar flex items-center justify-between ">
-          <small>House-08, Road-07, Block-C, Banasree,Dhaka-1219 </small>
-          <div className="flex space-x-3">
-            <a
-              href="https://www.facebook.com/profile.php?id=61558510933789"
-              target="_blank"
-            >
-              <FaFacebookF className="topIcon" />
-            </a>
-
-            <a
-              href="https://www.instagram.com/muissaltd?igsh=Nnp4M2d1M2pvMGtr"
-              target="_blank"
-            >
-              <FaInstagram className="topIcon" />
-            </a>
-
-            <a
-              href="https://www.linkedin.com/company/muissa-business-consulting-ltd/"
-              target="_blank"
-            >
-              <FaLinkedinIn className="topIcon" />
-            </a>
-          </div>
-        </div>
-      </div>
+      <TopBar />
       <Container className="headerWrap ">
         <div className=" flex items-center justify-between px-5 xl:px-0  ">
           <Link href="/">

@@ -3,7 +3,6 @@
 import { Button } from '@mui/material';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
-import { HiChevronRight } from 'react-icons/hi';
 import user from "../../../../assets/logo/user.png";
 import { useGetSingleBlogQuery } from '@/redux/api/blogApi';
 import Loader from '@/components/Loader';
