@@ -25,7 +25,7 @@ const Footer = async () => {
   const servicesData = await res.json();
   const sortedServices: TServices[] = servicesData?.data.services?.sort((a: TServices, b: TServices) => a.priority - b.priority);
 
-   if (!sortedServices || !servicesData) {
+  if (!sortedServices || !servicesData) {
     return <h1 className="mt-10 flex items-center justify-center text-3xl capitalize ">Oops! Services data not found! </h1>
 
   }
@@ -106,19 +106,22 @@ const Footer = async () => {
                 <li>Careers</li>
               </ul>
             </div>
-            {/* <div className="md:text-left w-full md:w-auto px-4">
+            <div className="md:text-left w-full md:w-auto px-4">
               <h4>Services</h4>
               <ul className="space-y-5 mt-5">
-                <li>Product Support</li>
-                <li>Sale Support</li>
-                <li>Marketing Support</li>
-                <li>Delivery Supports</li>
-                <li>IT Support</li>
-                <li>Funding Support</li>
-                <li>Investment Support</li>
+                <li> <Link href={`/services?tab=ফান্ডিং%20সাপোর্ট`}>Funding Support</Link></li>
+                <li> <Link href={`/services?tab=ইনভেস্টমেন্ট%20সাপোর্ট`}>Investment Support</Link></li>
+                <li> <Link href={`/services?tab=মার্কেটিং%20সাপোর্ট`}> Marketing Support</Link></li>
+                <li> <Link href={`/services?tab=আইটি%20সাপোর্ট`}>IT Support</Link></li>
+                <li> <Link href={`/services?tab=প্রোডাক্ট%20সাপোর্ট`}>Product Support</Link></li>
+                <li> <Link href={`/services?tab=সেলস%20সাপোর্ট`}>Sale Support</Link></li>
+                <li> <Link href={`/services?tab=ডেলিভারি%20সাপোর্ট`}>Delivery Supports</Link></li>
+
+
+
               </ul>
-            </div> */}
-            <div className="md:text-left w-full md:w-auto px-4">
+            </div>
+            {/* <div className="md:text-left w-full md:w-auto px-4">
               <h4>Services</h4>
 
               {
@@ -130,7 +133,7 @@ const Footer = async () => {
 
               }
 
-            </div>
+            </div> */}
             <div className="md:text-left w-full md:w-auto px-4">
               <h4>Resources</h4>
               <ul className="space-y-5 mt-5">

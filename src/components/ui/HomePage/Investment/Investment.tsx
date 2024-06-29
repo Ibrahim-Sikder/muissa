@@ -122,7 +122,7 @@ export default function Investment() {
           </ul>
 
           <div className="commonContent">
-            <Button component={Link} href='/services' sx={buttonStyle}><span>Know More</span></Button>
+            <Button component={Link} href={`/services?tab=ফান্ডিং%20সাপোর্ট`} sx={buttonStyle}><span>Know More</span></Button>
           </div>
         </div>
       ),
@@ -194,7 +194,7 @@ export default function Investment() {
 
 
           <div className="commonContent">
-            <Button component={Link} href='/services' sx={buttonStyle}><span>Know More</span></Button>
+            <Button component={Link} href={`/services?tab=ইনভেস্টমেন্ট%20সাপোর্ট`} sx={buttonStyle}><span>Know More</span></Button>
           </div>
         </div>
       ),
@@ -252,7 +252,7 @@ export default function Investment() {
 
 
           <div className="commonContent">
-            <Button component={Link} href='/services' sx={buttonStyle}><span>Know More</span></Button>
+            <Button component={Link} href={`/services?tab=মার্কেটিং%20সাপোর্ট`} sx={buttonStyle}><span>Know More</span></Button>
           </div>
         </div>
       ),
@@ -312,7 +312,7 @@ export default function Investment() {
 
 
           <div className="commonContent">
-            <Button component={Link} href='/services' sx={buttonStyle}><span>Know More</span></Button>
+            <Button component={Link} href={`/services?tab=আইটি%20সাপোর্ট`} sx={buttonStyle}><span>Know More</span></Button>
           </div>
         </div>
       ),
@@ -386,7 +386,7 @@ export default function Investment() {
 
 
           <div className="commonContent">
-            <Button component={Link} href='/services' sx={buttonStyle}><span>Know More</span></Button>
+            <Button component={Link} href={`/services?tab=প্রোডাক্ট%20সাপোর্ট`} sx={buttonStyle}><span>Know More</span></Button>
           </div>
         </div>
       ),
@@ -455,7 +455,7 @@ export default function Investment() {
 
 
           <div className="commonContent">
-            <Button component={Link} href='/services' sx={buttonStyle}><span>Know More</span></Button>
+            <Button component={Link} href={`/services?tab=সেলস%20সাপোর্ট`} sx={buttonStyle}><span>Know More</span></Button>
           </div>
         </div>
       ),
@@ -514,7 +514,7 @@ export default function Investment() {
 
 
           <div className="commonContent">
-            <Button component={Link} href='/services' sx={buttonStyle}><span>Know More</span></Button>
+            <Button component={Link} href={`/services?tab=ডেলিভারি%20সাপোর্ট`} sx={buttonStyle}><span>Know More</span></Button>
           </div>
         </div>
       ),

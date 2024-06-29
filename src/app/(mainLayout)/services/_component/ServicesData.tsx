@@ -144,6 +144,7 @@ const ServicesData = () => {
     const tab = searchParams.get('tab');
     const [value, setValue] = useState(0);
     const { data: serviceData, isLoading, error } = useGetAllServicesQuery({});
+    console.log(serviceData)
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 

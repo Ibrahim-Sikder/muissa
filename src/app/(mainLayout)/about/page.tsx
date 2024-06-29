@@ -13,8 +13,8 @@ import { Metadata } from "next";
 
 
 export const metadata: Metadata = {
-  title: "Muissa Consulting | About ",
-  description: '"Learn about Muissa Consulting, our mission, and the expert team driving success for our clients. Discover our values, approach, and how we deliver exceptional consulting services to empower your business."',
+  title: "Muissa Business Consultancy | About ",
+  description: '"Learn about Muissa Business Consultancy , our mission, and the expert team driving success for our clients. Discover our values, approach, and how we deliver exceptional consulting services to empower your business."',
   keywords: "Muissa Consulting,Mission and vision, About Muissa, Consulting services, Business consulting, Expert team, Company values, Consulting approach, Empowering businesses, Client success ",
 }
 
