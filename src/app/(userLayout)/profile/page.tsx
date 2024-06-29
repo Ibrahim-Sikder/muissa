@@ -47,6 +47,7 @@ import Loader from "@/components/Loader";
 import userImg from "../../../assets/logo/profile.png";
 import MUIMultiValue from "@/components/Forms/MultiPleValue";
 import { support_items } from "@/types";
+import ProfileLoader from "@/components/ProfileLoader";
 
 // const validationSchema = z.object({
 //   user: z.string().email("একটি বৈধ ইমেল ঠিকানা প্রদান করুন!").optional(),
@@ -356,7 +357,7 @@ const Profile = () => {
   };
 
   if (isLoading) {
-    return <Loader />;
+    return <ProfileLoader/>;
   }
 
   return (
