@@ -15,6 +15,7 @@ import { Box, Input, List, ListItem, ListItemText, Paper } from "@mui/material";
 import { format } from "timeago.js";
 import uploadFile from "@/helpers/uploadFile";
 import { toast } from "sonner";
+import { Send } from "@mui/icons-material";
 
 type TProps = {
   close: () => void;
@@ -241,6 +242,9 @@ const MessageModal = ({ close }: TProps) => {
 
   const onlineStatus = onlineUser.includes(userDetails?._id as string);
 
+
+  const iconStyle  = {fontSize:'28px', background:'#1591A3',color:'#fff', padding:'5px', borderRadius:'8px' }
+
   return (
     <div className="w-[300px] md:w-[360px] md:h-[600px] h-[400px]  bg-white fixed right-0 md:right-1 bottom-14  rounded-2xl text-black shadow-xl z-[9999999999999999] overflow-hidden shadowStyle">
       <div className="flex flex-col justify-between h-full ">
@@ -362,6 +366,7 @@ const MessageModal = ({ close }: TProps) => {
 
         <div className=" w-full h-24 bg-white flex pl-3  items-center border-t-[#ddd] border-[2px] ">
           <form onSubmit={onSubmit} className="flex flex-col items-start ">
+            <div className="flex items-center justify-between w-[330px] ">
             <input
               type="text"
               placeholder="Compose your message...."
@@ -369,6 +374,8 @@ const MessageModal = ({ close }: TProps) => {
               onChange={handleMessageOnChange}
               ref={textInputRef}
             />
+            <Send sx={iconStyle}/>
+            </div>
             <div className="pb-2 flex space-x-2 items-center text-[#707584] ">
               <input
                 type="file"

@@ -216,15 +216,15 @@ const Profile = () => {
   }
 
   const need_of_service = Array.isArray(memberShipData?.need_of_service)
-  ? memberShipData.need_of_service.map((service: any) => ({
+    ? memberShipData.need_of_service.map((service: any) => ({
       title: service.title || service,
     }))
-  : typeof memberShipData?.need_of_service === "string"
-  ? memberShipData.need_of_service
-      .split(",")
-      .map((service: any) => ({ title: service.trim() }))
-  : []
- 
+    : typeof memberShipData?.need_of_service === "string"
+      ? memberShipData.need_of_service
+        .split(",")
+        .map((service: any) => ({ title: service.trim() }))
+      : []
+
 
   const defaultValues = {
     profile_pic: userData?.profile_pic || "",
@@ -270,8 +270,8 @@ const Profile = () => {
         userType === "business_owner"
           ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-business-owner`
           : userType === "investor"
-          ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-investor`
-          : null;
+            ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-investor`
+            : null;
 
       if (!endpoint) {
         throw new Error("Invalid user type");
@@ -282,7 +282,7 @@ const Profile = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      
+
       if (
         response.status === 200 &&
         response.data.success === true &&
@@ -291,7 +291,7 @@ const Profile = () => {
         toast.success(response.data.message);
         setSuccessMessage(response.data.message);
         setLoading(false);
-     
+
 
         if (response?.data?.data?.redirectUrl === "payment") {
           router.push(
@@ -303,7 +303,7 @@ const Profile = () => {
         toast.error(response.data.data.message);
         setErrorMessage([response.data.data.message]);
         setLoading(false);
-      
+
         if (response?.data?.data?.redirectUrl === "payment") {
           router.push(
             `/${response.data.data.redirectUrl}?member_type=${userType}&id=${response.data.data.userId}`
@@ -312,7 +312,7 @@ const Profile = () => {
       }
     } catch (error: any) {
       if (error.response) {
-     
+
         const { status, data } = error.response;
         if ([400, 404, 401, 409, 500].includes(status)) {
           setErrorMessage(data.message);
@@ -332,32 +332,8 @@ const Profile = () => {
 
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  const buttonStyle = {
-    width: isMobile ? "200px" : "200px",
-    height: "50px",
-    backgroundColor: isMobile ? "#00305C" : "#1591A3",
-    borderRadius: "3px",
-    color: "#fff",
-    margin: "0 auto",
-    marginBottom: {
-      xs: "10px",
-    },
-    padding: "0px",
-    display: "flex",
-    fontSize: {
-      lg: "15px",
-      xs: "11px",
-    },
-    justifyContent: "center",
-    "&.Mui-selected": {
-      backgroundColor: "#00305C",
-      BorderBottom: "0px",
-      color: "#fff",
-    },
-  };
-
   if (isLoading) {
-    return <ProfileLoader/>;
+    return <ProfileLoader />;
   }
 
   return (
@@ -378,7 +354,7 @@ const Profile = () => {
               width={100}
             />
             <div>
-              <h4 className="text-xl md:text-3xl font-semibold ">
+              <h4 className="text-xl md:text-3xl font-semibold capitalize ">
                 {userData?.name}
               </h4>
               <p className="text-sm md:text-normal ">
@@ -437,7 +413,7 @@ const Profile = () => {
                   disabled={isEmailValid(userData.auth)}
                 />
               </Grid>
-              
+
               <Grid
                 item
                 xs={12}
@@ -518,263 +494,23 @@ const Profile = () => {
                   size="medium"
                 />
               </Grid>
+              <Grid
+                item
+                xs={12}
 
-              <Box
-                sx={{
-                  width: "100%",
-                  typography: "body1",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginTop: "10px",
-                }}
+                sx={{ marginRight: "0px" }}
               >
-                <TabContext value={userType}>
-                  <Box>
-                    <TabList
-                      onChange={handleChange}
-                      aria-label="lab API tabs example"
-                      orientation={isMobile ? "vertical" : "horizontal"}
-                      sx={{
-                        flexDirection: isMobile ? "column" : "row",
-                        justifyContent: "center",
-                        width: {
-                          lg: "430px",
-                        },
-                      }}
-                    >
-                      <Tab
-                        sx={buttonStyle}
-                        label=" As a Business Owner "
-                        value="business_owner"
-                      />
-                      <Tab
-                        sx={buttonStyle}
-                        label="As a Investor  "
-                        value="investor"
-                      />
-                    </TabList>
-                  </Box>
-                  <TabPanel value="business_owner" sx={{ padding: "0px" }}>
-                    <Stack
-                      direction={isMobile ? "column" : "row"}
-                      spacing={{ xs: 1, md: 3, lg: 3 }}
-                    >
-                      <Grid container spacing={1}>
-                        <Grid item xs={12} sm={6} md={6} lg={12}>
-                          <MUIInput
-                            name="business_name"
-                            label="ব্যবসার নাম "
-                            fullWidth
-                            size="medium"
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6} lg={12}>
-                          <MUIInput
-                            name="business_type"
-                            label="ব্যবসার ধরন"
-                            fullWidth
-                            size="medium"
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6} lg={12}>
-                          <MUIInput
-                            name="business_address"
-                            label="ব্যবসার ঠিকানা"
-                            fullWidth
-                            size="medium"
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6} lg={12}>
-                          <MUIInput
-                            name="website"
-                            label="ওয়েবসাইট (যদি থাকে)"
-                            fullWidth
-                            size="medium"
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6} lg={12}>
-                          <MUIInput
-                            name="business_description"
-                            label="ব্যবসার বিবরণ"
-                            fullWidth
-                            size="medium"
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6} lg={12}>
-                          <MUIMultiValue
-                            name="need_of_service"
-                            label="পরিষেবার প্রয়োজনীয়তা"
-                            options={support_items}
-                          />
-                        </Grid>
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
+                  <Button
+                    type="submit"
+                    sx={{ display: "", margin: "0 auto", width: '200px' }}
+                  >
+                    আপডেট করুন
+                  </Button>
+                </Box>
+              </Grid>
 
-                        <Grid item xs={12} sm={6} md={12} lg={12}>
-                          <MUITextArea
-                            name="additional_info"
-                            placeholder="আপনার কোন বিশেষ চাহিদা বা অনুরোধ আছে?"
-                            minRows={3}
-                            sx={{
-                              border: "1px solid #ddd",
-                              padding: "10px",
-                            }}
-                          />
-                        </Grid>
-                      </Grid>
-                      <Box>
-                        <DocUploader
-                          sx={{ fontSize: "20px" }}
-                          name="upload_file"
-                          setUploadedImage={setUploadedImage}
-                          uploadedImage={uploadedImage || memberShipData?.upload_file}
-                        />
-                        <div className="my-1">
-                          {successMessage && (
-                            <SuccessMessage message={successMessage} />
-                          )}
-                          {errorMessage && (
-                            <ErrorMessage message={errorMessage} />
-                          )}
-                        </div>
-                        <Grid
-                          item
-                          xs={12}
-                          sm={6}
-                          md={6}
-                          lg={12}
-                          sx={{ marginTop: "10px" }}
-                        >
-                          <Box
-                            sx={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              width: "100%",
-                            }}
-                          >
-                            <Button
-                              type="submit"
-                              sx={{ display: "block", margin: "0 auto" }}
-                            >
-                              {loading ? (
-                                <span>অপেক্ষা করুন</span>
-                              ) : (
-                                <span>সাবমিট করুন</span>
-                              )}
-                            </Button>
-                          </Box>
-                        </Grid>
-                      </Box>
-                    </Stack>
-                  </TabPanel>
-                  <TabPanel value="investor" sx={{ padding: "0px" }}>
-                    <Stack
-                      direction={isMobile ? "column" : "row"}
-                      spacing={{ xs: 1, md: 3, lg: 3 }}
-                    >
-                      <Grid container spacing={1}>
-                        <Grid item xs={12} sm={6} md={6} lg={12}>
-                          {/* <Grid item xs={12} sm={6} md={6} lg={12}>
-                        <MUIInput
-                          name="investor"
-                          label="AS A INVESTOR "
-                          fullWidth
-                          size="medium"
-                        />
-                      </Grid> */}
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6} lg={12}>
-                          <MUIInput
-                            name="investment_type"
-                            label="বিনিয়োগের ধরন"
-                            fullWidth
-                            size="medium"
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6} lg={12}>
-                          <MUIInput
-                            name="investment_amount"
-                            label="বিনিয়োগের পরিমাণ"
-                            fullWidth
-                            size="medium"
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6} lg={12}>
-                          <MUIInput
-                            name="investment_period"
-                            label="বিনিয়োগের সময়কাল"
-                            fullWidth
-                            size="medium"
-                          />
-                        </Grid>
-                        <Grid item xs={12} sm={6} md={6} lg={12}>
-                          <MUIInput
-                            name="investment_goal"
-                            label="বিনিয়োগের লক্ষ্য"
-                            fullWidth
-                            size="medium"
-                          />
-                        </Grid>
 
-                        <Grid item xs={12} sm={6} md={6} lg={12}>
-                          <MUITextArea
-                            name="additional_info"
-                            placeholder="আপনার কোন বিশেষ চাহিদা বা অনুরোধ আছে?"
-                            minRows={3}
-                            sx={{
-                              border: "1px solid #ddd",
-                              padding: "10px",
-                            }}
-                          />
-                        </Grid>
-                      </Grid>
-                      <Box
-                        sx={{
-                          marginTop: "50px",
-                        }}
-                      >
-                        <DocUploader
-                          sx={{ fontSize: "20px" }}
-                          name="upload_file"
-                          setUploadedImage={setUploadedImage}
-                          uploadedImage={uploadedImage}
-                        />
-                        <div className="my-1">
-                          {successMessage && (
-                            <SuccessMessage message={successMessage} />
-                          )}
-                          {errorMessage && (
-                            <ErrorMessage message={errorMessage} />
-                          )}
-                        </div>
-                        <Grid
-                          item
-                          xs={12}
-                          sm={6}
-                          md={6}
-                          lg={12}
-                          sx={{ marginTop: "10px" }}
-                        >
-                          <Box
-                            sx={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              width: "100%",
-                            }}
-                          >
-                            <Button
-                              type="submit"
-                              sx={{ display: "block", margin: "0 auto" }}
-                            >
-                              সাবমিট করুন
-                            </Button>
-                          </Box>
-                        </Grid>
-                      </Box>
-                    </Stack>
-                  </TabPanel>
-                </TabContext>
-              </Box>
             </Grid>
           </div>
         </MUIForm>

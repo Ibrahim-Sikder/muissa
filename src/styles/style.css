@@ -125,6 +125,15 @@
 }
 
 
+.divider {
+  background: #1591a3;
+  width: 4px;
+  height: 260px;
+  position: absolute;
+  left: -14px;
+}
+
+
 @media only screen and (max-width: 500px) {
   .membarshipCard {
     width: 100%;

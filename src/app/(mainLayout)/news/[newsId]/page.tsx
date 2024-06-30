@@ -15,6 +15,9 @@ import ReactHtmlParser from "react-html-parser";
 import Link from "next/link";
 import UserComment from "../_components/UserComment";
 import { Metadata } from "next";
+import { Share } from "@mui/icons-material";
+import ShareLink from "../_components/ShareLink";
+import ReplyComment from "../_components/ReplyComment";
 
 
 
@@ -173,146 +176,146 @@ const News = async ({ params }: BlogId) => {
 
   console.log('blog comments data', blog?.comments)
   return (
-    <>
+    <div className="min-h-screen">
       <div className="serviceDetailsWrap aboutWraps">
         <div className="aboutContent">
           <h1>BLOG</h1>
         </div>
       </div>
+
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-12 mt-10  gap-10 ">
-          <div className="lg:col-span-4   ">
-            <div className="px-10 ">
-              <h3 className="mb-5 capitalize">পপুলার সার্ভিস </h3>
-              <div className="space-y-5">
-                <div>
-                  <div className="flex items-center justify-between w-full ">
-                    <div className="flex items-center ">
-                      <HiChevronRight />
-                      <Link href={`/services?tab=ফান্ডিং%20সাপোর্ট`}> <p>ফান্ডিং সাপোর্ট </p></Link>
-                    </div>
-                    <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
-                      30
-                    </div>
-                  </div>
-                  <Divider sx={{ marginTop: "10px" }} />
-                </div>
-
-
-                <div>
-                  <div className="flex items-center justify-between w-full ">
-                    <div className="flex items-center ">
-                      <HiChevronRight />
-
-                      <Link href={`/services?tab=ইনভেস্টমেন্ট%20সাপোর্ট`}><p>ইনভেস্টমেন্ট সাপোর্ট</p></Link>
-                    </div>
-                    <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
-                      40
-                    </div>
-                  </div>
-                  <Divider sx={{ marginTop: "10px" }} />
-                </div>
-                <div>
-                  <div className="flex items-center justify-between w-full ">
-                    <div className="flex items-center ">
-                      <HiChevronRight />
-
-                      <Link href={`/services?tab=মার্কেটিং%20সাপোর্ট`}> <p>মার্কেটিং সাপোর্ট</p></Link>
-                    </div>
-                    <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
-                      45
-                    </div>
-                  </div>
-                  <Divider sx={{ marginTop: "10px" }} />
-                </div>
-                <div>
-                  <div className="flex items-center justify-between w-full ">
-                    <div className="flex items-center ">
-                      <HiChevronRight />
-
-                      <Link href={`/services?tab=আইটি%20সাপোর্ট`}> <p>আইটি সাপোর্ট</p></Link>
-                    </div>
-                    <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
-                      50
-                    </div>
-                  </div>
-                  <Divider sx={{ marginTop: "10px" }} />
-                </div>
-              </div>
-            </div>
-            <div className="mt-10 px-10 ">
-              <div>
-                <h4 className="mb-5">Recent News </h4>
+        <div className="grid grid-cols-1 md:grid-cols-12 mt-10  gap-10  ">
+          <div className=' lg:col-span-4 '>
+            <div className="sticky top-0">
+              <div className="px-10 ">
+                <h3 className="mb-5 capitalize">পপুলার সার্ভিস </h3>
                 <div className="space-y-5">
-                  <div className="space-y-8">
+                  <div>
+                    <div className="flex items-center justify-between w-full ">
+                      <div className="flex items-center ">
+                        <HiChevronRight />
+                        <Link href={`/services?tab=ফান্ডিং%20সাপোর্ট`}> <p>ফান্ডিং সাপোর্ট </p></Link>
+                      </div>
+                      <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
+                        30
+                      </div>
+                    </div>
+                    <Divider sx={{ marginTop: "10px" }} />
+                  </div>
 
 
-                    {
-                      blogDetails?.data?.blogs?.slice(0, 3)?.map((blogInfo: TBlog) => (
-                        <div key={blogInfo._id}>
-                          <Link href={`/news/${blogInfo._id}`}>
-                            <div className="flex flex-col md:flex-row items-center justify-between gap-10 ">
-                              <Image
-                                className="w-full object-fill h-auto sm:w-20 sm:h-20 md:w-30 md:h-30 lg:w-28 lg:h-28 rounded-full"
-                                src={blogInfo?.blog_image}
-                                alt="news"
-                                width={500}
-                                height={500}
-                              />
-                              <div>
-                                <h5 className="font-semibold">
-                                  {blogInfo?.title}
-                                </h5>
-                                <small>{formatDate(blogInfo.createdAt)}</small>
-                              </div>
-                            </div>
-                          </Link>
-                        </div>
-                      ))
-                    }
 
+                  <div>
+                    <div className="flex items-center justify-between w-full ">
+                      <div className="flex items-center ">
+                        <HiChevronRight />
+
+                        <Link href={`/services?tab=ইনভেস্টমেন্ট%20সাপোর্ট`}><p>ইনভেস্টমেন্ট সাপোর্ট</p></Link>
+                      </div>
+                      <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
+                        40
+                      </div>
+                    </div>
+                    <Divider sx={{ marginTop: "10px" }} />
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between w-full ">
+                      <div className="flex items-center ">
+                        <HiChevronRight />
+
+                        <Link href={`/services?tab=মার্কেটিং%20সাপোর্ট`}> <p>মার্কেটিং সাপোর্ট</p></Link>
+                      </div>
+                      <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
+                        45
+                      </div>
+                    </div>
+                    <Divider sx={{ marginTop: "10px" }} />
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between w-full ">
+                      <div className="flex items-center ">
+                        <HiChevronRight />
+
+                        <Link href={`/services?tab=আইটি%20সাপোর্ট`}> <p>আইটি সাপোর্ট</p></Link>
+                      </div>
+                      <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
+                        50
+                      </div>
+                    </div>
+                    <Divider sx={{ marginTop: "10px" }} />
                   </div>
                 </div>
               </div>
+              <div className="mt-10 px-10 ">
+                <div>
+                  <h4 className="mb-5">Recent News </h4>
+                  <div className="space-y-5">
+                    <div className="space-y-8">
+
+
+                      {
+                        blogDetails?.data?.blogs?.slice(0, 3)?.map((blogInfo: TBlog) => (
+                          <div key={blogInfo._id}>
+                            <Link href={`/news/${blogInfo._id}`}>
+                              <div className="flex flex-col md:flex-row items-center justify-between gap-10 ">
+                                <Image
+                                  className="w-full object-fill h-auto sm:w-20 sm:h-20 md:w-30 md:h-30 lg:w-28 lg:h-28 rounded-full"
+                                  src={blogInfo?.blog_image}
+                                  alt="news"
+                                  width={500}
+                                  height={500}
+                                />
+                                <div>
+                                  <h5 className="font-semibold">
+                                    {blogInfo?.title}
+                                  </h5>
+                                  <small>{formatDate(blogInfo.createdAt)}</small>
+                                </div>
+                              </div>
+                            </Link>
+                          </div>
+                        ))
+                      }
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
           <div className="lg:col-span-8 ">
-            <div className="newsDetailsRightSideWrap text-[15px]">
-              <Image src={news} className="rightSideImg" alt="news" />
-              <div className="my-5 px-5 ">
-                <div className="flex items-center space-x-3 ">
-                  <FaCalendarAlt />
-                  <span>{formatDate(blog?.data?.createdAt)}</span>
-                  <FaUser />
-                  <span> {blog?.data?.author}</span>
+            <div >
+              <div className="newsDetailsRightSideWrap text-[15px]">
+                <Image src={news} className="rightSideImg" alt="news" />
+                <div className="my-5 px-5 ">
+                  <div className="flex items-center space-x-3 ">
+                    <FaCalendarAlt />
+                    <span>{formatDate(blog?.data?.createdAt)}</span>
+                    <FaUser />
+                    <span> {blog?.data?.author}</span>
+                  </div>
+                  <Divider sx={{ marginTop: "2px" }} />
                 </div>
-                <Divider sx={{ marginTop: "2px" }} />
-              </div>
 
-              <div className="blogContent px-5 space-y- py-5 rounded-md ">
-                <h2 className="mb-5 text-center">{blog?.data?.title}</h2>
-                {renderContent(blog?.data?.description)}
+                <div className="blogContent px-5 space-y- py-5 rounded-md ">
+                  <h2 className="mb-5 text-center">{blog?.data?.title}</h2>
+                  {renderContent(blog?.data?.description)}
+                </div>
               </div>
+              <ShareLink />
+
+
+              <Divider sx={{ marginTop: "20px" }} />
+              <UserComment id={newsId} />
+              <CommentForm id={newsId} />
+
             </div>
-
-            <div className="socialMedia flex-col md:flex-row gap-5 lg:gap-0  flex justify-end flex-end   mt-10 ">
-
-              <div className="flex  items-center space-x-3 ">
-                <span>Share: </span>
-                <Link href='/https://www.facebook.com/profile.php?id=61558510933789'><Image className="w-10" src={facebook} alt="facebook" /></Link>
-                <Link href='/https://www.instagram.com/muissaltd/?igsh=Nnp4M2d1M2pvMGtr'> <Image className="w-10" src={instagram} alt="facebook" /></Link>
-                <Link href='/https://www.linkedin.com/company/muissa-business-consulting-ltd/'><Image className="w-10" src={linkedIn} alt="facebook" /></Link>
-
-
-              </div>
-            </div>
-            <Divider sx={{ marginTop: "20px" }} />
-            <UserComment id={newsId} />
-            <CommentForm id={newsId} />
           </div>
         </div>
       </Container>
-    </>
+    </div>
+
   );
 };
 

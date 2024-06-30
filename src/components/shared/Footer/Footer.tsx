@@ -141,7 +141,7 @@ const Footer = async () => {
                   <Link href="/contact">Contact Us</Link>
                 </li>
                 <li>
-                  <Link href="/news">Blog</Link>
+                  <Link href={`/news/667a5187e2981142105e84b8`}>Blog</Link>
                 </li>
                 <li>
                   <Link href="/faq">FAQs</Link>

@@ -18,10 +18,3 @@
   object-fit: fill;
 }
 
-.divider {
-  background: #1591a3;
-  width: 4px;
-  height: 260px;
-  position: absolute;
-  left: -14px;
-}

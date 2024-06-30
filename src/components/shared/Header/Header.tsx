@@ -179,6 +179,7 @@ const Header = () => {
                   <li>
                     <Link href="/services" onClick={toggleMobileMenu}>Services</Link>
                   </li>
+                 
                   <li>
                     <Link href="/about" onClick={toggleMobileMenu}>About</Link>
                   </li>
@@ -264,6 +265,9 @@ const Header = () => {
                 <Link href="/services" onClick={toggleMobileMenu}>Services</Link>
               </li>
               <li>
+                    <Link href="/membership" onClick={toggleMobileMenu}>Membership</Link>
+                  </li>
+              <li>
                 <Link href="/about" onClick={toggleMobileMenu}>About</Link>
               </li>
               <li>
@@ -294,7 +298,10 @@ const Header = () => {
                 </>
               ) : (
                 <li>
-                  <Link href="/login" onClick={toggleMobileMenu}><Button sx={buttonStyle}>Login</Button></Link>
+                <div className="flex gap-2 items-center">
+                <Link href="/login" onClick={toggleMobileMenu}><Button sx={buttonStyle}>Login</Button></Link>
+                <Link href="/register" onClick={toggleMobileMenu}><Button sx={buttonStyle}>Register</Button></Link>
+                </div>
                 </li>
               )}
 
