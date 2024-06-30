@@ -34,6 +34,7 @@ import { ErrorMessage } from "@/components/error-message";
 import MUIMultiValue from "@/components/Forms/MultiPleValue";
 import { support_items } from "@/types";
 import Loader from "@/components/Loader";
+import ProfileLoader from "@/components/ProfileLoader";
 
 const validationSchema = z.object({
   user: z.string().email("একটি বৈধ ইমেল ঠিকানা প্রদান করুন!").optional(),
@@ -201,7 +202,7 @@ const ProfileMemebershipForm = () => {
   return (
     <>
       {isLoading ? (
-        <Loader/>
+        <ProfileLoader/>
       ) : (
         <Container>
           

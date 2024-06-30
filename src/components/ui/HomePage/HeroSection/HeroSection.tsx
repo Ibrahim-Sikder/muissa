@@ -2,8 +2,10 @@
 
 import React from "react";
 import "./HeroSection.css";
-import hero from "../../../../assets/banner/slider3.png";
-import hero2 from "../../../../assets/banner/slider2.png";
+import hero from "../../../../assets/banner/slider5.jpg";
+import hero2 from "../../../../assets/banner/slider4.jpg";
+import hero3 from "../../../../assets/banner/slider3.png";
+import hero4 from "../../../../assets/banner/slider2.png";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -68,11 +70,11 @@ const HeroSection = () => {
         <SwiperSlide>
           <div className="heroContentWraps ">
             <div className="bannerImgWrap">
-              <Image src={hero2} alt="banner" />
+              <Image src={hero4} alt="banner" />
             </div>
             <div className=" commonContent heroContent">
               <div className="space-y- md:space-y-5">
-                <h1 className="animate-fadeInRight">ব্যবসার সাফল্যের জন্য</h1>
+                <h1 className="animate-fadeInRight">ইনভেস্টমেন্ট সাপোর্ট</h1>
                 <h2 className="md:mt-5 text-[#1591A3] animate-fadeInLeft">
                   বিশ্বস্ত পরামর্শ সেবা
                 </h2>
@@ -86,6 +88,50 @@ const HeroSection = () => {
             </div>
           </div>
         </SwiperSlide>
+        <SwiperSlide>
+          <div className="heroContentWraps ">
+            <div className="bannerImgWrap">
+              <Image src={hero3} alt="banner" />
+            </div>
+            <div className=" commonContent heroContent2">
+              <div className="space-y- md:space-y-5">
+                <h1 className="animate-fadeInRight">ফান্ডিং সাপোর্ট</h1>
+                <h2 className="md:mt-5 text-[#1591A3] animate-fadeInLeft">
+                  বিশ্বস্ত পরামর্শ সেবা
+                </h2>
+                <p className="mb-2 md:mb-0 md:mt- animate-fadeInRight">
+                  আপনার ব্যবসায়িক সাফল্যের পথে বিশ্বস্ত সাথী
+                </p>
+                <Button component={Link} href="/membership" sx={buttonStyle}>
+                  <span>Get Membership</span>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="heroContentWraps ">
+            <div className="bannerImgWrap">
+              <Image src={hero2} alt="banner" />
+            </div>
+            <div className=" commonContent heroContent">
+              <div className="space-y- md:space-y-5">
+                <h1 className="animate-fadeInRight">360° মার্কেটিং সাপোর্ট </h1>
+                <h2 className="md:mt-5 text-[#1591A3] animate-fadeInLeft">
+                  বিশ্বস্ত পরামর্শ সেবা
+                </h2>
+                <p className="mb-2 md:mb-0 md:mt- animate-fadeInRight">
+                  আপনার ব্যবসায়িক সাফল্যের পথে বিশ্বস্ত সাথী
+                </p>
+                <Button component={Link} href="/membership" sx={buttonStyle}>
+                  <span>Get Membership</span>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </SwiperSlide>
+        
+       
       </Swiper>
     </div>
   );

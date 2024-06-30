@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { getCookie } from '@/helpers/Cookies';
 import { useGetMemberForPaymentQuery } from '@/redux/api/memeberApi';
 import Loader from '@/components/Loader';
+import ProfileLoader from '@/components/ProfileLoader';
 
 type TService = {
   _id: string,
@@ -29,7 +30,7 @@ const UserServicePage = () => {
   });
 
   if (isLoading) {
-    return <Loader />
+    return <ProfileLoader/>
   }
 
   console.log(memberShipData);

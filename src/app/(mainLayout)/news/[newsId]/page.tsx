@@ -17,11 +17,33 @@ import UserComment from "../_components/UserComment";
 import { Metadata } from "next";
 
 
-export const metadata: Metadata = {
-  title: "Muissa Consulting | News ",
-  description: '"Stay updated with the latest news and insights from Muissa Consulting. Explore industry trends, expert opinions, and company updates to keep your business informed and ahead in the consulting world."',
-  "keywords": "News, Muissa Consulting News, Industry updates, Business insights, Consulting trends, Expert opinions, Company news, Market analysis, Business blog, Consulting updates, Latest developments"
+
+export async function generateMetadata({ params }: BlogId): Promise<Metadata> {
+  const { newsId } = params;
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/blogs/${newsId}`);
+  const blog = await res.json();
+
+  if (!blog) {
+    return {
+      title: "Blog not found",
+      description: "The requested blog was not found.",
+    };
+  }
+
+  return {
+    title: `${blog.data.title} | Muissa Consulting`,
+    description: blog.data.short_description || "Read the latest insights and updates.",
+    keywords: "Muissa Consulting, Blog, News, Consulting insights, Business updates",
+  };
 }
+
+
+// export const metadata: Metadata = {
+//   title: "Muissa Business Consultancy  | News ",
+//   description: '"Stay updated with the latest news and insights from Muissa Consulting. Explore industry trends, expert opinions, and company updates to keep your business informed and ahead in the consulting world."',
+//   "keywords": "News, Muissa Consulting News, Industry updates, Business insights, Consulting trends, Expert opinions, Company news, Market analysis, Business blog, Consulting updates, Latest developments"
+// }
 
 const renderContent = (content: string) => {
   const parsedContent = ReactHtmlParser(content);
@@ -167,10 +189,10 @@ const News = async ({ params }: BlogId) => {
                   <div className="flex items-center justify-between w-full ">
                     <div className="flex items-center ">
                       <HiChevronRight />
-                      <Link href='/services'> <p>ফান্ডিং সাপোর্ট </p></Link>
+                      <Link href={`/services?tab=ফান্ডিং%20সাপোর্ট`}> <p>ফান্ডিং সাপোর্ট </p></Link>
                     </div>
                     <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
-                      5
+                      30
                     </div>
                   </div>
                   <Divider sx={{ marginTop: "10px" }} />
@@ -182,10 +204,10 @@ const News = async ({ params }: BlogId) => {
                     <div className="flex items-center ">
                       <HiChevronRight />
 
-                      <Link href='/services'><p>ইনভেস্টমেন্ট সাপোর্ট</p></Link>
+                      <Link href={`/services?tab=ইনভেস্টমেন্ট%20সাপোর্ট`}><p>ইনভেস্টমেন্ট সাপোর্ট</p></Link>
                     </div>
                     <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
-                      10
+                      40
                     </div>
                   </div>
                   <Divider sx={{ marginTop: "10px" }} />
@@ -195,10 +217,10 @@ const News = async ({ params }: BlogId) => {
                     <div className="flex items-center ">
                       <HiChevronRight />
 
-                      <Link href='/services'> <p>মার্কেটিং সাপোর্ট</p></Link>
+                      <Link href={`/services?tab=মার্কেটিং%20সাপোর্ট`}> <p>মার্কেটিং সাপোর্ট</p></Link>
                     </div>
                     <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
-                      7
+                      45
                     </div>
                   </div>
                   <Divider sx={{ marginTop: "10px" }} />
@@ -208,10 +230,10 @@ const News = async ({ params }: BlogId) => {
                     <div className="flex items-center ">
                       <HiChevronRight />
 
-                      <Link href='/services'> <p>আইটি সাপোর্ট</p></Link>
+                      <Link href={`/services?tab=আইটি%20সাপোর্ট`}> <p>আইটি সাপোর্ট</p></Link>
                     </div>
                     <div className="rounded-sm bg-[#ddd] border w-6 p-2  h-6  text-center flex justify-center items-center text-sm ">
-                      7
+                      50
                     </div>
                   </div>
                   <Divider sx={{ marginTop: "10px" }} />

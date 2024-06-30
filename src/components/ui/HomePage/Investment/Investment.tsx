@@ -8,11 +8,13 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import Grid from "@mui/material/Grid";
 import Container from "../Container/Container";
-import investment from "../../../../assets/invest/investment.jpg";
-import investment2 from "../../../../assets/invest/investment2.jpg";
-import investment3 from "../../../../assets/invest/investment3.jpg";
-import investment4 from "../../../../assets/invest/ivestment4.jpg";
-import investment5 from "../../../../assets/invest/investment5.jpg";
+import investment from "../../../../assets/slider/funding-support.jpg";
+import investment2 from "../../../../assets/slider/investment-support.jpg";
+import investment3 from "../../../../assets/slider/marketing-support.jpg";
+import investment4 from "../../../../assets/slider/it-support.jpg";
+import investment5 from "../../../../assets/slider/muissa-product-support.jpg";
+import investment6 from "../../../../assets/slider/sales-support.jpg";
+import investment7 from "../../../../assets/slider/delivery-suppor.jpg";
 import { Button, useMediaQuery, useTheme } from "@mui/material";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import "./Investment.css";
@@ -60,7 +62,7 @@ export default function Investment() {
     {
       value: "1",
       label: "ফান্ডিং সাপোর্ট ",
-      image: investment5.src,
+      image: investment.src,
       content: (
         <div className="investmentContent">
           <ul className="space-y-3">
@@ -122,7 +124,7 @@ export default function Investment() {
           </ul>
 
           <div className="commonContent">
-            <Button component={Link} href='/services' sx={buttonStyle}><span>Know More</span></Button>
+            <Button component={Link} href={`/services?tab=ফান্ডিং%20সাপোর্ট`} sx={buttonStyle}><span>Know More</span></Button>
           </div>
         </div>
       ),
@@ -130,7 +132,7 @@ export default function Investment() {
     {
       value: "2",
       label: "ইনভেস্টমেন্ট সাপোর্ট",
-      image: investment5.src,
+      image: investment2.src,
       content: (
         <div className="investmentContent">
           <ul className="space-y-3">
@@ -194,7 +196,7 @@ export default function Investment() {
 
 
           <div className="commonContent">
-            <Button component={Link} href='/services' sx={buttonStyle}><span>Know More</span></Button>
+            <Button component={Link} href={`/services?tab=ইনভেস্টমেন্ট%20সাপোর্ট`} sx={buttonStyle}><span>Know More</span></Button>
           </div>
         </div>
       ),
@@ -202,7 +204,7 @@ export default function Investment() {
     {
       value: "3",
       label: "মার্কেটিং সাপোর্ট ",
-      image: investment5.src,
+      image: investment3.src,
       content: (
         <div className="investmentContent">
           <ul className="space-y-3">
@@ -252,7 +254,7 @@ export default function Investment() {
 
 
           <div className="commonContent">
-            <Button component={Link} href='/services' sx={buttonStyle}><span>Know More</span></Button>
+            <Button component={Link} href={`/services?tab=মার্কেটিং%20সাপোর্ট`} sx={buttonStyle}><span>Know More</span></Button>
           </div>
         </div>
       ),
@@ -260,7 +262,7 @@ export default function Investment() {
     {
       value: "4",
       label: "আইটি সাপোর্ট ",
-      image: investment3.src,
+      image: investment4.src,
       content: (
         <div className="investmentContent">
           <ul className="space-y-3">
@@ -312,7 +314,7 @@ export default function Investment() {
 
 
           <div className="commonContent">
-            <Button component={Link} href='/services' sx={buttonStyle}><span>Know More</span></Button>
+            <Button component={Link} href={`/services?tab=আইটি%20সাপোর্ট`} sx={buttonStyle}><span>Know More</span></Button>
           </div>
         </div>
       ),
@@ -320,7 +322,7 @@ export default function Investment() {
     {
       value: "5",
       label: "প্রোডাক্ট সাপোর্ট  ",
-      image: investment.src,
+      image: investment5.src,
       content: (
         <div className="investmentContent">
           <ul className="space-y-3">
@@ -386,7 +388,7 @@ export default function Investment() {
 
 
           <div className="commonContent">
-            <Button component={Link} href='/services' sx={buttonStyle}><span>Know More</span></Button>
+            <Button component={Link} href={`/services?tab=প্রোডাক্ট%20সাপোর্ট`} sx={buttonStyle}><span>Know More</span></Button>
           </div>
         </div>
       ),
@@ -395,7 +397,7 @@ export default function Investment() {
     {
       value: "6",
       label: "সেলস সাপোর্ট  ",
-      image: investment2.src,
+      image: investment6.src,
       content: (
         <div className="investmentContent">
           <ul className="space-y-3">
@@ -455,7 +457,7 @@ export default function Investment() {
 
 
           <div className="commonContent">
-            <Button component={Link} href='/services' sx={buttonStyle}><span>Know More</span></Button>
+            <Button component={Link} href={`/services?tab=সেলস%20সাপোর্ট`} sx={buttonStyle}><span>Know More</span></Button>
           </div>
         </div>
       ),
@@ -463,7 +465,7 @@ export default function Investment() {
     {
       value: "7",
       label: "ডেলিভারি সাপোর্ট  ",
-      image: investment3.src,
+      image: investment7.src,
       content: (
         <div className="investmentContent">
           <ul className="space-y-3">
@@ -514,7 +516,7 @@ export default function Investment() {
 
 
           <div className="commonContent">
-            <Button component={Link} href='/services' sx={buttonStyle}><span>Know More</span></Button>
+            <Button component={Link} href={`/services?tab=ডেলিভারি%20সাপোর্ট`} sx={buttonStyle}><span>Know More</span></Button>
           </div>
         </div>
       ),
