@@ -151,9 +151,6 @@ const News = async ({ params }: BlogId) => {
     return new Date(dateString).toLocaleDateString("en-US");
   };
 
-
-
-  console.log('blog comments data', blog?.comments)
   return (
     <>
       <div className="serviceDetailsWrap aboutWraps">
@@ -162,9 +159,9 @@ const News = async ({ params }: BlogId) => {
         </div>
       </div>
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-12 mt-10  gap-10 ">
-          <div className="lg:col-span-4   ">
-            <div className="px-10 ">
+        <div className="grid grid-cols-1 md:grid-cols-12 mt-10 relative min-h-screen  gap-10 ">
+          <div className="lg:col-span-4  ">
+            <div className="px-10  top-0 sticky">
               <h3 className="mb-5 capitalize">পপুলার সার্ভিস </h3>
               <div className="space-y-5">
                 <div>

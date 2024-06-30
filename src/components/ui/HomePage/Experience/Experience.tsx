@@ -24,7 +24,7 @@ const Experience = () => {
                   <h1 className="text-4xl md:text-6xl font-bold mt-5 mb-3 text-[#fff]">
                     150+
                   </h1>
-                  <p className="tracking-[3px]">Successfull Project</p>
+                  <p className="tracking-[3px]">Successful Project</p>
                 </div>
                 <div className="iconWraps ">
                   <InsertEmoticon className="experienceIcon" />
@@ -45,7 +45,7 @@ const Experience = () => {
                   <h1 className="text-4xl md:text-6xl font-bold mt-5 mb-3 text-[#fff]">
                     950+
                   </h1>
-                  <p className="tracking-[3px]">Cup Coffe </p>
+                  <p className="tracking-[3px]"> Cup Coffee </p>
                 </div>
               </div>
             </div>
