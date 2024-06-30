@@ -106,20 +106,19 @@ const Footer = async () => {
                 <li>Careers</li>
               </ul>
             </div>
+
             <div className="md:text-left w-full md:w-auto px-4">
               <h4>Services</h4>
               <ul className="space-y-5 mt-5">
-                <li> <Link href={`/services?tab=ফান্ডিং%20সাপোর্ট`}>Funding Support</Link></li>
-                <li> <Link href={`/services?tab=ইনভেস্টমেন্ট%20সাপোর্ট`}>Investment Support</Link></li>
-                <li> <Link href={`/services?tab=মার্কেটিং%20সাপোর্ট`}> Marketing Support</Link></li>
-                <li> <Link href={`/services?tab=আইটি%20সাপোর্ট`}>IT Support</Link></li>
-                <li> <Link href={`/services?tab=প্রোডাক্ট%20সাপোর্ট`}>Product Support</Link></li>
-                <li> <Link href={`/services?tab=সেলস%20সাপোর্ট`}>Sale Support</Link></li>
-                <li> <Link href={`/services?tab=ডেলিভারি%20সাপোর্ট`}>Delivery Supports</Link></li>
-
-
-
+                <li><Link href={`/services?tab=${encodeURIComponent('ফান্ডিং সাপোর্ট')}`}>Funding Support</Link></li>
+                <li><Link href={`/services?tab=${encodeURIComponent('ইনভেস্টমেন্ট সাপোর্ট')}`}>Investment Support</Link></li>
+                <li><Link href={`/services?tab=${encodeURIComponent('মার্কেটিং সাপোর্ট')}`}>Marketing Support</Link></li>
+                <li><Link href={`/services?tab=${encodeURIComponent('আইটি সাপোর্ট')}`}>IT Support</Link></li>
+                <li><Link href={`/services?tab=${encodeURIComponent('প্রোডাক্ট সাপোর্ট')}`}>Product Support</Link></li>
+                <li><Link href={`/services?tab=${encodeURIComponent('সেলস সাপোর্ট')}`}>Sale Support</Link></li>
+                <li><Link href={`/services?tab=${encodeURIComponent('ডেলিভারি সাপোর্ট')}`}>Delivery Supports</Link></li>
               </ul>
+
             </div>
             {/* <div className="md:text-left w-full md:w-auto px-4">
               <h4>Services</h4>
