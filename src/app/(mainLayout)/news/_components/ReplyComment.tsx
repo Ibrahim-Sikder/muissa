@@ -18,11 +18,11 @@ const validationSchema = z.object({
 });
 
 type TReply = {
-  blogId: string;
+  
   id: string;
 };
 
-const ReplyComment = ({ id, blogId }: TReply) => {
+const ReplyComment = ({ id }: TReply) => {
   const token = getCookie("mui-token");
 
   const [errorMessage, setErrorMessage] = useState<string[]>([]);
@@ -50,7 +50,7 @@ const ReplyComment = ({ id, blogId }: TReply) => {
     } catch (error: any) {
       if (error?.response) {
         const { status, data } = error.response;
-        if ([400, 404, 500].includes(status)) {
+        if ([400,401,409, 404, 500].includes(status)) {
           setErrorMessage(data.message);
         } else {
           setErrorMessage(["An unexpected error occurred."]);

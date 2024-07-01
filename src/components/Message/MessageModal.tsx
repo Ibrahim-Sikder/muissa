@@ -11,7 +11,7 @@ import { VscClose } from "react-icons/vsc";
 import { IoClose, IoLinkOutline } from "react-icons/io5";
 import { io, Socket } from "socket.io-client";
 import { getCookie } from "@/helpers/Cookies";
-import { Box, Input, List, ListItem, ListItemText, Paper } from "@mui/material";
+import { Box, Input, List, ListItem, ListItemText, Paper, Button } from '@mui/material';
 import { format } from "timeago.js";
 import uploadFile from "@/helpers/uploadFile";
 import { toast } from "sonner";
@@ -374,7 +374,7 @@ const MessageModal = ({ close }: TProps) => {
               onChange={handleMessageOnChange}
               ref={textInputRef}
             />
-            <Send sx={iconStyle}/>
+           <Button type="submit"> <Send sx={iconStyle}/></Button>
             </div>
             <div className="pb-2 flex space-x-2 items-center text-[#707584] ">
               <input

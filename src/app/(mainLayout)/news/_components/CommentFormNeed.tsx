@@ -45,7 +45,7 @@ const CommentForm = ({ id }: any) => {
     } catch (error: any) {
       if (error?.response) {
         const { status, data } = error.response;
-        if ([400, 404, 500].includes(status)) {
+        if ([400,401,409, 404, 500].includes(status)) {
           setErrorMessage(data.message);
         } else {
           setErrorMessage(["An unexpected error occurred."]);

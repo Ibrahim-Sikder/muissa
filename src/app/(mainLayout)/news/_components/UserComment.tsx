@@ -14,7 +14,7 @@ import muissa from "../../../../assets/logo/logo.png";
 import { useGetMeQuery } from "@/redux/api/userApi";
 import { toast } from "sonner";
 import axios from "axios";
-import CommentForm from "./CommentForm";
+ 
 
 const UserComment = ({ id }: any) => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -25,18 +25,11 @@ const UserComment = ({ id }: any) => {
     error,
     isLoading,
     refetch,
-
   } = useGetSingleBlogQuery({ id, pollingInterval: 1000 });
-
-
-
 
   const { data: verifyUser } = useGetMeQuery({ token });
 
-  // if(userData && userData.users){
-  //     const userRole = userData.users.map((user)=>user.role)
-  //     console.log(userRole,'user role')
-  // }
+  
 
   const [visibleReply, setVisibleReply] = useState<number | null>(null);
 
@@ -55,12 +48,6 @@ const UserComment = ({ id }: any) => {
       </h1>
     );
   }
-
-
-
-
-
-
 
   const formatDate = (dateString: string) => {
     const options = {
@@ -97,7 +84,7 @@ const UserComment = ({ id }: any) => {
     } catch (error: any) {
       if (error?.response) {
         const { status, data } = error.response;
-        if ([400, 404, 500].includes(status)) {
+        if ([400, 401, 409, 404, 500].includes(status)) {
           toast.error(data.message);
         } else {
           toast.error(["An unexpected error occurred."]);
@@ -108,8 +95,7 @@ const UserComment = ({ id }: any) => {
     }
   };
 
-
-  console.log('from reply comment', commentData)
+ 
 
   return (
     <div className="comment sectionMargin">
@@ -120,8 +106,14 @@ const UserComment = ({ id }: any) => {
       </div>
       <div className="grid grid-rows-1 gap-10">
         {commentData?.comments?.map((data: any) => (
-          <div key={data._id} className="flex flex-col justify-between gap-10">
-            <Image className="w-20 h-20 rounded-full" src={user} alt="user" />
+          <div key={data._id} className="flex flex-col justify-between gap-2">
+            <Image
+              className="w-12 h-12 rounded-full"
+              src={data?.user?.profile_pic || user}
+              alt="user"
+              width={100}
+              height={100}
+            />
             <div className="commentCard">
               <div>
                 <h4 className="capitalize">{data?.user?.name}</h4>
@@ -132,14 +124,14 @@ const UserComment = ({ id }: any) => {
               </div>
               <div className="flex justify-end text-left mt-5">
                 <div>
-
-                  {data?.reply_comments.map((reply: any) => (
-                    <div key={reply._id} className="relative reply bg-white p-5 rounded-md w-full md:w-[400px]">
+                  {data?.reply_comments?.map((reply: any) => (
+                    <div
+                      key={reply?._id}
+                      className="relative reply bg-white p-5 rounded-md w-full md:w-[400px]"
+                    >
                       <div className="absolute right-3 top-3 text-center flex flex-col justify-center items-center">
                         <Image
-                          src={
-                            muissa || reply?.user?.profile_pic
-                          }
+                          src={reply?.user?.profile_pic || muissa}
                           alt="muissa"
                           className="w-8 object-cover"
                           width={100}
@@ -147,9 +139,7 @@ const UserComment = ({ id }: any) => {
                         />
                         <small>{reply?.user?.name}</small>
                       </div>
-                      <p className="mt-14 text-[16px] justify-left">
-
-                      </p>
+                      <p className="mt-14 text-[16px] justify-left"></p>
                       <p className="mt-14 text-[16px] justify-left">
                         {reply?.reply}
                       </p>
@@ -157,21 +147,19 @@ const UserComment = ({ id }: any) => {
                   ))}
                 </div>
               </div>
-              {visibleReply === data._id && (
-                <ReplyComment blogId={id} id={data._id} />
-              )}
+              {visibleReply === data?._id && <ReplyComment id={data?._id} />}
               {verifyUser?.role === "admin" ? (
                 <div className="flex items-center justify-end gap-2 mt-2">
                   <Button
                     sx={{ width: "70px", height: "35px" }}
-                    onClick={() => toggleReply(data._id)}
+                    onClick={() => toggleReply(data?._id)}
                   >
                     Reply <HiChevronRight className="text-[#fff]" />
                   </Button>
                   <Button
                     disabled={loading}
                     sx={{ width: "70px", height: "35px", background: "red" }}
-                    onClick={() => handleSubmitDelete(data._id)}
+                    onClick={() => handleSubmitDelete(data?._id)}
                   >
                     Delete <HiChevronRight className="text-[#fff]" />
                   </Button>
@@ -181,7 +169,6 @@ const UserComment = ({ id }: any) => {
           </div>
         ))}
       </div>
-
     </div>
   );
 };
