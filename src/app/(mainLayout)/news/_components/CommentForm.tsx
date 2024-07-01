@@ -11,7 +11,6 @@ import React, { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { useRouter } from "next/navigation";
 
 const validationSchema = z.object({
   comment: z.string(),
@@ -19,7 +18,6 @@ const validationSchema = z.object({
 
 const CommentForm = ({ id }: any) => {
   const token = getCookie("mui-token");
-  const router = useRouter();
 
   const [errorMessage, setErrorMessage] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -41,7 +39,7 @@ const CommentForm = ({ id }: any) => {
       if (response?.status === 200) {
         toast.success(response?.data?.message);
         setLoading(false);
-        window.location.reload()
+        window.location.reload();
       }
     } catch (error: any) {
       if (error?.response) {
@@ -82,8 +80,13 @@ const CommentForm = ({ id }: any) => {
           <div className="my-1">
             {errorMessage && <ErrorMessage message={errorMessage} />}
           </div>
+          {!token && (
+            <div className="text-red-400 px-3">
+              You have to login first to add comments.
+            </div>
+          )}
           <Grid item lg={12} sx={{ marginRight: "0px" }}>
-            <Button disabled={loading} type="submit">
+            <Button disabled={loading || !token} type="submit">
               Submit
             </Button>
           </Grid>

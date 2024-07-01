@@ -13,6 +13,15 @@ export const userApi = baseApi.injectEndpoints({
         }
       }),
     }),
+    getSingleUser: build.query({
+      query: ({token}) => ({
+        url: "/users/single-user",
+        method: "GET",
+        headers: {
+          Authorization :`Bearer ${token}`
+        }
+      }),
+    }),
     getMe: build.query({
       query: ({token}) => ({
         url: "/users/me/verify",
@@ -34,4 +43,4 @@ export const userApi = baseApi.injectEndpoints({
 
 });
 
-export const { useGetAllUserQuery, useDeleteUserMutation , useGetMeQuery} = userApi;
+export const { useGetAllUserQuery, useDeleteUserMutation ,useGetSingleUserQuery, useGetMeQuery} = userApi;
