@@ -93,7 +93,7 @@ const Register = () => {
         setSuccessMessage(response?.data?.message);
         // router.push(`/verify?auth=${data.auth}`);
         setCookie("mui-token", response?.data?.data?.token, { expires: 10 });
-        router.push(`/`);
+        router.push(`/profile`);
         setLoading(false);
       }
     } catch (error: any) {
