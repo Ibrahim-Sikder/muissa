@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import ServicesData from "../_component/ServicesData";
+import ServicesData2 from "../_component/ServiceData2";
 
 
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ const ServicePage = () => {
         </div>
       </div>
 
-      <ServicesData />
+      <ServicesData2 />
     </>
   );
 };
