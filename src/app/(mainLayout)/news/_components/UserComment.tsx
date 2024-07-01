@@ -14,18 +14,22 @@ import muissa from "../../../../assets/logo/logo.png";
 import { useGetMeQuery } from "@/redux/api/userApi";
 import { toast } from "sonner";
 import axios from "axios";
+import CommentForm from "./CommentForm";
 
 const UserComment = ({ id }: any) => {
   const [loading, setLoading] = useState<boolean>(false);
   const pathname = usePathname();
   const token = getCookie("mui-token") || "";
-
   const {
     data: commentData,
     error,
     isLoading,
     refetch,
+
   } = useGetSingleBlogQuery({ id, pollingInterval: 1000 });
+
+
+
 
   const { data: verifyUser } = useGetMeQuery({ token });
 
@@ -51,6 +55,12 @@ const UserComment = ({ id }: any) => {
       </h1>
     );
   }
+
+
+
+
+
+
 
   const formatDate = (dateString: string) => {
     const options = {
@@ -98,6 +108,9 @@ const UserComment = ({ id }: any) => {
     }
   };
 
+
+  console.log('from reply comment', commentData)
+
   return (
     <div className="comment sectionMargin">
       <div className="mt-5">
@@ -119,25 +132,29 @@ const UserComment = ({ id }: any) => {
               </div>
               <div className="flex justify-end text-left mt-5">
                 <div>
-                  {data?.reply_comments && (
-                    <div className="relative reply bg-white p-5 rounded-md w-full md:w-[400px]">
+
+                  {data?.reply_comments.map((reply: any) => (
+                    <div key={reply._id} className="relative reply bg-white p-5 rounded-md w-full md:w-[400px]">
                       <div className="absolute right-3 top-3 text-center flex flex-col justify-center items-center">
                         <Image
                           src={
-                            data?.reply_comments?.user?.profile_pic || muissa
+                            muissa || reply?.user?.profile_pic
                           }
                           alt="muissa"
                           className="w-8 object-cover"
                           width={100}
                           height={100}
                         />
-                        <small>{data?.reply_comments?.user?.name}</small>
+                        <small>{reply?.user?.name}</small>
                       </div>
                       <p className="mt-14 text-[16px] justify-left">
-                        {data?.reply_comments?.reply}
+
+                      </p>
+                      <p className="mt-14 text-[16px] justify-left">
+                        {reply?.reply}
                       </p>
                     </div>
-                  )}
+                  ))}
                 </div>
               </div>
               {visibleReply === data._id && (
@@ -164,6 +181,7 @@ const UserComment = ({ id }: any) => {
           </div>
         ))}
       </div>
+
     </div>
   );
 };

@@ -7,7 +7,7 @@ import { getCookie } from "@/helpers/Cookies";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Grid } from "@mui/material";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -17,10 +17,15 @@ const validationSchema = z.object({
 });
 
 const CommentForm = ({ id }: any) => {
-  const token = getCookie("mui-token");
-
+  const [token, setToken] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    const tokenFromCookie = getCookie("mui-token");
+    setToken(tokenFromCookie ?? null);
+  }, []);
+
 
   const handleSubmit = async (data: FieldValues) => {
     setErrorMessage([]);
@@ -57,41 +62,43 @@ const CommentForm = ({ id }: any) => {
 
   return (
     <div className="mt-10">
-      <h4 className="mb-8 text-[#1591A3]">Give Your Feedback </h4>
-      <MUIForm
-        onSubmit={handleSubmit}
-        resolver={zodResolver(validationSchema)}
-        defaultValues={{
-          comment: "",
-        }}
-      >
-        <Grid container spacing={1}>
-          <Grid item xs={12} lg={12} sx={{ marginRight: "0px" }}>
-            <MUITextArea
-              name="comment"
-              placeholder="Comment"
-              minRows={3}
-              sx={{
-                border: "1px solid #ddd",
-                padding: "10px",
-              }}
-            />
-          </Grid>
-          <div className="my-1">
-            {errorMessage && <ErrorMessage message={errorMessage} />}
-          </div>
-          {!token && (
-            <div className="text-red-400 px-3">
-              You have to login first to add comments.
+      <h4 className="mb-8 text-[#1591A3]">Give Your Feedback</h4>
+      {token !== null && (
+        <MUIForm
+          onSubmit={handleSubmit}
+          resolver={zodResolver(validationSchema)}
+          defaultValues={{
+            comment: "",
+          }}
+        >
+          <Grid container spacing={1}>
+            <Grid item xs={12} lg={12} sx={{ marginRight: "0px" }}>
+              <MUITextArea
+                name="comment"
+                placeholder="Comment"
+                minRows={3}
+                sx={{
+                  border: "1px solid #ddd",
+                  padding: "10px",
+                }}
+              />
+            </Grid>
+            <div className="my-1">
+              {errorMessage && <ErrorMessage message={errorMessage} />}
             </div>
-          )}
-          <Grid item lg={12} sx={{ marginRight: "0px" }}>
-            <Button disabled={loading || !token} type="submit">
-              Submit
-            </Button>
+            {!token && (
+              <div className="text-red-400 px-3">
+                You have to login first to add comments.
+              </div>
+            )}
+            <Grid item lg={12} sx={{ marginRight: "0px" }}>
+              <Button disabled={loading || !token} type="submit">
+                Submit
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
-      </MUIForm>
+        </MUIForm>
+      )}
     </div>
   );
 };

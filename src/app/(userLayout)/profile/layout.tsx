@@ -9,16 +9,20 @@ const layout = ({ children }: { children: ReactNode }) => {
   return (
     <Suspense>
       <Header />
+
       <Container>
-        <div className="flex lg:flex-row flex-col  gap-10 w-full  mt-10 ">
-          <div>
-            <ProfileSidebar />
+        <div className="grid grid-cols-1  lg:grid-cols-12 mt-10 gap-5  ">
+          <div className="lg:col-span-3">
+            <div className="md:sticky md:top-28">
+              <ProfileSidebar />
+            </div>
           </div>
-          <div>{children}</div>
+          <div className="lg:col-span-9 ">{children}</div>
         </div>
       </Container>
       <Footer />
     </Suspense>
+
   );
 };
 

@@ -3,6 +3,7 @@
   background: #1591a3;
   color: #fff;
   padding:20px;
+  width:250px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -10,6 +11,7 @@
     background: transparent;
     color: #111;
     height: auto;
+    width:100%
   }
   .profileItems {
     display: flex;

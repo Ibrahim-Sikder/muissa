@@ -201,6 +201,7 @@ const Profile = () => {
     country: userData?.country || "",
   };
 
+  console.log(userData)
   const submitHandler = async (data: any) => {
     data.profile_pic = imageUrl;
 
@@ -228,9 +229,11 @@ const Profile = () => {
       if (error.response) {
         const { status, data } = error.response;
         if ([400, 404, 401, 409, 500].includes(status)) {
-          setErrorMessage(data.message);
+          // setErrorMessage(data.message);
+          toast.error(data.message)
         } else {
-          setErrorMessage(["An unexpected error occurred."]);
+          // setErrorMessage(["An unexpected error occurred."]);
+          toast.error(error.message)
         }
       }
     } finally {

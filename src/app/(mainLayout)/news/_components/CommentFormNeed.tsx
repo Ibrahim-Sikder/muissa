@@ -12,28 +12,22 @@ import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-
 const validationSchema = z.object({
-  reply: z.string(),
+  comment: z.string(),
 });
 
-type TReply = {
-  blogId: string;
-  id: string;
-};
-
-const ReplyComment = ({ id, blogId }: TReply) => {
+const CommentForm = ({ id }: any) => {
   const token = getCookie("mui-token");
 
   const [errorMessage, setErrorMessage] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSubmit = async (data:FieldValues) => {
+  const handleSubmit = async (data: FieldValues) => {
     setErrorMessage([]);
     setLoading(true);
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_API_URL}/replyComments/create-replyComment?id=${id}`,
+        `${process.env.NEXT_PUBLIC_BASE_API_URL}/comments/create-comment?id=${id}`,
         data,
         {
           headers: {
@@ -41,6 +35,7 @@ const ReplyComment = ({ id, blogId }: TReply) => {
           },
         }
       );
+      
 
       if (response?.status === 200) {
         toast.success(response?.data?.message);
@@ -60,22 +55,21 @@ const ReplyComment = ({ id, blogId }: TReply) => {
       setLoading(false);
     }
   };
- 
 
   return (
     <div className="mt-10">
-      {/* <h4 className="mb-8 text-[#1591A3]">Reply User Feedback </h4> */}
+      <h4 className="mb-8 text-[#1591A3]">Give Your Feedback </h4>
       <MUIForm
         onSubmit={handleSubmit}
         resolver={zodResolver(validationSchema)}
         defaultValues={{
-          reply: "",
+          comment: "",
         }}
       >
         <Grid container spacing={1}>
           <Grid item xs={12} lg={12} sx={{ marginRight: "0px" }}>
             <MUITextArea
-              name="reply"
+              name="comment"
               placeholder="Comment"
               minRows={3}
               sx={{
@@ -87,9 +81,14 @@ const ReplyComment = ({ id, blogId }: TReply) => {
           <div className="my-1">
             {errorMessage && <ErrorMessage message={errorMessage} />}
           </div>
+          {!token && (
+            <div className="text-red-400 px-3">
+              You have to login first to add comments.
+            </div>
+          )}
           <Grid item lg={12} sx={{ marginRight: "0px" }}>
-            <Button disabled={loading} type="submit">
-              {loading ? "Submitting" : "Submit"}
+            <Button disabled={loading || !token} type="submit">
+              Submit
             </Button>
           </Grid>
         </Grid>
@@ -98,4 +97,4 @@ const ReplyComment = ({ id, blogId }: TReply) => {
   );
 };
 
-export default ReplyComment;
+export default CommentForm;
