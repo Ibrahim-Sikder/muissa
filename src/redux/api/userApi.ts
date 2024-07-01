@@ -13,6 +13,15 @@ export const userApi = baseApi.injectEndpoints({
         }
       }),
     }),
+    getMe: build.query({
+      query: ({token}) => ({
+        url: "/users/me/verify",
+        method: "GET",
+        headers: {
+          Authorization :`Bearer ${token}`
+        }
+      }),
+    }),
     deleteUser: build.mutation({
       query: (id) => ({
         url: `/users/${id}`,
@@ -25,4 +34,4 @@ export const userApi = baseApi.injectEndpoints({
 
 });
 
-export const { useGetAllUserQuery, useDeleteUserMutation } = userApi;
+export const { useGetAllUserQuery, useDeleteUserMutation , useGetMeQuery} = userApi;

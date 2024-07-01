@@ -379,14 +379,7 @@ const ProfileMemebershipForm = () => {
                       >
                         <Grid container spacing={1}>
                           <Grid item xs={12} sm={6} md={6} lg={12}>
-                            {/* <Grid item xs={12} sm={6} md={6} lg={12}>
-                        <MUIInput
-                          name="investor"
-                          label="AS A INVESTOR "
-                          fullWidth
-                          size="medium"
-                        />
-                      </Grid> */}
+                            
                           </Grid>
                           <Grid item xs={12} sm={6} md={6} lg={12}>
                             <MUIInput
