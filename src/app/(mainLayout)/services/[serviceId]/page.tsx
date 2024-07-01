@@ -20,7 +20,7 @@ const ServicePage = () => {
         </div>
       </div>
 
-      <ServicesData2 />
+      <ServicesData />
     </>
   );
 };

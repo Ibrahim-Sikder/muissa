@@ -35,18 +35,11 @@ export async function generateMetadata({ params }: BlogId): Promise<Metadata> {
   }
 
   return {
-    title: `${blog.data.title} | Muissa Consulting`,
-    description: blog.data.short_description || "Read the latest insights and updates.",
-    keywords: "Muissa Consulting, Blog, News, Consulting insights, Business updates",
+    title: `${blog?.data?.seo_title} | Muissa Consulting`,
+    description: blog?.data?.seo_description || "Read the latest insights and updates.",
+    keywords: blog?.data?.seo_keyword || "Muissa Consulting, Blog, News, Consulting insights, Business updates",
   };
 }
-
-
-// export const metadata: Metadata = {
-//   title: "Muissa Business Consultancy  | News ",
-//   description: '"Stay updated with the latest news and insights from Muissa Consulting. Explore industry trends, expert opinions, and company updates to keep your business informed and ahead in the consulting world."',
-//   "keywords": "News, Muissa Consulting News, Industry updates, Business insights, Consulting trends, Expert opinions, Company news, Market analysis, Business blog, Consulting updates, Latest developments"
-// }
 
 const renderContent = (content: string) => {
   const parsedContent = ReactHtmlParser(content);
@@ -172,9 +165,6 @@ const News = async ({ params }: BlogId) => {
     return new Date(dateString).toLocaleDateString("en-US");
   };
 
-
-
-  console.log('blog comments data', blog?.comments)
   return (
     <div className="min-h-screen">
       <div className="serviceDetailsWrap aboutWraps">
