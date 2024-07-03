@@ -47,7 +47,7 @@ const UserServicePage = () => {
   return (
     <div>
       <h3 className='text-cente mt-8'>My services </h3>
-      <div className='grid grid-cols-1  lg:grid-cols-2 gap-10 mt-10 '>
+      <div className='grid grid-cols-1  lg:grid-cols-2 w-full md:w-[750px]  mt-10 gap-5 '>
         {memberShipData?.need_of_service?.map((service: string, index: number) => (
           <div key={index} className='profileServiceCard p-5 border rounded-lg shadow-md'>
             <div className="flex items-center gap-8">

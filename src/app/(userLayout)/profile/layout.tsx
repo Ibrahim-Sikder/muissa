@@ -23,6 +23,7 @@ const layout = ({ children }: { children: ReactNode }) => {
       <Footer />
     </Suspense>
 
+
   );
 };
 
