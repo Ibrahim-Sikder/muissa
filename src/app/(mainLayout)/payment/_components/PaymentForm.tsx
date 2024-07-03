@@ -41,7 +41,7 @@ const PaymentForm = () => {
     data: discountAmount,
     error,
     isLoading: discountLoading,
-  }:any = useGetDiscountForPaymentQuery({});
+  }: any = useGetDiscountForPaymentQuery({});
 
   const handleBankChange = (event: { target: { value: string } }) => {
     setSelectedValue(event.target.value);
@@ -76,9 +76,9 @@ const PaymentForm = () => {
         router.push("/profile");
         setIsLoading(false);
       }
-      
+
     } catch (error: any) {
-      
+
       if (error?.response) {
         const { status, data } = error.response;
         if ([400, 401, 409, 404, 500].includes(status)) {
@@ -101,7 +101,7 @@ const PaymentForm = () => {
     if (value === "1 year subscription fee") {
       subscriptionAmount = 12000;
     } else if (value === "2 year subscription fee") {
-      subscriptionAmount = 12000;
+      subscriptionAmount = 24000;
     }
 
     if (discountStatus === "Percentage") {
@@ -179,14 +179,15 @@ const PaymentForm = () => {
           <p className="mb-2">2. Copy Account Pay/অ্যাকাউন্ট পে কপি করুন</p>
           <Grid container spacing={1}>
             <Grid item xs={12} md={12} lg={12}>
-              <MUIInput
+              {/* <MUIInput
                 name="target_account"
-                label="01984673686"
+                sx={{ fontWeight: 'bold', color: 'red' }}
                 variant="outlined"
                 fullWidth
                 value="01984673686"
-                disabled
-              />
+
+              /> */}
+                <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold mb-3 border-[#11111159]"> 01984673686 </span>
             </Grid>
 
             <p className="">3. Your Transaction / আপনার লেনদেন</p>
@@ -199,7 +200,7 @@ const PaymentForm = () => {
               />
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
-              <MUIInput
+              {/* <MUIInput
                 name="amount"
                 variant="outlined"
                 fullWidth
@@ -208,12 +209,12 @@ const PaymentForm = () => {
                 value={totalAmount.toString()}
                 sx={{
                   "& .MuiInputBase-input.Mui-disabled": {
-                    color: "#002140", 
+                    color: "#002140",
                     //  backgroundColor: "#002140", 
                   },
                 }}
-              />
-              {/* {totalAmount.toString()} */}
+              /> */}
+              <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold my-2 border-[#11111159]"> {totalAmount.toString()}</span>
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
               <div className="flex items-center gap-x-1 ">
@@ -256,7 +257,7 @@ const PaymentForm = () => {
               information
             </p>
             <p className="text-sm text-gray-500">
-              টিপঃ নিচের অ্যাকাউন্টে ক্যাশ আউট করুন এবং প্রয়োজনীয় তথ্য পূরণ
+              টিপঃ উপরের অ্যাকাউন্টে ক্যাশ আউট করুন এবং প্রয়োজনীয় তথ্য পূরণ
               করুন
             </p>
           </div>
