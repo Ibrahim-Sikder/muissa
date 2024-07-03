@@ -1,6 +1,6 @@
 "use client";
 
-import { Button} from "@mui/material";
+import { Button } from "@mui/material";
 import { useGetDiscountForPaymentQuery } from "@/redux/api/paymentApi";
 
 
@@ -36,7 +36,9 @@ const MembershipDiscountData = () => {
                     },
                 }}
             >
-                ফি মাত্র <del className="mx-2">{convertedOriginalPrice}</del>{" "}
+                ফি মাত্র {
+                    discountData ? <del className="mx-2">{discountData === 0 ? 12000 : convertedOriginalPrice}</del> : <span className="mx-2">12000</span>
+                }
                 {convertedDiscountedPrice} টাকা।
             </Button>
         </>
