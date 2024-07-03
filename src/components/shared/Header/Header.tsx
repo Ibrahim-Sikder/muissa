@@ -10,7 +10,7 @@ import {
   FaPhoneVolume,
 } from "react-icons/fa";
 import "./Header.css";
-import logo from "../../../assets/logo/logo.png";
+import logo from "../../../assets/logo/navber logo .svg";
 import Image from "next/image";
 import {
   HiOutlineArrowNarrowRight,
@@ -20,15 +20,12 @@ import {
 } from "react-icons/hi";
 import { Box, Button, Divider } from "@mui/material";
 import Link from "next/link";
-
 import { getCookie, removeCookie } from "@/helpers/Cookies";
 import { usePathname, useRouter } from "next/navigation";
-
 import { AccountCircle, Notifications, TrendingFlat } from "@mui/icons-material";
 
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
-import MailIcon from "@mui/icons-material/Mail";
 import TopBar from "./TopBar";
 
 
@@ -95,13 +92,13 @@ const Header = () => {
           <Link href="/">
             <div className="flex items-center ">
               <Image
-                className="w-10 md:w-16 mr-2 rounded-full "
+                className="w-28 md:w-40"
                 src={logo}
                 alt="logo"
               />
 
               <div>
-                <h3 className="text-sm md:text-xl lg:text-2xl">Muissa</h3>
+                {/* <h3 className="text-sm md:text-xl lg:text-2xl">Muissa</h3> */}
                 {/* <small className="md:mt-0 -mt-2 ">
                   Business Consulting Ltd.
                 </small> */}
@@ -156,15 +153,12 @@ const Header = () => {
               <Box component={Link} href="/">
                 <div className="flex items-center ">
                   <Image
-                    className="w-10 md:w-16 mr-2 rounded-full "
+                    className="w-28 md:w-40"
                     src={logo}
                     alt="logo"
                   />
 
-                  <div>
-                    <h3 className="text-sm md:text-xl lg:text-2xl">Muissa</h3>
-                    {/* <small>Business Consulting Ltd. </small> */}
-                  </div>
+
                 </div>
               </Box>
             </div>
@@ -179,7 +173,7 @@ const Header = () => {
                   <li>
                     <Link href="/services" onClick={toggleMobileMenu}>Services</Link>
                   </li>
-                 
+
                   <li>
                     <Link href="/about" onClick={toggleMobileMenu}>About</Link>
                   </li>
@@ -206,7 +200,7 @@ const Header = () => {
 
 
                 </ul>
-                <div className="hidden lg:block ml-2">
+                <div className="hidden xl:block ml-2">
                   <IconButton aria-label={notificationsLabel(100)}>
                     <Badge badgeContent={100} color="primary">
                       <Notifications
@@ -245,7 +239,7 @@ const Header = () => {
             <div className="flex items-center xl:hidden ">
               {" "}
               <Image
-                className="w-12 mr-2 rounded-full "
+                className="w-28 "
                 src={logo}
                 alt="logo"
               />
@@ -265,8 +259,8 @@ const Header = () => {
                 <Link href="/services" onClick={toggleMobileMenu}>Services</Link>
               </li>
               <li>
-                    <Link href="/membership" onClick={toggleMobileMenu}>Membership</Link>
-                  </li>
+                <Link href="/membership" onClick={toggleMobileMenu}>Membership</Link>
+              </li>
               <li>
                 <Link href="/about" onClick={toggleMobileMenu}>About</Link>
               </li>
@@ -298,10 +292,10 @@ const Header = () => {
                 </>
               ) : (
                 <li>
-                <div className="flex gap-2 items-center">
-                <Link href="/login" onClick={toggleMobileMenu}><Button sx={buttonStyle}>Login</Button></Link>
-                <Link href="/register" onClick={toggleMobileMenu}><Button sx={buttonStyle}>Register</Button></Link>
-                </div>
+                  <div className="flex gap-2 items-center">
+                    <Link href="/login" onClick={toggleMobileMenu}><Button sx={buttonStyle}>Login</Button></Link>
+                    <Link href="/register" onClick={toggleMobileMenu}><Button sx={buttonStyle}>Register</Button></Link>
+                  </div>
                 </li>
               )}
 

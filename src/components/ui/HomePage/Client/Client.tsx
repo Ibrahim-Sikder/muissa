@@ -13,6 +13,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+// import { Pagination, Autoplay } from "swiper/modules";
 import { Pagination, Autoplay } from "swiper/modules";
 import { useGetAllReviewsQuery } from "@/redux/api/reviewApi";
 import Loader from "@/components/Loader";

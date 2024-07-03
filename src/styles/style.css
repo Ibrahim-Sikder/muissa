@@ -4,6 +4,7 @@
   background-image: url(../assets/business/contact.jpg);
   position: relative;
 }
+
 .serviceDetailsWrap::after {
   position: absolute;
   top: 0;
@@ -16,6 +17,7 @@
   z-index: 1;
   opacity: 0.8;
 }
+
 .chatIcon {
   font-size: 15px !important;
 }
@@ -80,6 +82,7 @@
   width: 200px;
   border-radius: 30px;
 }
+
 .commonContent a span {
   position: absolute;
   z-index: 9;
@@ -98,6 +101,7 @@
   border-radius: 30px;
   transition: all 0.5s cubic-bezier(0.48, 0.46, 0.6, 0.57);
 }
+
 .commonContent a:hover::after {
   width: 100%;
 }
@@ -107,7 +111,7 @@
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
- .rotate-90 {
+.rotate-90 {
   transform: rotate(90deg);
 }
 
@@ -118,9 +122,9 @@
 .message {
   transition: transform 0.5s ease-in-out;
   z-index: 999999999999999 !important;
-} 
+}
 
-.shadowStyle{
+.shadowStyle {
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
@@ -138,15 +142,18 @@
   .membarshipCard {
     width: 100%;
   }
+
   .responsiveTypography {
     font-size: 0.5rem;
     background-color: red;
   }
 
-}
-@media only screen and (max-width: 500px) {
-
   .commonContent a {
     width: 120px;
-}
+  }
+
+  .serviceDetailsWrap {
+    height: 230px;
+  }
+
 }

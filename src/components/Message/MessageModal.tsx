@@ -16,6 +16,9 @@ import { format } from "timeago.js";
 import uploadFile from "@/helpers/uploadFile";
 import { toast } from "sonner";
 import { Send } from "@mui/icons-material";
+import { redirect } from "next/dist/server/api-utils";
+import { useRouter } from "next/navigation";
+
 
 type TProps = {
   close: () => void;
@@ -80,7 +83,7 @@ const MessageModal = ({ close }: TProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [myReceiverUser, setMyReceiverUser] = useState<MyReceiverUser>();
-
+  const router = useRouter()
   const [senderUser, setSenderUser] = useState({
     _id: "",
     name: "",
@@ -109,6 +112,7 @@ const MessageModal = ({ close }: TProps) => {
   }, [allMessage]);
 
   const token = getCookie("mui-token");
+
 
   const userId =
     myReceiverUser?.receiver?._id || process.env.NEXT_PUBLIC_CHAT_ID;
@@ -178,6 +182,8 @@ const MessageModal = ({ close }: TProps) => {
   }, [socket, userId, senderUser]);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+
+
     event.preventDefault(); // Prevent page reload
     if (message.text || message.imageUrl) {
       if (socket) {
@@ -243,7 +249,7 @@ const MessageModal = ({ close }: TProps) => {
   const onlineStatus = onlineUser.includes(userDetails?._id as string);
 
 
-  const iconStyle  = {fontSize:'28px', background:'#1591A3',color:'#fff', padding:'5px', borderRadius:'8px' }
+  const iconStyle = { fontSize: '28px', background: '#1591A3', color: '#fff', padding: '5px', borderRadius: '8px' }
 
   return (
     <div className="w-[300px] md:w-[360px] md:h-[600px] h-[400px]  bg-white fixed right-0 md:right-1 bottom-14  rounded-2xl text-black shadow-xl z-[9999999999999999] overflow-hidden shadowStyle">
@@ -264,7 +270,7 @@ const MessageModal = ({ close }: TProps) => {
                   alt="logo"
                   height={100}
                 />
-                
+
 
                 {userDetails && <span>{userDetails?.name}</span>}
                 {onlineStatus ? "online" : "offline"}
@@ -366,15 +372,15 @@ const MessageModal = ({ close }: TProps) => {
 
         <div className=" w-full h-24 bg-white flex pl-3  items-center border-t-[#ddd] border-[2px] ">
           <form onSubmit={onSubmit} className="flex flex-col items-start ">
-            <div className="flex items-center justify-between w-[330px] ">
-            <input
-              type="text"
-              placeholder="Compose your message...."
-              className="w-[100%] bg-transparent  h-10 placeholder:text-[14px] "
-              onChange={handleMessageOnChange}
-              ref={textInputRef}
-            />
-           <Button type="submit"> <Send sx={iconStyle}/></Button>
+            <div className="flex items-center justify-between w-[300px] md:w-[330px] ">
+              <input
+                type="text"
+                placeholder="Compose your message...."
+                className="w-[100%] bg-transparent  h-10 placeholder:text-[14px] "
+                onChange={handleMessageOnChange}
+                ref={textInputRef}
+              />
+              <Button type="submit"> <Send sx={iconStyle} /></Button>
             </div>
             <div className="pb-2 flex space-x-2 items-center text-[#707584] ">
               <input

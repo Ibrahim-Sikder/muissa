@@ -5,7 +5,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/ui/HomePage/Container/Container";
-import logo from "../../../assets/logo/logo.png";
+import logo from "../../../assets/logo/footer.svg";
 import { MapIcon, PhoneIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
 import {
   FaFacebook,
@@ -38,7 +38,11 @@ const Footer = async () => {
           <div className="flex text-center flex-col md:flex-row justify-center gap-14 md:justify-between  text-white md:text-left">
             <div className="md:w-[500px] w-full px-4">
               <div className="space-y-4">
-
+                <Image
+                  className="w-32 mx-auto md:mx-0 md:w-56 "
+                  src={logo}
+                  alt="logo"
+                />
                 <div className="flex items-center gap-2 justify-center md:justify-start">
                   <EnvelopeIcon className="h-6 w-6" />
                   <a href="mailto:muissaltd@gmail.com" className="text-blue-500">

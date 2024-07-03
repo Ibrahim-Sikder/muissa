@@ -6,12 +6,11 @@ import hero from "../../../../assets/banner/slider5.jpg";
 import hero2 from "../../../../assets/banner/slider4.jpg";
 import hero3 from "../../../../assets/banner/slider3.png";
 import hero4 from "../../../../assets/banner/slider2.png";
-
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Autoplay } from "swiper/modules";
 import { Button } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,11 +30,11 @@ const HeroSection = () => {
   return (
     <div className="heroSectionWrap">
       <Swiper
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        speed={1500}
+        // autoplay={{
+        //   delay: 2500,
+        //   disableOnInteraction: false,
+        // }}
+        // speed={1500}
         loop={true}
         spaceBetween={30}
         centeredSlides={true}
@@ -46,7 +45,7 @@ const HeroSection = () => {
         modules={[Autoplay]}
         className="mySwiper"
       >
-        <SwiperSlide>
+        {/* <SwiperSlide>
           <div className="heroContentWraps ">
             <div className="bannerImgWrap">
               <Image src={hero} alt="banner" />
@@ -66,8 +65,8 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
-        </SwiperSlide>
-        <SwiperSlide>
+        </SwiperSlide> */}
+        {/* <SwiperSlide>
           <div className="heroContentWraps ">
             <div className="bannerImgWrap">
               <Image src={hero4} alt="banner" />
@@ -87,7 +86,7 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
-        </SwiperSlide>
+        </SwiperSlide> */}
         <SwiperSlide>
           <div className="heroContentWraps ">
             <div className="bannerImgWrap">

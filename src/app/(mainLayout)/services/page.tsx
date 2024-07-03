@@ -24,8 +24,9 @@ export async function generateMetadata(): Promise<Metadata> {
     };
   }
 
+
   return {
-    title: `${servicesData?.data?.services?.[0]?.seo_title}`,
+     title: "Muissa Consulting | Services",
     description: servicesData?.data?.services?.[0]?.seo_description || "Read the latest insights and updates.",
     keywords: servicesData?.data?.services?.[0].seo_keyword || "Muissa Consulting, Blog, News, Consulting insights, Business updates",
   };

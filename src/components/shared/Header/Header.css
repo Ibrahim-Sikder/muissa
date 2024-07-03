@@ -214,17 +214,17 @@ nav.menuItemsBarWraps {
   }
 }
 @media only screen and (max-width: 600px) {
+
   .stickyMenu {
     width: 100%;
-  }
+    height: 55px;
+}
+.headerWrap {
+  height: 55px;
+  padding: 8px 0px;
+}
 }
 
-@media only screen and (max-width: 375px) {
-
-  .headerWrap {
-    height: 80px;
-}
-}
 @media only screen and (max-width: 250px) {
   .stickyMenu {
     width: 250px;

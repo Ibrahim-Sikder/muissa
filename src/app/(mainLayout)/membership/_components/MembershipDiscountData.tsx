@@ -7,7 +7,7 @@ import { useGetDiscountForPaymentQuery } from "@/redux/api/paymentApi";
 const MembershipDiscountData = () => {
     const { data: discountData, isLoading } = useGetDiscountForPaymentQuery({});
 
-    const originalPrice = 500;
+    const originalPrice = 12000;
     const discountedPrice = originalPrice - discountData?.discount_amount;
     const convertedOriginalPrice = convertToBengaliNumerals(originalPrice);
     const convertedDiscountedPrice = convertToBengaliNumerals(discountedPrice);

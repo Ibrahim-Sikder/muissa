@@ -49,12 +49,7 @@ body {
   margin-top: 100px;
 }
 
-.navbar {
-  position: static;
-  width: 100%;
-  background-color: transparent;
-  transition: background-color 0.4s linear;
-}
+
 
 .w-270px {
   width: 270px;

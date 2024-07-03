@@ -4,6 +4,7 @@
   background-image: url(../../../assets/logo/serviceBanner.jpg);
   position: relative;
 }
+
 .serviceDetailsWrap::after {
   position: absolute;
   top: 0;
@@ -16,6 +17,7 @@
   z-index: 1;
   opacity: 0.4;
 }
+
 /* .serviceContent {
   position: absolute;
   z-index: 2;
@@ -28,34 +30,37 @@
   width: 370px;
   height: 400px;
 }
+
 .serviceImgWrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.swiper-button-prev, .swiper-button-next {
-    width: 40px !important;
-    height: 40px !important;
-    border-radius: 100%;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  }
 
-  .swiper-button-prev:after, .swiper-button-next:after {
-
-    font-size: 20px !important;
+.swiper-button-prev,
+.swiper-button-next {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 100%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.serviceCoverImgWrap{
+.swiper-button-prev:after,
+.swiper-button-next:after {
 
-}
-.serviceCoverImgWrap img{
-  width:100%;
-  height:100%;
-  object-fit:fill;
-
+  font-size: 20px !important;
 }
 
-@media only screen and (max-width:500px){
+.serviceCoverImgWrap {}
+
+.serviceCoverImgWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+
+}
+
+@media only screen and (max-width:500px) {
   .serviceImgWrap {
     width: 100%;
 
@@ -64,8 +69,9 @@
   .serviceDetailsWrap {
     height: 230px;
   }
-  .serviceCoverImgWrap{
-    width:100%;
-    height:160px;
+
+  .serviceCoverImgWrap {
+    width: 100%;
+    height: 160px;
   }
 }

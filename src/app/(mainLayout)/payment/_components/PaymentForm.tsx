@@ -99,9 +99,9 @@ const PaymentForm = () => {
     let subscriptionAmount = 0;
 
     if (value === "1 year subscription fee") {
-      subscriptionAmount = 500;
+      subscriptionAmount = 12000;
     } else if (value === "2 year subscription fee") {
-      subscriptionAmount = 1000;
+      subscriptionAmount = 12000;
     }
 
     if (discountStatus === "Percentage") {
@@ -181,10 +181,11 @@ const PaymentForm = () => {
             <Grid item xs={12} md={12} lg={12}>
               <MUIInput
                 name="target_account"
-                label="Target Account/পে একাউন্ট"
+                label="01984673686"
                 variant="outlined"
                 fullWidth
-                placeholder="01XXXXXXXXXX"
+                value="01984673686"
+                disabled
               />
             </Grid>
 

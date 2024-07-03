@@ -143,9 +143,7 @@
   .heroContent {
     left: 10%;
   }
-  .heroContent2 {
-    right: 10% !important;
-  }
+
 }
 @media only screen and (min-width: 300px) and (max-width: 851px) {
   .heroContent h1,
@@ -228,7 +226,7 @@
     margin: 3px 0 !important;
   }
   .heroContent2 {
-    right: 16% !important;
+    right: -2% !important;
 }
 .bannerImgWrap, .heroSectionWrap {
   height: 270px;
