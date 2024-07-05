@@ -62,7 +62,7 @@ const UserServicePage = () => {
                       <h4>{service}</h4>
                       <div className="flex items-center">
                         <small className='text-bold'>{formatDate(memberShipData?.createdAt)}</small> <span className="mx-2"> <HiMinus /></span>
-                        <small className='text-semibold'>{formatDate(memberShipData?.createdAt)}</small>
+                        <small className='text-semibold'>{formatDate(memberShipData?.membership_year)}</small>
                       </div>
                       {/* <Button sx={{ width: '30px', fontSize: '11px', height: '25px' }}> Pending</Button> */}
                     </div>

@@ -10,6 +10,7 @@ import { useMyPaymentQuery } from '@/redux/api/paymentApi';
 import { getCookie } from '@/helpers/Cookies';
 import Loader from '@/components/Loader';
 import { TPaymentData } from '@/types';
+import Link from 'next/link';
 
 
 
@@ -85,7 +86,7 @@ const Payment = () => {
                                 </tr>
                             </thead>
                             <tbody className='text-center'>
-                                {paymentData.map((data: TPaymentData, i: number) => (
+                                {paymentData?.map((data: TPaymentData, i: number) => (
                                     <tr key={i} className="text-xs">
                                         <td className='capitalize'>{data?.user?.name}</td>
                                         <td className='capitalize'>{data.member_type}</td>
@@ -101,8 +102,15 @@ const Payment = () => {
                             </tbody>
                         </table>
                     </div>
-                    <div>
+                    <div className='flex flex-end justify-end mb-3'>
+                        <Button
+                            component={Link} href='/profile/my-payment/view'
+                            variant='outlined'
+                            sx={{ fontSize: '12px', width: '50px', padding: '5px 3px', marginTop: '10px' }}
 
+                        >
+                            View
+                        </Button>
                     </div>
 
                     <div ref={invoiceRef} className="hidden-invoice-content">
@@ -150,7 +158,7 @@ const Payment = () => {
                                                 </tr>
                                             </thead>
                                             <tbody className='text-center'>
-                                                {invoiceData.map((data, i) => (
+                                                {invoiceData?.map((data, i) => (
                                                     <tr key={i} className="text-xs">
                                                         <td className="px-2.5 py-2.5 border">{data.services}</td>
                                                         <td className="px-2.5 py-2.5 border">{data.subscription}</td>
