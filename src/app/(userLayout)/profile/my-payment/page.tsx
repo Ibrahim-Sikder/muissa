@@ -6,10 +6,23 @@ import { Button, Divider } from '@mui/material';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import React, { useRef } from 'react';
+import { useMyPaymentQuery } from '@/redux/api/paymentApi';
+import { getCookie } from '@/helpers/Cookies';
+import Loader from '@/components/Loader';
+import { TPaymentData } from '@/types';
+
+
+
 
 const Payment = () => {
+    const token = getCookie('mui-token')
+    const { data: paymentData, isLoading } = useMyPaymentQuery({ token })
     const invoiceRef = useRef<HTMLDivElement>(null);
 
+    if (isLoading) {
+        return <Loader />
+    }
+    console.log(paymentData)
     const handleDownload = async () => {
         const invoiceElement = invoiceRef.current;
 
@@ -72,24 +85,24 @@ const Payment = () => {
                                 </tr>
                             </thead>
                             <tbody className='text-center'>
-                                {invoiceData.map((data, i) => (
+                                {paymentData.map((data: TPaymentData, i: number) => (
                                     <tr key={i} className="text-xs">
-                                        <td >{data.services}</td>
-                                        <td >{data.partner}</td>
-                                        <td >{data.subscription}</td>
-                                        <td >{data.rate}</td>
-                                        <td >{data.tax}</td>
-                                        <td className="px-2.5 py-2.5 border">{data.amount}</td>
-                                        <td >dfghjhgf4567</td>
-                                        <td>4567898765</td>
-                                        <td>Pending</td>
+                                        <td className='capitalize'>{data?.user?.name}</td>
+                                        <td className='capitalize'>{data.member_type}</td>
+                                        <td >{data.subscription_for}</td>
+                                        <td >{data.total_amount}</td>
+                                        <td >{data.discount_amount}</td>
+                                        <td>{data.amount}</td>
+                                        <td >{data?.transaction_id}</td>
+                                        <td>{data?.account_number}</td>
+                                        <td>{data?.payment_status}</td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
                     </div>
                     <div>
-                        
+
                     </div>
 
                     <div ref={invoiceRef} className="hidden-invoice-content">

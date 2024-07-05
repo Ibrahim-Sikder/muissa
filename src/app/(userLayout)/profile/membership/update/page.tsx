@@ -28,7 +28,7 @@ import { getCookie } from "@/helpers/Cookies";
 import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import { toast } from "sonner";
-import { useGetMemberForPaymentQuery } from "@/redux/api/memeberApi";
+import { useGetMemberForPaymentQuery, useUpdateMemberQuery } from "@/redux/api/memeberApi";
 import { SuccessMessage } from "@/components/success-message";
 import { ErrorMessage } from "@/components/error-message";
 import MUIMultiValue from "@/components/Forms/MultiPleValue";
@@ -127,7 +127,7 @@ const ProfileMemebershipForm = () => {
     try {
       const endpoint =
         userType === "business_owner"
-          ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-business-owner`
+          ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members`
           : userType === "investor"
             ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-investor`
             : null;
@@ -268,14 +268,7 @@ const ProfileMemebershipForm = () => {
                         spacing={{ xs: 1, md: 3, lg: 3 }}
                       >
                         <Grid container spacing={1}>
-                          {/* <Grid item xs={12} sm={6} md={6} lg={12}>
-                      <MUIInput
-                        name="businessOwner"
-                        label="AS A BUSINESS OWNER "
-                        fullWidth
-                        size="medium"
-                      />
-                    </Grid> */}
+                          
                           <Grid item xs={12} sm={6} md={6} lg={12}>
                             <MUIInput
                               name="business_name"

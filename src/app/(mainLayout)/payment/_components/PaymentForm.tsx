@@ -30,6 +30,7 @@ const PaymentForm = () => {
 
   const [selectedValue, setSelectedValue] = useState("bkash");
   const [totalAmount, setTotalAmount] = useState<number>(0);
+  const [withoutDiscountAmount, setWithoutDiscrountAmount] = useState<number>(0);
 
   const [coupon, setCoupon] = useState("");
 
@@ -57,9 +58,10 @@ const PaymentForm = () => {
     setErrorMessage([]);
 
     data.payment_method = selectedValue;
-
+    data.discount_amount = withoutDiscountAmount - totalAmount
     data.amount = Number(totalAmount);
     data.member_type = member_type;
+    data.total_amount = withoutDiscountAmount
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_API_URL}/payments/create-payment`,
@@ -93,6 +95,7 @@ const PaymentForm = () => {
     }
   };
 
+
   const handleChang = (value: string) => {
     const discountValue = discountAmount?.discount_amount || 0;
     const discountStatus = discountAmount?.discount_status || "Flat";
@@ -101,8 +104,10 @@ const PaymentForm = () => {
 
     if (value === "1 year subscription fee") {
       subscriptionAmount = 12000;
+      setWithoutDiscrountAmount(12000);
     } else if (value === "2 year subscription fee") {
       subscriptionAmount = 24000;
+      setWithoutDiscrountAmount(24000);
     }
 
     if (discountStatus === "Percentage") {
@@ -195,7 +200,7 @@ const PaymentForm = () => {
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
 
-              <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold my-2 border-[#11111159]"> {totalAmount.toString()}</span>
+              <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold my-2 border-[#11111159]"> {withoutDiscountAmount.toString()}</span>
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
               <div className="flex items-center gap-x-1 ">

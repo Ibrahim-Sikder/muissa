@@ -31,6 +31,15 @@ export const memeberApi = baseApi.injectEndpoints({
         params: { member_type, id },
       }),
     }),
+    updateMember: build.query({
+      query: ({ token,id }) => ({
+        url: `/members/${id}`,
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -38,4 +47,5 @@ export const {
   useGetAllMembersQuery,
   useGetSingleMemberQuery,
   useGetMemberForPaymentQuery,
+  useUpdateMemberQuery
 } = memeberApi;

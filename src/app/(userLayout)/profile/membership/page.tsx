@@ -52,9 +52,9 @@ const Membership = () => {
             <ProfileMemebershipForm />
           </Box>
         )
-
-
       }
+
+
     </Container>
   );
 };
