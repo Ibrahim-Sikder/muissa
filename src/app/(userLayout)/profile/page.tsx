@@ -15,6 +15,7 @@ import userImg from "../../../assets/logo/profile.png";
 import ProfileLoader from "@/components/ProfileLoader";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 
 const validationSchema = z.object({
   name: z
@@ -117,7 +118,7 @@ const Profile = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [getLoading, setGetLoading] = useState<boolean>(false);
   const [reload, setReload] = useState<boolean>(false);
-
+const router = useRouter()
   const [userData, setUserData] = useState<UserData>({
     _id: "",
     userId: "",
@@ -224,6 +225,8 @@ const Profile = () => {
         toast.success(response.data.message);
         setSuccessMessage(response.data.message);
         setReload(!reload);
+        router.push('/membership')
+
       }
     } catch (error: any) {
       if (error.response) {

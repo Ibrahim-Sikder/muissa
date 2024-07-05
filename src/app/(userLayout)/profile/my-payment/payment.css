@@ -1,7 +1,16 @@
-.invoiceWrap{
-    height:1100px;
-    width:800px;
-    background:white;
-    margin:0 auto;
-    padding:30px 40px;
+.invoiceWrap {
+    height: 1100px;
+    width: 800px;
+    background: white;
+    margin: 0 auto;
+    padding: 30px 40px;
+}
+
+.paymentTable th {
+    font-size: 14px;
+}
+
+.paymentTable :where(th, td) {
+    padding: 10px;
+    border: 1px solid #ddd;
 }

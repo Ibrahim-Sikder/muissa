@@ -88,7 +88,7 @@ const DocUploader = ({ name, sx, setUploadedImage, uploadedImage }: INTFileUploa
                 <Typography component="h2">Uploading...</Typography>
               ) : (
                 <Typography component="h2">
-                  Drag & Drop or Choose File to Upload
+                  Drag & Drop or Choose File to Upload Your Documents
                 </Typography>
               )}
             </label>

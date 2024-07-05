@@ -137,6 +137,16 @@
   left: -14px;
 }
 
+.profileServiceCard {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  width: 350px;
+  padding: 20px;
+  height: 150px;
+}
+.investmentCard {
+  height: auto;
+}
+
 
 @media only screen and (max-width: 500px) {
   .membarshipCard {

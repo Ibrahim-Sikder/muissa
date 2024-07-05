@@ -11,7 +11,7 @@ const layout = ({ children }: { children: ReactNode }) => {
       <Header />
 
       <Container>
-        <div className="grid grid-cols-1  lg:grid-cols-12 mt-10 gap-5  ">
+        <div className="flex flex-col lg:flex-row justify mt-10 gap-10  ">
           <div className="lg:col-span-3">
             <div className="md:sticky md:top-28">
               <ProfileSidebar />

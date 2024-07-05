@@ -20,17 +20,7 @@ const ProfileSidebar = () => {
   return (
     <div className=" profileSideBar ">
       <div className="lg:space-y-5 profileItems">
-        <div>
-          <Link href="/profile">
-            <div
-              className={`flex items-center space-x-2  ${isActive("/profile") ? "activeProfileLink" : ""
-                }`}
-            >
-              <FaUserTie size={25} />
-              <span>My Account</span>
-            </div>
-          </Link>
-        </div>
+       
 
         <div>
           <Link href="/profile/membership">

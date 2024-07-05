@@ -56,37 +56,40 @@ const Payment = () => {
                             Download Invoice
                         </Button>
                     </div>
-                    <div className="overflow-x-auto">
-                        <table className="min-w-full bg-white border border-gray-300">
+                    <div className="overflow-x-auto paymentTable">
+                        <table className="min-w-full overflow-x-auto bg-white border border-gray-300">
                             <thead>
                                 <tr>
-                                    <th className="px-2.5 py-2.5 border">Customer Name</th>
-                                    <th className="px-2.5 py-2.5 border">Service Type </th>
-                                    <th className="px-2.5 py-2.5 border"> Subscription</th>
-                                    <th className="px-2.5 py-2.5 border">Membership Fee </th>
-                                    <th className="px-2.5 py-2.5 border">Discount</th>
-                                    <th className="px-2.5 py-2.5 border">Payment</th>
+                                    <th >Customer Name</th>
+                                    <th >Membership Type </th>
+                                    <th > Subscription</th>
+                                    <th >Membership Fee </th>
+                                    <th >Discount</th>
+                                    <th >Payment</th>
                                     <th className="px-2.5 py-2.5 border">Transiton ID </th>
-                                    <th className="px-2.5 py-2.5 border">Mobile Number</th>
-                                    <th className="px-2.5 py-2.5 border">Action</th>
+                                    <th >Mobile Number</th>
+                                    <th >Status</th>
                                 </tr>
                             </thead>
                             <tbody className='text-center'>
                                 {invoiceData.map((data, i) => (
                                     <tr key={i} className="text-xs">
-                                        <td className="px-2.5 py-2.5 border">{data.services}</td>
-                                        <td className="px-2.5 py-2.5 border">{data.partner}</td>
-                                        <td className="px-2.5 py-2.5 border">{data.subscription}</td>
-                                        <td className="px-2.5 py-2.5 border">{data.rate}</td>
-                                        <td className="px-2.5 py-2.5 border">{data.tax}</td>
+                                        <td >{data.services}</td>
+                                        <td >{data.partner}</td>
+                                        <td >{data.subscription}</td>
+                                        <td >{data.rate}</td>
+                                        <td >{data.tax}</td>
                                         <td className="px-2.5 py-2.5 border">{data.amount}</td>
-                                        <td className="px-2.5 py-2.5 border">dfghjhgf4567</td>
-                                        <td className="px-2.5 py-2.5 border ">4567898765</td>
-                                        <td className="px-2.5 py-2.5 border ">{data.amount}</td>
+                                        <td >dfghjhgf4567</td>
+                                        <td>4567898765</td>
+                                        <td>Pending</td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
+                    </div>
+                    <div>
+                        
                     </div>
 
                     <div ref={invoiceRef} className="hidden-invoice-content">

@@ -36,6 +36,7 @@ const UserServicePage = () => {
 
 
   console.log(memberShipData);
+  console.log(memberShipData.member_type)
 
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {
@@ -73,7 +74,7 @@ const UserServicePage = () => {
               ))}
             </div>
           </div>
-        ): memberShipData.member_type === 'investor' ?  (
+        ) : memberShipData.member_type === 'investor' ? (
           <>
 
             <div>
@@ -81,9 +82,9 @@ const UserServicePage = () => {
               <div className='grid grid-cols-1  lg:grid-cols-2 w-full md:w-[750px]  mt-10 gap-5 '>
                 <div className='profileServiceCard investmentCard p-5 border rounded-lg shadow-md '>
                   <div className="flex  gap-2 ">
-                 <div className="imgWrap">
-                 <Image className='w-10 object-cover h-10' src={icon} alt='services' />
-                 </div>
+                    <div className="imgWrap">
+                      <Image className='w-10 object-cover h-10' src={icon} alt='services' />
+                    </div>
                     <div>
                       <h4>{memberShipData?.business_name}</h4>
                       <h4>Investment Support </h4>
@@ -92,7 +93,7 @@ const UserServicePage = () => {
                           <span>Investment Amount  </span>
                           <span>Investment Goal  </span>
                           <span>Investment Period  </span>
-                 
+
                         </div>
                         <div className='flex flex-col text-sm '>
                           <b>: {memberShipData?.investment_amount}</b>
@@ -103,13 +104,13 @@ const UserServicePage = () => {
                       </div>
 
 
-                     
+
                     </div>
                   </div>
                   <div className="flex items-center justify-end ">
 
                     <div className="flex items-center mt-5">
-                    <b className='capitalize'> {memberShipData?.member_type} </b>
+                      <b className='capitalize'> {memberShipData?.member_type} </b>
                     </div>
                   </div>
                 </div>
@@ -117,7 +118,7 @@ const UserServicePage = () => {
             </div>
 
           </>
-        ): <p>No service found</p>
+        ) : <p>No service found</p>
       }
     </>
   );

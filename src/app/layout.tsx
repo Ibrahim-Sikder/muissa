@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/next-script-for-ga */
 import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
@@ -6,6 +7,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { Toaster } from "sonner";
 import dynamic from "next/dynamic";
 import MessageIcons from "@/components/Message/MessageIcons";
+import Head from "next/head";
 
 const BackTopButton = dynamic(
   () => import("@/components/BackTopButton/BackTopButton"),
@@ -33,6 +35,8 @@ export const metadata: Metadata = {
   },
 };
 
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -40,6 +44,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll="0">
+      <Head>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-5311HCY79B"
+        ></script>
+      </Head>
       <Providers>
         <body className={hindiSiliguri.className}>
           <Toaster position="bottom-right" richColors />
