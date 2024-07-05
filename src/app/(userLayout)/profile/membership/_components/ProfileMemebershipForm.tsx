@@ -1,6 +1,6 @@
 "use client";
 
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import Container from "@/components/ui/HomePage/Container/Container";
 
 import {
@@ -82,9 +82,9 @@ const ProfileMemebershipForm = () => {
     member_type,
     id,
   });
-  
-  
-  
+
+
+
 
   const defaultValues = {
     profile_pic: memberShipData?.user?.profile_pic || "",
@@ -92,20 +92,25 @@ const ProfileMemebershipForm = () => {
     email: memberShipData?.user?.auth || "",
     additional_info: memberShipData?.additional_info || "",
     need_of_service: Array.isArray(memberShipData?.need_of_service)
-    ? memberShipData.need_of_service.map((service:any) => ({ title: service.title || service }))   
-    : typeof memberShipData?.need_of_service === 'string'
-    ? memberShipData.need_of_service.split(',').map((service:any) => ({ title: service.trim() }))
-    : [],
+      ? memberShipData.need_of_service.map((service: any) => ({ title: service.title || service }))
+      : typeof memberShipData?.need_of_service === 'string'
+        ? memberShipData.need_of_service.split(',').map((service: any) => ({ title: service.trim() }))
+        : [],
     business_description: memberShipData?.business_description || "",
     website: memberShipData?.website || "",
     business_address: memberShipData?.business_address || "",
     business_name: memberShipData?.business_name || "",
     business_type: memberShipData?.business_type || "",
+    investment_type: memberShipData?.investment_type || "",
+    investment_amount: memberShipData?.investment_amount || "",
+    investment_period: memberShipData?.investment_period || "",
+    investment_goal: memberShipData?.investment_goal || "",
+
   };
 
   const handleSubmit = async (data: FieldValues) => {
     if (Array.isArray(data.need_of_service)) {
-      data.need_of_service = data.need_of_service.map(item => item.title); 
+      data.need_of_service = data.need_of_service.map(item => item.title);
     }
     data.upload_file = uploadedImage;
     data.member_type = userType;
@@ -145,7 +150,7 @@ const ProfileMemebershipForm = () => {
       ) {
         toast.success(response.data.message);
         setSuccessMessage(response.data.message);
-     
+
 
         router.push(
           `/${response.data.data.redirectUrl}?member_type=${userType}&id=${response.data.data.userId}`
@@ -154,7 +159,7 @@ const ProfileMemebershipForm = () => {
       if (response.status === 200 && response.data.data.success === false) {
         toast.error(response.data.data.message);
         setErrorMessage([response.data.data.message]);
-        
+
 
         router.push(
           `/${response.data.data.redirectUrl}?member_type=${userType}&id=${response.data.data.userId}`
@@ -185,7 +190,7 @@ const ProfileMemebershipForm = () => {
     backgroundColor: "#1591A3",
     borderRadius: "3px",
     color: "#fff",
-   
+
     margin: "5px auto",
     justifyContent: "center",
     "&.Mui-selected": {
@@ -202,10 +207,10 @@ const ProfileMemebershipForm = () => {
   return (
     <>
       {isLoading ? (
-        <ProfileLoader/>
+        <ProfileLoader />
       ) : (
         <Container>
-          
+
           <div className="grid grid-cols-1  mt-14 xl:w-[800px] mx-auto   ">
             <div className="mb-5 ">
               <h3 className="text-2xl font-semibold ">সদস্যতা নিবন্ধন</h3>
@@ -221,6 +226,7 @@ const ProfileMemebershipForm = () => {
               defaultValues={defaultValues}
             >
               <Grid container spacing={1}>
+
                 <Box
                   sx={{
                     width: "100%",
@@ -379,7 +385,7 @@ const ProfileMemebershipForm = () => {
                       >
                         <Grid container spacing={1}>
                           <Grid item xs={12} sm={6} md={6} lg={12}>
-                            
+
                           </Grid>
                           <Grid item xs={12} sm={6} md={6} lg={12}>
                             <MUIInput

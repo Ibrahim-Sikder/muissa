@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { FaStaylinked, FaUserLock, FaUserTie, FaUsers } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import "./Profile.css";
+import { HiCurrencyBangladeshi } from "react-icons/hi";
 const ProfileSidebar = () => {
   const pathname = usePathname();
   const [activeLink, setActiveLink] = useState("");
@@ -13,7 +14,7 @@ const ProfileSidebar = () => {
     setActiveLink(pathname);
   }, [pathname]);
 
-  
+
   const isActive = (path: string) => activeLink === path;
 
   return (
@@ -22,9 +23,8 @@ const ProfileSidebar = () => {
         <div>
           <Link href="/profile">
             <div
-              className={`flex items-center space-x-2  ${
-                isActive("/profile") ? "activeProfileLink" : ""
-              }`}
+              className={`flex items-center space-x-2  ${isActive("/profile") ? "activeProfileLink" : ""
+                }`}
             >
               <FaUserTie size={25} />
               <span>My Account</span>
@@ -35,9 +35,8 @@ const ProfileSidebar = () => {
         <div>
           <Link href="/profile/membership">
             <div
-              className={`flex items-center space-x-2 ${
-                isActive("/profile/membership") ? "activeProfileLink" : ""
-              }`}
+              className={`flex items-center space-x-2 ${isActive("/profile/membership") ? "activeProfileLink" : ""
+                }`}
             >
               <FaUsers size={25} />
               <span>Membership</span>
@@ -48,12 +47,22 @@ const ProfileSidebar = () => {
         <div>
           <Link href="/profile/services">
             <div
-              className={`flex items-center space-x-2 ${
-                isActive("/profile/services") ? "activeProfileLink" : ""
-              }`}
+              className={`flex items-center space-x-2 ${isActive("/profile/services") ? "activeProfileLink" : ""
+                }`}
             >
               <FaStaylinked size={25} />
-              <span>Services</span>
+              <span>My Services</span>
+            </div>
+          </Link>
+        </div>
+        <div>
+          <Link href="/profile/my-payment">
+            <div
+              className={`flex items-center space-x-2 ${isActive("/profile/my-payment") ? "activeProfileLink" : ""
+                }`}
+            >
+              <HiCurrencyBangladeshi size={25} />
+              <span>My Payment</span>
             </div>
           </Link>
         </div>
@@ -61,9 +70,8 @@ const ProfileSidebar = () => {
         <div>
           <Link href="/profile/change-password">
             <div
-              className={`flex items-center space-x-2 ${
-                isActive("/profile/change-password") ? "activeProfileLink" : ""
-              }`}
+              className={`flex items-center space-x-2 ${isActive("/profile/change-password") ? "activeProfileLink" : ""
+                }`}
             >
               <FaUserLock size={25} />
               <span>Change Password</span>

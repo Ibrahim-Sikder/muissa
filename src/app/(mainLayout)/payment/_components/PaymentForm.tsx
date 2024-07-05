@@ -22,6 +22,7 @@ import { ChangeEvent, useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
+
 const PaymentForm = () => {
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string[]>([]);
@@ -179,15 +180,8 @@ const PaymentForm = () => {
           <p className="mb-2">2. Copy Account Pay/অ্যাকাউন্ট পে কপি করুন</p>
           <Grid container spacing={1}>
             <Grid item xs={12} md={12} lg={12}>
-              {/* <MUIInput
-                name="target_account"
-                sx={{ fontWeight: 'bold', color: 'red' }}
-                variant="outlined"
-                fullWidth
-                value="01984673686"
 
-              /> */}
-                <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold mb-3 border-[#11111159]"> 01984673686 </span>
+              <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold mb-3 border-[#11111159]"> 01984673686 </span>
             </Grid>
 
             <p className="">3. Your Transaction / আপনার লেনদেন</p>
@@ -200,20 +194,7 @@ const PaymentForm = () => {
               />
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
-              {/* <MUIInput
-                name="amount"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                disabled={true}
-                value={totalAmount.toString()}
-                sx={{
-                  "& .MuiInputBase-input.Mui-disabled": {
-                    color: "#002140",
-                    //  backgroundColor: "#002140", 
-                  },
-                }}
-              /> */}
+
               <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold my-2 border-[#11111159]"> {totalAmount.toString()}</span>
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
@@ -227,9 +208,6 @@ const PaymentForm = () => {
                   sx={{ width: "250px" }}
                   onChange={handleCouponChange}
                 />
-
-
-                {/* <input type="text" onChange={handleCouponChange} className="border" /> */}
                 <Button
                   sx={{ width: "70px", height: "40px", marginTop: "8px" }}
                   onClick={handleHandleCoupon}
@@ -241,13 +219,14 @@ const PaymentForm = () => {
 
             <Grid item xs={12} md={12} lg={12}>
               <p className="mt-3 ">Payable Amount/পরিশোধিত পরিমান</p>
-              <MUIInput
+              {/* <MUIInput
                 name="payable_amount"
                 disabled
                 variant="outlined"
                 fullWidth
                 margin="normal"
-              />
+              /> */}
+              <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold my-2 border-[#11111159]"> {totalAmount.toString()}</span>
             </Grid>
           </Grid>
 
