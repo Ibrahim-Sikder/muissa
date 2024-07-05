@@ -12,11 +12,18 @@ type INTFileUploaderProps = {
   sx: SxProps;
   uploadedImage: string;
   setUploadedImage: (image: string) => void;
+  upload_file?: string;
 };
 
-const DocUploader = ({ name, sx, setUploadedImage, uploadedImage }: INTFileUploaderProps) => {
+const DocUploader = ({
+  name,
+  sx,
+  setUploadedImage,
+  uploadedImage,
+  upload_file,
+}: INTFileUploaderProps) => {
   const { control, setValue, watch } = useFormContext();
-   
+
   const [loading, setLoading] = useState<boolean>(false);
 
   const selectedFile = watch(name);
@@ -74,41 +81,54 @@ const DocUploader = ({ name, sx, setUploadedImage, uploadedImage }: INTFileUploa
               className="cursor-pointer py-2 rounded-md shadow-[rgba(0, 0, 0, 0.1) 0px 1px 2px 0px]"
               style={{ display: uploadedImage ? "none" : "block" }}
             >
-              <BackupIcon
-                sx={{
-                  mr: 2,
-                  color: "#111",
-                  fontSize: 60,
-                  background: "#E8EDFF",
-                  padding: "10px",
-                  borderRadius: "100%",
-                }}
-              />
-              {loading ? (
-                <Typography component="h2">Uploading...</Typography>
-              ) : (
-                <Typography component="h2">
-                  Drag & Drop or Choose File to Upload Your Documents
-                </Typography>
+              {!upload_file && !loading && (
+                <>
+                  <BackupIcon
+                    sx={{
+                      mr: 2,
+                      color: "#111",
+                      fontSize: 60,
+                      background: "#E8EDFF",
+                      padding: "10px",
+                      borderRadius: "100%",
+                    }}
+                  />
+
+                  <Typography component="h2">
+                    Drag & Drop or Choose File to Upload Your Documents
+                  </Typography>
+                </>
               )}
             </label>
-            {uploadedImage && (
-              <Box mt={2}>
-                <Image
-                  src={uploadedImage}
-                  alt="Uploaded"
-                  layout="responsive"
-                  width={300}
-                  height={200}
-                  style={{ borderRadius: "8px" }}
-                />
-              </Box>
+            {loading ? (
+              <Typography
+                component="h2"
+                width={300}
+                height={200}
+                className="flex items-center justify-center"
+              >
+                Uploading...
+              </Typography>
+            ) : (
+              <>
+                {(uploadedImage || upload_file) && (
+                  <Box mt={2}>
+                    <Image
+                      src={uploadedImage || upload_file || ""}
+                      alt="Uploaded"
+                      layout="responsive"
+                      width={300}
+                      height={200}
+                      style={{ borderRadius: "8px" }}
+                    />
+                  </Box>
+                )}
+              </>
             )}
-            {uploadedImage && (
+            {(uploadedImage || upload_file) && (
               <Box mt={2}>
                 <label
                   htmlFor="files"
-                  
                   style={{
                     padding: "10px 15px",
                     border: "none",
