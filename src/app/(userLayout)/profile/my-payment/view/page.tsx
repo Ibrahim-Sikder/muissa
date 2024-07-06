@@ -19,14 +19,14 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
 interface PaymentData {
-    _id: string;
-    createdAt: string;
-    amount: number;
-    subscription_for: string;
-    user: {
-        name: string;
-        email: string;
-    };
+  _id: string;
+  createdAt: string;
+  amount: number;
+  subscription_for: string;
+  user: {
+    name: string;
+    email: string;
+  };
 }
 
 const ShowInvoice: React.FC = () => {
@@ -34,18 +34,34 @@ const ShowInvoice: React.FC = () => {
     const invoiceRef = useRef<HTMLDivElement>(null);
 
 
-    const token = getCookie("mui-token");
-    const {
-        data: paymentData,
-        error,
-        isLoading,
-    } = useGetSinglePaymentQuery({ id, token });
+  const token = getCookie("mui-token");
 
-    const componentRef = useRef<HTMLDivElement>(null);
+  const {
+    data: paymentData,
+    error,
+    isLoading,
+  } = useGetSinglePaymentQuery({ id, token });
 
-    if (isLoading) {
-        return <Loader />;
+  const componentRef = useRef<HTMLDivElement>(null);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    const errorWithData = error as {
+      message?: string;
+      data?: { message?: string };
+    };
+
+    if (errorWithData.data?.message) {
+      toast.error([errorWithData.data.message]);
+    } else if (errorWithData.message) {
+      toast.error([errorWithData.message]);
+    } else {
+      toast.error(["An unexpected error occurred."]);
     }
+  }
 
     if (error) {
         const errorWithData = error as {
@@ -63,6 +79,7 @@ const ShowInvoice: React.FC = () => {
     }
 
 
+    
     const handleDownload = async () => {
         const invoiceElement = invoiceRef.current;
 
@@ -208,37 +225,37 @@ const ShowInvoice: React.FC = () => {
                                         <div className="flex flex-col space-y-1">
                                             <strong>Subtotal:</strong>
 
-                                            <span>Amount paid:</span>
-                                        </div>
-                                        <div className="flex flex-col space-y-1 text-right">
-                                            <strong>{paymentData?.amount}</strong>
-
-                                            <strong>{paymentData?.amount}</strong>
-                                        </div>
-                                    </div>
-                                    <Divider />
-                                    <div className="flex justify-between mt-2">
-                                        <strong>Balance Due:</strong>
-                                        <strong>0</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="w-[630px] mx-auto flex justify-between mt-8">
-                            <div className="text-center">
-                                <Divider />
-                                <strong>Client signature</strong>
-                            </div>
-                            <div className="text-center">
-                                <Divider />
-                                <strong>Business signature</strong>
-                            </div>
-                        </div>
+                      <span>Amount paid:</span>
                     </div>
+                    <div className="flex flex-col space-y-1 text-right">
+                      <strong>{paymentData?.amount}</strong>
+
+                      <strong>{paymentData?.amount}</strong>
+                    </div>
+                  </div>
+                  <Divider />
+                  <div className="flex justify-between mt-2">
+                    <strong>Balance Due:</strong>
+                    <strong>0</strong>
+                  </div>
                 </div>
-            </Container>
-            <style jsx>{`
+              </div>
+            </div>
+
+            <div className="w-[630px] mx-auto flex justify-between mt-8">
+              <div className="text-center">
+                <Divider />
+                <strong>Client signature</strong>
+              </div>
+              <div className="text-center">
+                <Divider />
+                <strong>Business signature</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+      <style jsx>{`
         @page {
           size: A4;
           margin: 20mm;
@@ -262,8 +279,8 @@ const ShowInvoice: React.FC = () => {
           }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default ShowInvoice;

@@ -13,13 +13,16 @@ export const paymentApi = baseApi.injectEndpoints({
       }),
     }),
     getSinglePayment: build.query({
-      query: (id) => ({
+      query: ({ id, token }) => ({
         url: `/payments/${id}`,
         method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }),
     }),
     getMemeberFee: build.query({
-      query: (id) => ({
+      query: () => ({
         url: `/fees/get-fee`,
         method: "GET",
       }),
@@ -51,7 +54,7 @@ export const paymentApi = baseApi.injectEndpoints({
     }),
     getAllUsersForDashboard: build.query({
       query: ({ token, page, limit }) => ({
-        url: `/users//get/all/user`,
+        url: `/users/get/all/user`,
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

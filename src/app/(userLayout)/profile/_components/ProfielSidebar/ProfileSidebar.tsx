@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FaStaylinked, FaUserLock, FaUserTie, FaUsers } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import "./Profile.css";
 import { HiCurrencyBangladeshi } from "react-icons/hi";
+import { getCookie, removeCookie } from "@/helpers/Cookies";
+import { Button } from "@mui/material";
+import { Logout } from "@mui/icons-material";
 const ProfileSidebar = () => {
   const pathname = usePathname();
   const [activeLink, setActiveLink] = useState("");
@@ -16,6 +19,15 @@ const ProfileSidebar = () => {
 
 
   const isActive = (path: string) => activeLink === path;
+
+  const [authenticated, setAuthenticated] = useState<boolean>(false);
+  const { push } = useRouter();
+  const token = getCookie("mui-token");
+  const logOut = () => {
+    setAuthenticated(false);
+    removeCookie("mui-token");
+    return push("/");
+  };
 
   return (
     <div className=" profileSideBar ">
@@ -69,13 +81,14 @@ const ProfileSidebar = () => {
           </Link>
         </div>
         <div>
-          <div
-            className={`flex items-center space-x-2 ${isActive("/profile/change-password") ? "activeProfileLink" : ""
-              }`}
+          <Button onClick={logOut}
+
           >
-            <FaUserLock size={25} />
+            <Logout />
             <span>Log Out </span>
-          </div>
+          </Button>
+
+
         </div>
       </div>
     </div>

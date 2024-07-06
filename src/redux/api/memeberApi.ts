@@ -22,17 +22,16 @@ export const memeberApi = baseApi.injectEndpoints({
       }),
     }),
     getMemberForPayment: build.query({
-      query: ({ token,member_type, id }) => ({
+      query: ({ token }) => ({
         url: `/members/get-member`,
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        params: { member_type, id },
       }),
     }),
     updateMember: build.query({
-      query: ({ token,id }) => ({
+      query: ({ token, id }) => ({
         url: `/members/${id}`,
         method: "PUT",
         headers: {
@@ -47,5 +46,5 @@ export const {
   useGetAllMembersQuery,
   useGetSingleMemberQuery,
   useGetMemberForPaymentQuery,
-  useUpdateMemberQuery
+  useUpdateMemberQuery,
 } = memeberApi;

@@ -38,15 +38,14 @@ const UserServicePage = () => {
   console.log(memberShipData);
   console.log(memberShipData.member_type)
 
-
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
     };
     return new Date(dateString).toLocaleDateString("en-GB", options);
-};
+  };
 
   return (
     <>
@@ -69,9 +68,7 @@ const UserServicePage = () => {
                     </div>
                   </div>
                   <div className="flex items-center justify-end mt-5 capitalize">
-                  <b className="capitalize">
-                       {memberShipData?.member_type === 'business_owner' ? 'Business Owner' : memberShipData?.member_type}
-                    </b>
+                    <b className=''>{memberShipData?.member_type} </b>
                   </div>
                 </div>
               ))}
