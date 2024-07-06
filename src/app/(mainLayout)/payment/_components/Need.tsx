@@ -108,11 +108,11 @@ const PaymentForm = () => {
     let subscriptionAmount = 0;
 
     if (value === "1 year subscription fee") {
-      subscriptionAmount = memberFee?.membership_fee;
-      setWithoutDiscrountAmount(memberFee?.membership_fee);
+      subscriptionAmount = 12000;
+      setWithoutDiscrountAmount(12000);
     } else if (value === "2 year subscription fee") {
-      subscriptionAmount = memberFee?.membership_fee * 2;
-      setWithoutDiscrountAmount(memberFee?.membership_fee * 2);
+      subscriptionAmount = 24000;
+      setWithoutDiscrountAmount(24000);
     }
 
     if (discountStatus === "Percentage") {

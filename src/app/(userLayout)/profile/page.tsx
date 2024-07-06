@@ -225,7 +225,8 @@ const router = useRouter()
         toast.success(response.data.message);
         setSuccessMessage(response.data.message);
         setReload(!reload);
-        router.push('/membership')
+
+       window.location.href = "/membership"
 
       }
     } catch (error: any) {

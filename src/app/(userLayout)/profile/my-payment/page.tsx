@@ -44,18 +44,15 @@ const Payment = () => {
 
         invoiceElement.style.display = 'none';
     };
+    const formatDate = (dateString: string) => {
+        const options: Intl.DateTimeFormatOptions = {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+        };
+        return new Date(dateString).toLocaleDateString("en-GB", options);
+    };
 
-    const invoiceData = [
-        {
-            id: 1,
-            services: 'Product Service',
-            subscription: '2 year',
-            tax: '5',
-            rate: 500,
-            amount: '500',
-            partner: 'As a investor'
-        },
-    ];
 
     return (
         <>
@@ -89,7 +86,7 @@ const Payment = () => {
                                 {paymentData?.map((data: TPaymentData, i: number) => (
                                     <tr key={i} className="text-xs">
                                         <td className='capitalize'>{data?.user?.name}</td>
-                                        <td className='capitalize'>{data.member_type}</td>
+                                        <td className='capitalize'>{data?.member_type === 'business_owner' ? 'Business Owner' : data?.member_type}</td>
                                         <td >{data.subscription_for}</td>
                                         <td >{data.total_amount}</td>
                                         <td >{data.discount_amount}</td>
@@ -103,14 +100,20 @@ const Payment = () => {
                         </table>
                     </div>
                     <div className='flex flex-end justify-end mb-3'>
-                        <Button
-                            component={Link} href='/profile/my-payment/view'
-                            variant='outlined'
-                            sx={{ fontSize: '12px', width: '50px', padding: '5px 3px', marginTop: '10px' }}
+                        {
+                            paymentData?.map((data: TPaymentData) => (
 
-                        >
-                            View
-                        </Button>
+                                <Button
+                                    key={data._id}
+                                    component={Link} href={`/profile/my-payment/view/${data._id}`}
+                                    variant='outlined'
+                                    sx={{ fontSize: '12px', width: '50px', padding: '5px 3px', marginTop: '10px' }}
+
+                                >
+                                    View
+                                </Button>
+                            ))
+                        }
                     </div>
 
                     <div ref={invoiceRef} className="hidden-invoice-content">
@@ -123,48 +126,58 @@ const Payment = () => {
                                             <h3 className='mb-1'>Muissa</h3>
                                             <span><b>Owner Name:</b> Abdu Rakib</span>
                                             <span><b>E-mail:</b> muissa@gmail.com</span>
-                                            <span><b>Phone:</b> 34567890</span>
+                                            <span><b>Phone:</b> 01984673686</span>
                                             <span><b>Website:</b> www.muissa.com</span>
-                                            <span><b>Address:</b> Dahka</span>
+                                            <span><b>Address:</b> House-08, Road-07, Block-C, Banasree,Dhaka-1219</span>
                                         </div>
                                     </div>
                                     {/* <Image alt='logo' src={logo}  /> */}
                                 </div>
                                 <Divider sx={{ background: "#152644", marginTop: '10px' }} />
                                 <div className="clientInfo text-sm">
-                                    <div className="flex justify-between">
-                                        <div className="mt-10 flex flex-col space-y-1 text-sm">
-                                            <h4>Bill To</h4>
-                                            <span><b>Client Name :</b> Ahsan</span>
-                                            <span><b>E-mail:</b> ahsan@gmail.com</span>
-                                            <span><b>Phone :</b> 34567890</span>
-                                            <span><b>Address :</b> Dahka</span>
-                                        </div>
-                                        <div className="mt-10 flex flex-col space-y-1 text-sm">
-                                            <h4>Invoice No : 5</h4>
-                                            <span><b>Invoice date :</b>20-05-22</span>
-                                            <span><b>Due :</b> 67545</span>
-                                        </div>
-                                    </div>
+                                    {
+                                        paymentData?.map((data: TPaymentData) => (
+                                            <div key={data._id} className="flex justify-between">
+                                                <div className="mt-10 flex flex-col space-y-1 text-sm">
+                                                    <h4>Bill To</h4>
+                                                    <span><b>Client Name :</b> {data?.user?.name}</span>
+                                                    <span><b>E-mail:</b>{data?.user?.auth}</span>
+                                                    <span><b>Phone :</b> {data?.user?.name}</span>
+                                                    <span><b>Phone :</b> {data?.user?.phone}</span>
+                                                    <span><b>Address :</b> {data?.user?.street_address}</span>
+                                                </div>
+                                                <div className="mt-10 flex flex-col space-y-1 text-sm">
+                                                    <h4>Invoice No : {data?.invoice_no}</h4>
+                                                    <h4>Invoice date : {formatDate(data?.createdAt)}</h4>
+
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
                                     <div className="mt-10">
                                         <table className="min-w-full bg-white border border-gray-300">
-                                            <thead>
+                                            <thead className='bg-gray-200'>
                                                 <tr>
-                                                    <th className="px-2.5 py-2.5 border">Service Name</th>
-                                                    <th className="px-2.5 py-2.5 border">Year Subscription</th>
-                                                    <th className="px-2.5 py-2.5 border">Rate</th>
-                                                    <th className="px-2.5 py-2.5 border">Tax</th>
-                                                    <th className="px-2.5 py-2.5 border">Amount</th>
+                                                    <th className="px-4 py-2 border"> Subscription</th>
+                                                    <th className="px-4 py-2 border">Membership Fee </th>
+                                                    <th className="px-4 py-2 border">Discount</th>
+                                                    <th className="px-4 py-2 border">Payment</th>
+                                                    <th className="px-4 py-2 border">Transiton ID </th>
+
+                                                    <th >Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody className='text-center'>
-                                                {invoiceData?.map((data, i) => (
+                                                {paymentData?.map((data: TPaymentData, i: number) => (
                                                     <tr key={i} className="text-xs">
-                                                        <td className="px-2.5 py-2.5 border">{data.services}</td>
-                                                        <td className="px-2.5 py-2.5 border">{data.subscription}</td>
-                                                        <td className="px-2.5 py-2.5 border">{data.rate}</td>
-                                                        <td className="px-2.5 py-2.5 border">{data.tax}</td>
-                                                        <td className="px-2.5 py-2.5 border">{data.amount}</td>
+
+
+                                                        <td className="px-4 py-2 border">{data.subscription_for}</td>
+                                                        <td className="px-4 py-2 border">{data.total_amount}</td>
+                                                        <td className="px-4 py-2 border">{data.discount_amount}</td>
+                                                        <td className="px-4 py-2 border">{data.amount}</td>
+                                                        <td className="px-4 py-2 border">{data.transaction_id}</td>
+                                                        <td className="px-4 py-2 border">{data?.payment_status}</td>
                                                     </tr>
                                                 ))}
                                             </tbody>
@@ -173,28 +186,29 @@ const Payment = () => {
                                     <div className="flex justify-end text-sm mt-10 w-full">
                                         <div className="w-[350px]">
                                             <div>
-                                                <div className="flex justify-between">
-                                                    <div className='flex flex-col space-y-1'>
-                                                        <b>Subtotal :</b>
-                                                        <span>Discount :</span>
-                                                        <span>Tax :</span>
-                                                        <b>Total</b>
-                                                        <span>Amount paid</span>
-                                                    </div>
-                                                    <div className='flex flex-col space-y-1'>
-                                                        <b>$765434567</b>
-                                                        <span>$20</span>
-                                                        <span>$20</span>
-                                                        <b>65434</b>
-                                                        <span>50</span>
-                                                    </div>
-                                                </div>
+                                                {
+                                                    paymentData?.map((data: TPaymentData) => (
+                                                        <div key={data._id} className="flex justify-between">
+                                                            <div className='flex flex-col space-y-1'>
+                                                                <b>Subtotal :</b>
+                                                                <span>Discount :</span>
+                                                                <span>Amount paid</span>
+                                                            </div>
+                                                            <div className='flex flex-col space-y-1'>
+                                                                <b>{data.total_amount}</b>
+                                                                <span>{data.discount_amount}</span>
+
+                                                                <span>{data.amount}</span>
+                                                            </div>
+                                                        </div>
+                                                    ))
+                                                }
                                             </div>
                                             <Divider sx={{ background: "#152644", margin: '10px 0px' }} />
-                                            <div className="flex justify-between">
+                                            {/* <div className="flex justify-between">
                                                 <b>Balance Due :</b>
                                                 <b>567765</b>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                 </div>

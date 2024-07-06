@@ -5,8 +5,7 @@ import Container from "@/components/ui/HomePage/Container/Container";
 import { Button, Divider } from "@mui/material";
 import Image from "next/image";
 
-import logo from "../../../../../assets/logo/logo.png";
-import Link from "next/link";
+import logo from "../../../../../../assets/logo/navber logo .svg";
 import { FaArrowLeft } from "react-icons/fa";
 import { useParams } from "next/navigation";
 import { useGetSinglePaymentQuery } from "@/redux/api/paymentApi";
@@ -27,22 +26,24 @@ interface PaymentData {
     };
 }
 
-const ShowInvoice: React.FC = () => {
+const ShowInvoice = () => {
     const { id } = useParams<{ id: string }>();
-    console.log('id here',id)
 
     const token = getCookie("mui-token");
+ 
     const {
         data: paymentData,
         error,
         isLoading,
-    } = useGetSinglePaymentQuery({ id, token });
+    } = useGetSinglePaymentQuery({ id });
 
     const componentRef = useRef<HTMLDivElement>(null);
 
     if (isLoading) {
         return <Loader />;
     }
+    console.log('id here', id)
+
 
     if (error) {
         const errorWithData = error as {
@@ -59,9 +60,14 @@ const ShowInvoice: React.FC = () => {
         }
     }
 
+    console.log('payment data', paymentData)
+
+    // if (!paymentData) {
+    //     return <div className="text-center">Invoice data not found</div>;
+    // }
 
     return (
-        <div className="min-h-screen bg-gray-100 py-10">
+        <div className="min-h-screen  py-10">
             <Container>
                 <div className="flex justify-between mb-6">
 
@@ -108,7 +114,7 @@ const ShowInvoice: React.FC = () => {
                                 <Image
                                     alt="logo"
                                     src={logo}
-                                    className="w-32 h-32 object-cover"
+                                    className="w-44 h-44 object-fill"
                                 />
                             </div>
                             <Divider />

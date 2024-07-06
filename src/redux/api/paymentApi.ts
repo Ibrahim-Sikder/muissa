@@ -18,6 +18,12 @@ export const paymentApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    getMemeberFee: build.query({
+      query: (id) => ({
+        url: `/fees/get-fee`,
+        method: "GET",
+      }),
+    }),
     myPayment: build.query({
       query: ({token}) => ({
         url: `/payments/get/single-payment`,
@@ -62,5 +68,6 @@ export const {
   useGetDiscountForPaymentQuery,
   useGetAllCouponPaymentQuery,
   useGetAllUsersForDashboardQuery,
-  useMyPaymentQuery
+  useMyPaymentQuery,
+  useGetMemeberFeeQuery
 } = paymentApi;

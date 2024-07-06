@@ -3,6 +3,9 @@
 export type TPaymentData = {
     user: {
         name: string;
+        street_address:string,
+        phone:string,
+        auth:string,
     };
     _id:string,
     member_type: string;
@@ -13,4 +16,7 @@ export type TPaymentData = {
     account_number: string;
     payment_status: string;
     total_amount: string,
+    createdAt:string,
+    invoice_no:string,
+  
 }
