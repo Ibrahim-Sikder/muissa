@@ -20,7 +20,7 @@ const ProfileSidebar = () => {
   return (
     <div className=" profileSideBar ">
       <div className="lg:space-y-5 profileItems">
-       
+
 
         <div>
           <Link href="/profile/membership">
@@ -67,6 +67,15 @@ const ProfileSidebar = () => {
               <span>Change Password</span>
             </div>
           </Link>
+        </div>
+        <div>
+          <div
+            className={`flex items-center space-x-2 ${isActive("/profile/change-password") ? "activeProfileLink" : ""
+              }`}
+          >
+            <FaUserLock size={25} />
+            <span>Log Out </span>
+          </div>
         </div>
       </div>
     </div>

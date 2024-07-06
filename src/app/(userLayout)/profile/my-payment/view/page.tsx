@@ -15,6 +15,8 @@ import ReactToPrint from "react-to-print";
 import Loader from "@/components/Loader";
 import { toast } from "sonner";
 import { getCookie } from "@/helpers/Cookies";
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 interface PaymentData {
     _id: string;
@@ -29,7 +31,8 @@ interface PaymentData {
 
 const ShowInvoice: React.FC = () => {
     const { id } = useParams<{ id: string }>();
-    console.log('id here',id)
+    const invoiceRef = useRef<HTMLDivElement>(null);
+
 
     const token = getCookie("mui-token");
     const {
@@ -60,6 +63,23 @@ const ShowInvoice: React.FC = () => {
     }
 
 
+    const handleDownload = async () => {
+        const invoiceElement = invoiceRef.current;
+
+        if (!invoiceElement) {
+            return;
+        }
+
+
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        const canvas = await html2canvas(invoiceElement);
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        pdf.addImage(imgData, 'PNG', 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+        pdf.save('invoice.pdf');
+    };
+
     return (
         <div className="min-h-screen bg-gray-100 py-10">
             <Container>
@@ -74,8 +94,15 @@ const ShowInvoice: React.FC = () => {
                         )}
                         content={() => componentRef.current}
                     />
+                    <Button
+                        variant='outlined'
+                        sx={{ fontSize: '12px', width: '140px', padding: '5px 3px' }}
+                        onClick={handleDownload}
+                    >
+                        Download Invoice
+                    </Button>
                 </div>
-                <div className="">
+                <div ref={invoiceRef}>
                     <div
                         ref={componentRef}
                         id="invoice"
@@ -153,17 +180,20 @@ const ShowInvoice: React.FC = () => {
                                 <table className="min-w-full bg-white border border-gray-300">
                                     <thead className="bg-gray-200">
                                         <tr>
-                                            <th className="px-4 py-2 border">Year Subscription</th>
-                                            <th className="px-4 py-2 border">Rate</th>
-                                            <th className="px-4 py-2 border">Amount</th>
+                                            <th className="px-4 py-2 border"> Subscription</th>
+                                            <th className="px-4 py-2 border">Membership Fee </th>
+                                            <th className="px-4 py-2 border">Discount</th>
+                                            <th className="px-4 py-2 border">Payment</th>
+                                            <th className="px-4 py-2 border">Transiton ID </th>
                                         </tr>
                                     </thead>
                                     <tbody className="text-center">
                                         <tr className="text-sm">
                                             <td className="px-4 py-2 border">
-                                                {" "}
                                                 {paymentData?.subscription_for}
                                             </td>
+                                            <td className="px-4 py-2 border">N/A</td>
+                                            <td className="px-4 py-2 border">N/A</td>
                                             <td className="px-4 py-2 border">N/A</td>
                                             <td className="px-4 py-2 border">
                                                 {paymentData?.amount}
