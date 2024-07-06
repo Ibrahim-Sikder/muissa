@@ -7,7 +7,10 @@ import INTSelect from "@/components/Forms/Select";
 import { ErrorMessage } from "@/components/error-message";
 import { SuccessMessage } from "@/components/success-message";
 import { getCookie } from "@/helpers/Cookies";
-import { useGetDiscountForPaymentQuery, useGetMemeberFeeQuery } from "@/redux/api/paymentApi";
+import {
+  useGetDiscountForPaymentQuery,
+  useGetMemeberFeeQuery,
+} from "@/redux/api/paymentApi";
 import { subscriptions } from "@/types";
 import {
   Button,
@@ -22,7 +25,6 @@ import { ChangeEvent, useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
-
 const PaymentForm = () => {
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string[]>([]);
@@ -31,9 +33,9 @@ const PaymentForm = () => {
   const [selectedValue, setSelectedValue] = useState("bkash");
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [withoutDiscountAmount, setWithoutDiscountAmount] = useState<number>(0);
+  const [mainAmount, setMainAmount] = useState<number>(0);
 
   const [coupon, setCoupon] = useState("");
-
 
   const token = getCookie("mui-token");
   const params = useSearchParams();
@@ -46,9 +48,8 @@ const PaymentForm = () => {
     isLoading: discountLoading,
   }: any = useGetDiscountForPaymentQuery({});
 
-
-  const { data: memberFee } = useGetMemeberFeeQuery({});
-  console.log('member fee', memberFee)
+  const { data: memberFee ,  isLoading: memberFeeLoading,} = useGetMemeberFeeQuery({});
+  console.log("member fee", memberFee);
 
   const handleBankChange = (event: { target: { value: string } }) => {
     setSelectedValue(event.target.value);
@@ -56,17 +57,16 @@ const PaymentForm = () => {
 
   console.log(selectedValue);
   const handleSubmit = async (data: FieldValues) => {
- 
     setIsLoading(true);
 
     setSuccessMessage("");
     setErrorMessage([]);
 
     data.payment_method = selectedValue;
-    data.discount_amount = withoutDiscountAmount - totalAmount
+    data.discount_amount = mainAmount - totalAmount;
     data.amount = Number(totalAmount);
     data.member_type = member_type;
-    data.total_amount = withoutDiscountAmount
+    data.total_amount = withoutDiscountAmount;
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_API_URL}/payments/create-payment`,
@@ -84,9 +84,8 @@ const PaymentForm = () => {
         router.push("/profile");
         setIsLoading(false);
       }
-
     } catch (error: any) {
-
+      console.log(error);
       if (error?.response) {
         const { status, data } = error.response;
         if ([400, 401, 409, 404, 500].includes(status)) {
@@ -100,7 +99,6 @@ const PaymentForm = () => {
     }
   };
 
-
   const handleChang = (value: string) => {
     const discountValue = discountAmount?.discount_amount || 0;
     const discountStatus = discountAmount?.discount_status || "Flat";
@@ -110,9 +108,11 @@ const PaymentForm = () => {
     if (value === "1 year subscription fee") {
       subscriptionAmount = memberFee?.membership_fee;
       setWithoutDiscountAmount(memberFee?.membership_fee);
+      setMainAmount(memberFee?.membership_fee);
     } else if (value === "2 year subscription fee") {
       subscriptionAmount = memberFee?.membership_fee * 2;
       setWithoutDiscountAmount(memberFee?.membership_fee * 2);
+      setMainAmount(memberFee?.membership_fee * 2);
     }
 
     if (discountStatus === "Percentage") {
@@ -198,8 +198,10 @@ const PaymentForm = () => {
           <p className="mb-2">2. Copy Account Pay/অ্যাকাউন্ট পে কপি করুন</p>
           <Grid container spacing={1}>
             <Grid item xs={12} md={12} lg={12}>
-
-              <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold mb-3 border-[#11111159]"> 01984673686 </span>
+              <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold mb-3 border-[#11111159]">
+                {" "}
+                01984673686{" "}
+              </span>
             </Grid>
 
             <p className="">3. Your Transaction / আপনার লেনদেন</p>
@@ -212,8 +214,10 @@ const PaymentForm = () => {
               />
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
-
-              <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold my-2 border-[#11111159]"> {withoutDiscountAmount.toString()}</span>
+              <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold my-2 border-[#11111159]">
+                {" "}
+                {withoutDiscountAmount.toString()}
+              </span>
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
               <div className="flex items-center gap-x-1 ">
@@ -244,7 +248,10 @@ const PaymentForm = () => {
                 fullWidth
                 margin="normal"
               /> */}
-              <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold my-2 border-[#11111159]"> {totalAmount.toString()}</span>
+              <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold my-2 border-[#11111159]">
+                {" "}
+                {totalAmount.toString()}
+              </span>
             </Grid>
           </Grid>
 

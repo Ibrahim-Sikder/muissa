@@ -15,17 +15,13 @@ import moment from "moment";
 const MembershipCard = () => {
   const token = getCookie("mui-token");
 
- 
-
-  const { data: paymentData, isLoading } = useMyPaymentQuery({ token });
-  const { data: memberShipData } = useGetMemberForPaymentQuery({
+  const { data: memberShipData, isLoading } = useGetMemberForPaymentQuery({
     token,
   });
 
   if (isLoading) {
     return <ProfileLoader />;
   }
- 
 
   const formatDate = (dateString: string) => {
     if (!dateString) {
@@ -39,8 +35,6 @@ const MembershipCard = () => {
 
     return date.format("DD-MM-YYYY");
   };
-
- 
 
   return (
     <>
