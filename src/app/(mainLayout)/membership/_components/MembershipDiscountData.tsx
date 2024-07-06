@@ -10,8 +10,10 @@ const MembershipDiscountData = () => {
     const { data: discountData, isLoading } = useGetDiscountForPaymentQuery({});
 
     const originalPrice = memberFee?.membership_fee;
-    const discountedPrice = originalPrice - discountData?.discount_amount;
+    const discountedPrice = originalPrice * discountData?.discount_amount / 100;
+    const memberFeeWithDiscount = convertToBengaliNumerals(originalPrice - discountedPrice)
     const convertedOriginalPrice = convertToBengaliNumerals(originalPrice);
+
     const convertedDiscountedPrice = convertToBengaliNumerals(discountedPrice);
 
     function convertToBengaliNumerals(num: number): string {
@@ -41,7 +43,8 @@ const MembershipDiscountData = () => {
                 ফি মাত্র {
                     discountData ? <del className="mx-2">{discountData === 0 ? 12000 : convertedOriginalPrice}</del> : <span className="mx-2">{memberFee?.membership_fee}</span>
                 }
-                {convertedDiscountedPrice} টাকা।
+                { discountedPrice ?  memberFeeWithDiscount : ''} টাকা।
+
             </Button>
         </>
     );

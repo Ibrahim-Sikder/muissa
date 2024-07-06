@@ -80,9 +80,10 @@ const ShowInvoice = () => {
   };
 
   console.log(paymentData)
+  const memberShipFee = Number(Number(paymentData?.amount) + Number(paymentData?.discount_amount))
 
   return (
-    <div className="min-h-screen  py-10">
+    <div className="min-h-screen ">
       <Container>
         <div className="flex justify-between mb-6">
 
@@ -107,17 +108,17 @@ const ShowInvoice = () => {
           <div
             ref={componentRef}
             id="invoice"
-            className="bg-white p-10 rounded-lg a4-size flex flex-col justify-between "
+            className="bg-white rounded-lg a4-size flex flex-col justify-between "
           >
             <div>
               <h1 className="text-[40px]">Invoice</h1>
               <div className="flex justify-between items-center mb-10">
                 <div>
                   <div className="mt-8 text-sm">
-                    <h3 className="text-xl font-semibold mb-2">Muissa</h3>
-                    <div className="flex justify-between w-[350px] mb-3">
+                  
+                    <div className="flex justify-between w-[420px] mb-3">
                       <div className="flex flex-col space-y-">
-                        <span>Owner Name</span>
+                        <span>Company Name</span>
                         <span>E-mail</span>
                         <span>Phone</span>
                         <span>Website</span>
@@ -182,13 +183,14 @@ const ShowInvoice = () => {
               </div>
               <div className="mt-8">
                 <table className="min-w-full bg-white border border-gray-300">
-                  <thead className="bg-gray-200 text-sm">
+                  <thead className="bg-gray-200 text-sm ">
                     <tr>
                       <th className="px-4 py-2 border"> Subscription</th>
+                      <th className="px-4 py-2 border">Transiton ID </th>
+                      <th className="px-4 py-2 border">Payment Number </th>
                       <th className="px-4 py-2 border">Membership Fee </th>
                       <th className="px-4 py-2 border">Discount</th>
                       <th className="px-4 py-2 border">Payment</th>
-                      <th className="px-4 py-2 border">Transiton ID </th>
                     </tr>
                   </thead>
                   <tbody className="text-center">
@@ -197,14 +199,16 @@ const ShowInvoice = () => {
                         {" "}
                         {paymentData?.subscription_for}
                       </td>
-                      <td className="px-4 py-2 border">{paymentData?.total_amount}</td>
+                      <td className="px-4 py-2 border">
+                        {paymentData?.transaction_id}
+                      </td>
+                      <td className="px-4 py-2 border">{paymentData?.account_number}</td>
+                      <td className="px-4 py-2 border">{memberShipFee}</td>
                       <td className="px-4 py-2 border">{paymentData?.discount_amount}</td>
                       <td className="px-4 py-2 border">
                         {paymentData?.amount}
                       </td>
-                      <td className="px-4 py-2 border">
-                        {paymentData?.transaction_id}
-                      </td>
+                      
                     </tr>
                   </tbody>
                 </table>
@@ -271,7 +275,7 @@ const ShowInvoice = () => {
         .a4-size {
           width: 210mm;
           min-height: 297mm;
-          padding: 20mm;
+          padding: 10mm;
           margin: auto;
           background: white;
           border: 1px solid #d3d3d3;
