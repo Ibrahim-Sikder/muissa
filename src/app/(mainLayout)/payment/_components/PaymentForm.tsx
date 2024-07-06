@@ -30,7 +30,7 @@ const PaymentForm = () => {
 
   const [selectedValue, setSelectedValue] = useState("bkash");
   const [totalAmount, setTotalAmount] = useState<number>(0);
-  const [withoutDiscountAmount, setWithoutDiscrountAmount] = useState<number>(0);
+  const [withoutDiscountAmount, setWithoutDiscountAmount] = useState<number>(0);
 
   const [coupon, setCoupon] = useState("");
 
@@ -56,7 +56,7 @@ const PaymentForm = () => {
 
   console.log(selectedValue);
   const handleSubmit = async (data: FieldValues) => {
-    console.log(data);
+ 
     setIsLoading(true);
 
     setSuccessMessage("");
@@ -109,10 +109,10 @@ const PaymentForm = () => {
 
     if (value === "1 year subscription fee") {
       subscriptionAmount = memberFee?.membership_fee;
-      setWithoutDiscrountAmount(memberFee?.membership_fee);
+      setWithoutDiscountAmount(memberFee?.membership_fee);
     } else if (value === "2 year subscription fee") {
       subscriptionAmount = memberFee?.membership_fee * 2;
-      setWithoutDiscrountAmount(memberFee?.membership_fee * 2);
+      setWithoutDiscountAmount(memberFee?.membership_fee * 2);
     }
 
     if (discountStatus === "Percentage") {
@@ -120,16 +120,24 @@ const PaymentForm = () => {
         setTotalAmount(
           subscriptionAmount - (subscriptionAmount * discountValue) / 100
         );
+        setWithoutDiscountAmount(
+          subscriptionAmount - (subscriptionAmount * discountValue) / 100
+        );
       } else {
         setTotalAmount(
+          subscriptionAmount - (subscriptionAmount * discountValue) / 100
+        );
+        setWithoutDiscountAmount(
           subscriptionAmount - (subscriptionAmount * discountValue) / 100
         );
       }
     } else {
       if (value === "2 year subscription fee") {
         setTotalAmount(subscriptionAmount - discountValue * 2);
+        setWithoutDiscountAmount(subscriptionAmount - discountValue * 2);
       } else {
         setTotalAmount(subscriptionAmount - discountValue);
+        setWithoutDiscountAmount(subscriptionAmount - discountValue);
       }
     }
   };

@@ -27,10 +27,7 @@ import { getCookie } from "@/helpers/Cookies";
 import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import { toast } from "sonner";
-import {
-  useGetMemberForPaymentQuery,
-  useUpdateMemberQuery,
-} from "@/redux/api/memeberApi";
+import { useGetSingleMemberQuery } from "@/redux/api/memeberApi";
 import { SuccessMessage } from "@/components/success-message";
 import { ErrorMessage } from "@/components/error-message";
 import MUIMultiValue from "@/components/Forms/MultiPleValue";
@@ -82,9 +79,12 @@ const ProfileMemebershipForm = () => {
     data: memberShipData,
     isLoading,
     refetch,
-  } = useGetMemberForPaymentQuery({
+  } = useGetSingleMemberQuery({
     token,
+    id,
   });
+
+  console.log(memberShipData);
 
   const defaultValues = {
     profile_pic: memberShipData?.user?.profile_pic || "",
@@ -112,8 +112,6 @@ const ProfileMemebershipForm = () => {
 
     upload_file: memberShipData?.upload_file || "",
   };
-
-  
 
   const handleSubmit = async (data: FieldValues) => {
     if (Array.isArray(data.need_of_service)) {
