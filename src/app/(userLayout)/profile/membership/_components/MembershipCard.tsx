@@ -42,19 +42,18 @@ const MembershipCard = () => {
         {memberShipData?.map((data: any) => (
           <div
             key={data._id}
-            className="profileServiceCard investmentCard p-5 border rounded-lg shadow-md"
+            className="profileServiceCard investmentCard p-3 md:p-5 border rounded-lg shadow-md"
           >
             <div className="flex gap-2">
               <div>
                 <h4>Membership</h4>
-                <div className="flex items-center">
-                  <div className="flex flex-col mr-5 text-sm">
-                    <span>Membership Type</span>
+                <div className="flex items-center justify-between w-[250px] md:w-full ">
+                  <div className="flex flex-col mr-1 md:mr-5 text-[12px] md:text-sm">
+                    <p>Membership Type</p>
                     <span>Validity</span>
-                    {/* <span>Status</span> */}
                   </div>
-                  <div className="flex flex-col text-sm">
-                    <b className="capitalize">
+                  <div className="flex flex-col mr-2 md:mr-5 text-[12px] md:text-sm">
+                    <b className="capitalize ">
                       :{" "}
                       {data?.member_type === "business_owner"
                         ? "Business Owner"
@@ -62,15 +61,15 @@ const MembershipCard = () => {
                     </b>
                     <b className="flex">
                       :
-                      <div className="flex items-center ml-1">
-                        <b className="text-bold">
+                      <div className="flex items-center ml-1 flex-wrap">
+                        <b className="md:text-bold text-[11px] ">
                           {formatDate(data?.createdAt)}
                         </b>{" "}
-                        <span className="mx-2">
+                        <span className="md:mx-2">
                           {" "}
                           <HiMinus />
                         </span>
-                        <b className="text-semibold">
+                        <b className="md:text-semibold md:text-sm text-[11px]">
                           {formatDate(data?.membership_year)}
                         </b>
                       </div>
@@ -80,11 +79,16 @@ const MembershipCard = () => {
                 </div>
               </div>
             </div>
-            <div className="flex items-center justify-end mt-5">
+            <div className="flex items-center md:justify-end mt-5">
               <Button
                 component={Link}
                 href={`/profile/membership/update?id=${data?._id}&member_type=${data?.member_type}`}
-                sx={{ width: "50px", height: "30px", fontSize: "12px" }}
+                sx={{
+                  width: {
+                    md: '50px',
+                    xs: '30px'
+                  }, height: "30px", fontSize: "12px"
+                }}
               >
                 Update
               </Button>

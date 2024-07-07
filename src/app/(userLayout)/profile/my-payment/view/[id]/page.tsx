@@ -5,7 +5,7 @@ import Container from "@/components/ui/HomePage/Container/Container";
 import { Button, Divider } from "@mui/material";
 import Image from "next/image";
 
-import logo from "../../../../../../assets/logo/logo.png";
+import logo from "../../../../../../assets/logo/facebook-profile.png";
 
 import { useParams } from "next/navigation";
 import { useGetSinglePaymentQuery } from "@/redux/api/paymentApi";

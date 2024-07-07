@@ -21,7 +21,7 @@ const Membership = () => {
 
   const { data: memberShipData, isLoading } = useGetMemberForPaymentQuery({
     token,
- 
+
   });
 
 

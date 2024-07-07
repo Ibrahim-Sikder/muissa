@@ -143,15 +143,25 @@
   padding: 20px;
   height: 150px;
 }
+
 .investmentCard {
   height: auto;
 }
 
 
 @media only screen and (max-width: 500px) {
-  .membarshipCard {
+
+  .membarshipCard,
+  .profileServiceCard,
+  .investmentCard {
     width: 100%;
   }
+
+  .profileServiceCard,
+  .investmentCard {
+    padding: 10px 3px;
+  }
+
 
   .responsiveTypography {
     font-size: 0.5rem;

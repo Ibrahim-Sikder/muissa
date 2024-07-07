@@ -91,7 +91,7 @@ const ProfileSidebar = () => {
             </div>
           </Link>
         </div>
-        <div>
+        <div className="hidden lg:block ">
           <Button onClick={logOut}
 
           >
