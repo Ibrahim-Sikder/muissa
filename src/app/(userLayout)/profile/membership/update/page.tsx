@@ -65,6 +65,7 @@ const ProfileMemebershipForm = () => {
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [uploadedFile, setUploadedFile] = useState<string>("");
 
   const [uploadedImage, setUploadedImage] = useState<string>("");
   const [userType, setUserType] = useState("business_owner");
@@ -117,7 +118,7 @@ const ProfileMemebershipForm = () => {
     if (Array.isArray(data.need_of_service)) {
       data.need_of_service = data.need_of_service.map((item) => item.title);
     }
-    data.upload_file = uploadedImage;
+    data.upload_file = uploadedFile;
     data.member_type = userType;
     const investmentAmount = Number(data.investment_amount);
     data.investment_amount = investmentAmount;
@@ -315,12 +316,12 @@ const ProfileMemebershipForm = () => {
                           </Grid>
                           <Box>
                             <DocUploader
-                              sx={{ fontSize: "20px" }}
+                              sx={{ fontSize:'20px' }}
+                              setUploadedFile={setUploadedFile}
+                              uploadedFile={uploadedFile}
                               name="upload_file"
-                              setUploadedImage={setUploadedImage}
-                              uploadedImage={uploadedImage}
-                              upload_file={memberShipData?.upload_file}
                             />
+
 
                             <div className="my-1">
                               {successMessage && (
@@ -420,11 +421,10 @@ const ProfileMemebershipForm = () => {
                             }}
                           >
                             <DocUploader
-                              sx={{ fontSize: "20px" }}
+                              sx={{ fontSize:'20px' }}
+                              setUploadedFile={setUploadedFile}
+                              uploadedFile={uploadedFile}
                               name="upload_file"
-                              setUploadedImage={setUploadedImage}
-                              uploadedImage={uploadedImage}
-                              upload_file={memberShipData?.upload_file}
                             />
 
                             <Grid

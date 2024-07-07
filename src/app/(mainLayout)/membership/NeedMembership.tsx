@@ -77,7 +77,6 @@ const defaultValues = {
 
 
 const MembershipForm = () => {
-  const [uploadedFile, setUploadedFile] = useState<string>("");
   const [uploadedImage, setUploadedImage] = useState<string>("");
   const [userType, setUserType] = useState("business_owner");
   const { data: discountData, isLoading } = useGetDiscountForPaymentQuery({});
@@ -93,7 +92,7 @@ const MembershipForm = () => {
     if (Array.isArray(data.need_of_service)) {
       data.need_of_service = data.need_of_service.map((item) => item.title);
     }
-    data.upload_file = uploadedFile;
+    data.upload_file = uploadedImage;
     data.member_type = userType;
 
     if (userType === "investor") {
@@ -110,8 +109,8 @@ const MembershipForm = () => {
         userType === "business_owner"
           ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-business-owner`
           : userType === "investor"
-            ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-investor`
-            : null;
+          ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-investor`
+          : null;
 
       if (!endpoint) {
         throw new Error("Invalid user type");
@@ -217,8 +216,8 @@ const MembershipForm = () => {
 
           <MUIForm
             onSubmit={handleSubmit}
-          // resolver={zodResolver(validationSchema)}
-          // defaultValues={defaultValues}
+            // resolver={zodResolver(validationSchema)}
+            // defaultValues={defaultValues}
           >
             <Grid container spacing={1}>
               <Box
@@ -323,13 +322,12 @@ const MembershipForm = () => {
                         </Grid>
                       </Grid>
                       <Box>
-                        <DocUploader
-                          sx={{ fontSize:'20px' }}
-                          setUploadedFile={setUploadedFile}
-                          uploadedFile={uploadedFile}
+                        {/* <DocUploader
+                          sx={{ fontSize: "20px" }}
                           name="upload_file"
-
-                        />
+                          setUploadedImage={setUploadedImage}
+                          uploadedImage={uploadedImage}
+                        /> */}
 
                         <div className="my-1">
                           {successMessage && (
@@ -429,12 +427,12 @@ const MembershipForm = () => {
                           marginTop: "50px",
                         }}
                       >
-                        <DocUploader
-                     sx={{ fontSize:'20px' }}
-                     setUploadedFile={setUploadedFile}
-                     uploadedFile={uploadedFile}
-                     name="upload_file"
-                        />
+                        {/* <DocUploader
+                          sx={{ fontSize: "20px" }}
+                          name="upload_file"
+                          // setUploadedImage={setUploadedImage}
+                          uploadedImage={uploadedImage}
+                        /> */}
                         <div className="my-1">
                           {successMessage && (
                             <SuccessMessage message={successMessage} />

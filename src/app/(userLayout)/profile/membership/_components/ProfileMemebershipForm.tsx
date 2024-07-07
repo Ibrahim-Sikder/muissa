@@ -64,6 +64,7 @@ const validationSchema = z.object({
 
 
 const ProfileMemebershipForm = () => {
+  const [uploadedFile, setUploadedFile] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -112,7 +113,7 @@ const ProfileMemebershipForm = () => {
     if (Array.isArray(data.need_of_service)) {
       data.need_of_service = data.need_of_service.map(item => item.title);
     }
-    data.upload_file = uploadedImage;
+    data.upload_file = uploadedFile;
     data.member_type = userType;
 
     if (userType === "investor") {
@@ -336,10 +337,10 @@ const ProfileMemebershipForm = () => {
                         </Grid>
                         <Box>
                           <DocUploader
-                            sx={{ fontSize: "20px" }}
+                            sx={{ fontSize:'20px' }}
+                            setUploadedFile={setUploadedFile}
+                            uploadedFile={uploadedFile}
                             name="upload_file"
-                            setUploadedImage={setUploadedImage}
-                            uploadedImage={uploadedImage}
                           />
 
                           <div className="my-1">
@@ -438,10 +439,10 @@ const ProfileMemebershipForm = () => {
                           }}
                         >
                           <DocUploader
-                            sx={{ fontSize: "20px" }}
-                            name="upload_file"
-                            setUploadedImage={setUploadedImage}
-                            uploadedImage={uploadedImage}
+                           sx={{ fontSize:'20px' }}
+                           setUploadedFile={setUploadedFile}
+                           uploadedFile={uploadedFile}
+                           name="upload_file"
                           />
 
                           <Grid
@@ -451,6 +452,7 @@ const ProfileMemebershipForm = () => {
                             md={6}
                             lg={12}
                             sx={{ marginTop: "10px" }}
+                            
                           >
                             <Box
                               sx={{

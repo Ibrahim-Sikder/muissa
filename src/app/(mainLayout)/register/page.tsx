@@ -240,7 +240,7 @@ const Register = () => {
                 }}
                 component="small"
               >
-                Already have an account ? <Link href="/login">Login</Link>
+                Already have an account ? <Link href="/login"><b className="ml-1 font-bold text-[#1591A3] text-[13px]">Login</b></Link>
               </Typography>
             </Box>
           </MUIForm>

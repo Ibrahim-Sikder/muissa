@@ -174,6 +174,7 @@ const ShowInvoice = () => {
                     </div>
                     <div className="flex flex-col ">
                       <strong className="text-xl font-semibold ">:{paymentData?.invoice_no}</strong>
+        
                       <strong>:{dayjs(paymentData?.createdAt).format("DD-MM-YY")}</strong>
                     </div>
                   </div>
@@ -256,11 +257,11 @@ const ShowInvoice = () => {
             <div className="w-[630px] mx-auto flex justify-between mt-8">
               <div className="text-center">
                 <Divider />
-                <strong>Client signature</strong>
+                <strong>Client Signature</strong>
               </div>
               <div className="text-center">
                 <Divider />
-                <strong>Business signature</strong>
+                <strong>Company Signature</strong>
               </div>
             </div>
           </div>

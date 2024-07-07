@@ -35,6 +35,17 @@ const ProfileSidebar = () => {
 
 
         <div>
+          <Link href="/profile">
+            <div
+              className={`flex items-center space-x-2 ${isActive("/profile") ? "activeProfileLink" : ""
+                }`}
+            >
+              <FaUserTie size={25} />
+              <span>My Account</span>
+            </div>
+          </Link>
+        </div>
+        <div>
           <Link href="/profile/membership">
             <div
               className={`flex items-center space-x-2 ${isActive("/profile/membership") ? "activeProfileLink" : ""

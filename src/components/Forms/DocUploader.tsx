@@ -3,29 +3,26 @@
 import uploadFile from "@/helpers/uploadFile";
 import BackupIcon from "@mui/icons-material/Backup";
 import { Box, Button, SxProps, Typography } from "@mui/material";
-import Image from "next/image";
 import React, { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 type INTFileUploaderProps = {
   name: string;
   sx: SxProps;
-  uploadedImage: string;
-  setUploadedImage: (image: string) => void;
+  uploadedFile: string;
+  setUploadedFile: (file: string) => void;
   upload_file?: string;
 };
 
 const DocUploader = ({
   name,
   sx,
-  setUploadedImage,
-  uploadedImage,
+  setUploadedFile,
+  uploadedFile,
   upload_file,
 }: INTFileUploaderProps) => {
   const { control, setValue, watch } = useFormContext();
-
   const [loading, setLoading] = useState<boolean>(false);
-
   const selectedFile = watch(name);
 
   const handleFileChange = async (
@@ -35,16 +32,10 @@ const DocUploader = ({
     const file = event.target.files?.[0];
     if (file) {
       setValue(name, file);
-      // setUploadedImage(URL.createObjectURL(file));
-      const uploadPhoto = await uploadFile(file);
-      setUploadedImage(uploadPhoto?.secure_url);
+      const uploadResponse = await uploadFile(file);
+      setUploadedFile(uploadResponse?.secure_url);
       setLoading(false);
     }
-  };
-
-  const handleUpload = async () => {
-    if (!selectedFile) return;
-    setTimeout(() => {}, 1000);
   };
 
   return (
@@ -75,11 +66,12 @@ const DocUploader = ({
               id="files"
               className="hidden"
               onChange={handleFileChange}
+              accept="application/pdf"
             />
             <label
               htmlFor="files"
               className="cursor-pointer py-2 rounded-md shadow-[rgba(0, 0, 0, 0.1) 0px 1px 2px 0px]"
-              style={{ display: uploadedImage ? "none" : "block" }}
+              style={{ display: uploadedFile ? "none" : "block" }}
             >
               {!upload_file && !loading && (
                 <>
@@ -111,21 +103,16 @@ const DocUploader = ({
               </Typography>
             ) : (
               <>
-                {(uploadedImage || upload_file) && (
+                {uploadedFile && (
                   <Box mt={2}>
-                    <Image
-                      src={uploadedImage || upload_file || ""}
-                      alt="Uploaded"
-                      layout="responsive"
-                      width={300}
-                      height={200}
-                      style={{ borderRadius: "8px" }}
-                    />
+                    <Typography component="h2">
+                      Document Uploaded Successfully
+                    </Typography>
                   </Box>
                 )}
               </>
             )}
-            {(uploadedImage || upload_file) && (
+            {uploadedFile && (
               <Box mt={2}>
                 <label
                   htmlFor="files"
@@ -138,7 +125,7 @@ const DocUploader = ({
                     cursor: "pointer",
                   }}
                 >
-                  Upload
+                  Upload Another
                 </label>
               </Box>
             )}
