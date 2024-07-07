@@ -15,13 +15,17 @@ import moment from "moment";
 const MembershipCard = () => {
   const token = getCookie("mui-token");
 
-  const { data: memberShipData, isLoading } = useGetMemberForPaymentQuery({
+  const { data: memberShipData, isLoading,error } = useGetMemberForPaymentQuery({
     token,
   });
 
   if (isLoading) {
     return <ProfileLoader />;
   }
+  if (error) {
+    return <p>You are no membership!</p>;
+  }
+  console.log(memberShipData)
 
   const formatDate = (dateString: string) => {
     if (!dateString) {

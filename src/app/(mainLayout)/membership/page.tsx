@@ -18,6 +18,7 @@ import { getCookie } from "@/helpers/Cookies";
 import { useSearchParams } from "next/navigation";
 import { useGetMemberForPaymentQuery } from "@/redux/api/memeberApi";
 import MembershipCard from "@/app/(userLayout)/profile/membership/_components/MembershipCard";
+import Loader from "@/components/Loader";
 
 // export const metadata: Metadata = {
 //   title: "Muissa Consulting | Membership ",
@@ -38,6 +39,10 @@ const Membership = () => {
     token,
 
   });
+  if (isLoading) {
+    return <Loader />
+  }
+  console.log(memberShipData)
 
 
   const serviceData = [
@@ -97,7 +102,7 @@ const Membership = () => {
   return (
     <>
       {
-        memberShipData ? (
+        memberShipData?.length > 0 ? (
           <Container>
 
             <div className=" mt-14 items-center mx-auto w-[500px]">

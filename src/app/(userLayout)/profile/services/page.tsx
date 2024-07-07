@@ -27,6 +27,7 @@ type TService = {
   updatedAt: string;
   investment_goal: string,
   upload_file: string;
+  investment_type: string,
   user: {
     _id: string;
     userId: string;
@@ -98,26 +99,37 @@ const UserServicePage: React.FC = () => {
                 </div>
               ) : (
                 <div>
-                  <div className='grid grid-cols-1 lg:grid-cols-2 w-full md:w-[750px] mt-10 gap-5'>
+                  <div className='   mt-10 '>
                     <div className='profileServiceCard investmentCard p-5 border rounded-lg shadow-md'>
                       <div className="flex gap-2">
                         <div className="imgWrap">
                           <Image className='w-10 object-cover h-10' src={icon} alt='services' />
                         </div>
                         <div>
-                          <h4>{data?.business_name}</h4>
+
                           <h4>Investment Support</h4>
-                          <div className="flex items-center">
-                            <div className='flex flex-col mr-5 text-sm'>
-                              <span>Investment Amount</span>
-                              <span>Investment Goal</span>
-                              <span>Investment Period</span>
+                          <div className="   ">
+                            <div className="flex items-center  ">
+                              <span className='w-[150px] md:w-[230px] block'>Investment Type </span>
+                              <span>: {data?.investment_type}</span>
                             </div>
-                            <div className='flex flex-col text-sm'>
-                              <b>: {data?.investment_amount}</b>
-                              <b className='capitalize'>: {data?.investment_goal}</b>
-                              <b>: {data?.investment_period}Y</b>
+                            <div className="flex items-center  ">
+                              <span className='w-[150px] md:w-[230px] block'>Investment Amount</span>
+                              <span>: {data?.investment_amount}</span>
                             </div>
+                            <div className="flex items-center  ">
+                              <span className='w-[150px] md:w-[230px] block' >Investment Period</span>
+                              <span>: {data?.investment_period}Y</span>
+                            </div>
+                            {/* <div className="flex  ">
+                              <span className='w-[230px] block'>Investment Goal</span>
+                              <span className='text-'>: {data?.investment_goal}</span>
+                            </div>
+                            <div className="flex ">
+                              <span className='w-[230px] block'>Request Message </span>
+                              <span>: {data?.investment_goal}</span>
+                            </div> */}
+
                           </div>
                         </div>
                       </div>
