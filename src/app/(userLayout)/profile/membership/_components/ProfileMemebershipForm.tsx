@@ -62,7 +62,6 @@ const validationSchema = z.object({
   investorDescription: z.string().optional(),
 });
 
-
 const ProfileMemebershipForm = () => {
   const [uploadedFile, setUploadedFile] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
@@ -73,19 +72,14 @@ const ProfileMemebershipForm = () => {
   const [userType, setUserType] = useState("business_owner");
   const token = getCookie("mui-token");
   const router = useRouter();
-  const params = useSearchParams();
 
-  const member_type = params.get("member_type");
-  const id = params.get("id");
-
-  const { data: memberShipData, isLoading } = useGetMemberForPaymentQuery({
+  const {
+    data: memberShipData,
+    isLoading,
+    refetch,
+  } = useGetMemberForPaymentQuery({
     token,
-    member_type,
-    id,
   });
-
-
-
 
   const defaultValues = {
     profile_pic: memberShipData?.user?.profile_pic || "",
@@ -93,10 +87,14 @@ const ProfileMemebershipForm = () => {
     email: memberShipData?.user?.auth || "",
     additional_info: memberShipData?.additional_info || "",
     need_of_service: Array.isArray(memberShipData?.need_of_service)
-      ? memberShipData.need_of_service.map((service: any) => ({ title: service.title || service }))
-      : typeof memberShipData?.need_of_service === 'string'
-        ? memberShipData.need_of_service.split(',').map((service: any) => ({ title: service.trim() }))
-        : [],
+      ? memberShipData.need_of_service.map((service: any) => ({
+          title: service.title || service,
+        }))
+      : typeof memberShipData?.need_of_service === "string"
+      ? memberShipData.need_of_service
+          .split(",")
+          .map((service: any) => ({ title: service.trim() }))
+      : [],
     business_description: memberShipData?.business_description || "",
     website: memberShipData?.website || "",
     business_address: memberShipData?.business_address || "",
@@ -106,12 +104,11 @@ const ProfileMemebershipForm = () => {
     investment_amount: memberShipData?.investment_amount || "",
     investment_period: memberShipData?.investment_period || "",
     investment_goal: memberShipData?.investment_goal || "",
-
   };
 
   const handleSubmit = async (data: FieldValues) => {
     if (Array.isArray(data.need_of_service)) {
-      data.need_of_service = data.need_of_service.map(item => item.title);
+      data.need_of_service = data.need_of_service.map((item) => item.title);
     }
     data.upload_file = uploadedFile;
     data.member_type = userType;
@@ -130,8 +127,8 @@ const ProfileMemebershipForm = () => {
         userType === "business_owner"
           ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-business-owner`
           : userType === "investor"
-            ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-investor`
-            : null;
+          ? `${process.env.NEXT_PUBLIC_BASE_API_URL}/members/create-investor`
+          : null;
 
       if (!endpoint) {
         throw new Error("Invalid user type");
@@ -151,8 +148,7 @@ const ProfileMemebershipForm = () => {
       ) {
         toast.success(response.data.message);
         setSuccessMessage(response.data.message);
-
-
+        refetch();
         router.push(
           `/${response.data.data.redirectUrl}?member_type=${userType}&id=${response.data.data.userId}`
         );
@@ -160,7 +156,6 @@ const ProfileMemebershipForm = () => {
       if (response.status === 200 && response.data.data.success === false) {
         toast.error(response.data.data.message);
         setErrorMessage([response.data.data.message]);
-
 
         router.push(
           `/${response.data.data.redirectUrl}?member_type=${userType}&id=${response.data.data.userId}`
@@ -211,7 +206,6 @@ const ProfileMemebershipForm = () => {
         <ProfileLoader />
       ) : (
         <Container>
-
           <div className="grid grid-cols-1  mt-14 xl:w-[800px] mx-auto   ">
             <div className="mb-5 ">
               <h3 className="text-2xl font-semibold ">সদস্যতা নিবন্ধন</h3>
@@ -227,7 +221,6 @@ const ProfileMemebershipForm = () => {
               defaultValues={defaultValues}
             >
               <Grid container spacing={1}>
-
                 <Box
                   sx={{
                     width: "100%",
@@ -318,9 +311,11 @@ const ProfileMemebershipForm = () => {
                             />
                           </Grid>
                           <Grid item xs={12} sm={6} md={6} lg={12}>
-                            <MUIMultiValue name="need_of_service"
+                            <MUIMultiValue
+                              name="need_of_service"
                               label="পরিষেবার প্রয়োজনীয়তা"
-                              options={support_items} />
+                              options={support_items}
+                            />
                           </Grid>
 
                           <Grid item xs={12} sm={6} md={12} lg={12}>
@@ -337,7 +332,7 @@ const ProfileMemebershipForm = () => {
                         </Grid>
                         <Box>
                           <DocUploader
-                            sx={{ fontSize:'20px' }}
+                            sx={{ fontSize: "20px" }}
                             setUploadedFile={setUploadedFile}
                             uploadedFile={uploadedFile}
                             name="upload_file"
@@ -369,6 +364,7 @@ const ProfileMemebershipForm = () => {
                               }}
                             >
                               <Button
+                                disabled={loading}
                                 type="submit"
                                 sx={{ display: "block", margin: "0 auto" }}
                               >
@@ -385,9 +381,7 @@ const ProfileMemebershipForm = () => {
                         spacing={{ xs: 1, md: 3, lg: 3 }}
                       >
                         <Grid container spacing={1}>
-                          <Grid item xs={12} sm={6} md={6} lg={12}>
-
-                          </Grid>
+                          <Grid item xs={12} sm={6} md={6} lg={12}></Grid>
                           <Grid item xs={12} sm={6} md={6} lg={12}>
                             <MUIInput
                               name="investment_type"
@@ -439,10 +433,10 @@ const ProfileMemebershipForm = () => {
                           }}
                         >
                           <DocUploader
-                           sx={{ fontSize:'20px' }}
-                           setUploadedFile={setUploadedFile}
-                           uploadedFile={uploadedFile}
-                           name="upload_file"
+                            sx={{ fontSize: "20px" }}
+                            setUploadedFile={setUploadedFile}
+                            uploadedFile={uploadedFile}
+                            name="upload_file"
                           />
 
                           <Grid
@@ -452,7 +446,6 @@ const ProfileMemebershipForm = () => {
                             md={6}
                             lg={12}
                             sx={{ marginTop: "10px" }}
-                            
                           >
                             <Box
                               sx={{
@@ -464,6 +457,7 @@ const ProfileMemebershipForm = () => {
                             >
                               <Button
                                 type="submit"
+                                disabled={loading}
                                 sx={{ display: "block", margin: "0 auto" }}
                               >
                                 সাবমিট করুন

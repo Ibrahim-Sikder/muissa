@@ -56,7 +56,7 @@ const PaymentForm = () => {
     setSelectedValue(event.target.value);
   };
 
-  console.log(selectedValue);
+ 
   const handleSubmit = async (data: FieldValues) => {
     setIsLoading(true);
 
@@ -78,7 +78,7 @@ const PaymentForm = () => {
           },
         }
       );
-      console.log(response);
+  
       if (response?.status === 200) {
         toast.success(response?.data?.message);
         setSuccessMessage(response?.data?.message);
@@ -86,7 +86,7 @@ const PaymentForm = () => {
         setIsLoading(false);
       }
     } catch (error: any) {
-      console.log(error);
+ 
       if (error?.response) {
         const { status, data } = error.response;
         if ([400, 401, 409, 404, 500].includes(status)) {
