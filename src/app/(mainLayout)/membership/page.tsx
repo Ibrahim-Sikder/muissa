@@ -13,13 +13,10 @@ import Image from "next/image";
 import consult from "../../../assets/news/sub.png";
 import MembershipForm from "./_components/MembershipForm";
 import MembershipDiscountData from "./_components/MembershipDiscountData";
-import { usePathname } from "next/navigation";
 import { getCookie } from "@/helpers/Cookies";
-import { useSearchParams } from "next/navigation";
 import { useGetMemberForPaymentQuery } from "@/redux/api/memeberApi";
 import MembershipCard from "@/app/(userLayout)/profile/membership/_components/MembershipCard";
 import Loader from "@/components/Loader";
-import { useEffect } from "react";
 
 // export const metadata: Metadata = {
 //   title: "Muissa Consulting | Membership ",
@@ -29,22 +26,10 @@ import { useEffect } from "react";
 
 const Membership = () => {
   const token = getCookie("mui-token");
-  const params = useSearchParams();
 
-  const pathName = usePathname();
-
-  const {
-    data: memberShipData,
-    isLoading,
-    refetch,
-  } = useGetMemberForPaymentQuery({
+  const { data: memberShipData, isLoading } = useGetMemberForPaymentQuery({
     token,
   });
-
-  useEffect(() => {
-    refetch();
-  }, [refetch, pathName]);
-
   if (isLoading) {
     return <Loader />;
   }
@@ -101,27 +86,24 @@ const Membership = () => {
     },
   ];
 
+console.log(memberShipData.length)
+
   return (
-    <>
- 
- 
-      {
-        memberShipData?.length > 0 ? (
-          <Container>
-
-            <div className=" mt-14 items-center mx-auto md:w-[500px]">
-              <h3 className="text-[#002140] font-bold">Already you have membership!</h3>
-              <MembershipCard />
-            </div>
-          </Container>
-
-        ) : (
-          <div>
-            <div className="serviceDetailsWrap aboutWraps">
-              <div className="aboutContent memberShipContent">
-                <h1>Membership</h1>
-              </div>
- 
+    <section>
+      {memberShipData?.length > 0 ? (
+        <Container>
+          <div className=" mt-14 items-center mx-auto md:w-[500px]">
+            <h3 className="text-[#002140] font-bold">
+              Already you have membership!
+            </h3>
+            <MembershipCard />
+          </div>
+        </Container>
+      ) : (
+        <div>
+          <div className="serviceDetailsWrap aboutWraps">
+            <div className="aboutContent memberShipContent">
+              <h1>Membership</h1>
             </div>
           </div>
           <Container>
@@ -181,7 +163,7 @@ const Membership = () => {
           </Container>
         </div>
       )}
-    </>
+    </section>
   );
 };
 
