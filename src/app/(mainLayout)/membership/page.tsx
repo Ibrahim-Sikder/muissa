@@ -86,8 +86,10 @@ const Membership = () => {
     },
   ];
 
+console.log(memberShipData.length)
+
   return (
-    <>
+    <section>
       {memberShipData?.length > 0 ? (
         <Container>
           <div className=" mt-14 items-center mx-auto md:w-[500px]">
@@ -161,7 +163,7 @@ const Membership = () => {
           </Container>
         </div>
       )}
-    </>
+    </section>
   );
 };
 
