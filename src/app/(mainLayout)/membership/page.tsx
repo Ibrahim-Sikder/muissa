@@ -103,20 +103,25 @@ const Membership = () => {
 
   return (
     <>
-      {memberShipData?.length > 0 ? (
-        <Container>
-          <div className=" mt-14 items-center mx-auto w-[500px]">
-            <h3 className="text-[#002140] font-bold">
-              Already you have membership!
-            </h3>
-            <MembershipCard />
-          </div>
-        </Container>
-      ) : (
-        <div>
-          <div className="serviceDetailsWrap aboutWraps">
-            <div className="aboutContent memberShipContent">
-              <h1>Membership</h1>
+ 
+ 
+      {
+        memberShipData?.length > 0 ? (
+          <Container>
+
+            <div className=" mt-14 items-center mx-auto md:w-[500px]">
+              <h3 className="text-[#002140] font-bold">Already you have membership!</h3>
+              <MembershipCard />
+            </div>
+          </Container>
+
+        ) : (
+          <div>
+            <div className="serviceDetailsWrap aboutWraps">
+              <div className="aboutContent memberShipContent">
+                <h1>Membership</h1>
+              </div>
+ 
             </div>
           </div>
           <Container>

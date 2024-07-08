@@ -30,11 +30,11 @@ const HeroSection = () => {
   return (
     <div className="heroSectionWrap">
       <Swiper
-        // autoplay={{
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // }}
-        // speed={1500}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        speed={1500}
         loop={true}
         spaceBetween={30}
         centeredSlides={true}
@@ -45,7 +45,7 @@ const HeroSection = () => {
         modules={[Autoplay]}
         className="mySwiper"
       >
-        {/* <SwiperSlide>
+        <SwiperSlide>
           <div className="heroContentWraps ">
             <div className="bannerImgWrap">
               <Image src={hero} alt="banner" />
@@ -65,8 +65,8 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
-        </SwiperSlide> */}
-        {/* <SwiperSlide>
+        </SwiperSlide>
+        <SwiperSlide>
           <div className="heroContentWraps ">
             <div className="bannerImgWrap">
               <Image src={hero4} alt="banner" />
@@ -86,7 +86,7 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
-        </SwiperSlide> */}
+        </SwiperSlide>
         <SwiperSlide>
           <div className="heroContentWraps ">
             <div className="bannerImgWrap">
