@@ -2,7 +2,7 @@
 
 import uploadFile from "@/helpers/uploadFile";
 import BackupIcon from "@mui/icons-material/Backup";
-import { Box, Button, SxProps, Typography } from "@mui/material";
+import { Box, SxProps, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
@@ -21,9 +21,8 @@ const DocUploader = ({
   uploadedFile,
   upload_file,
 }: INTFileUploaderProps) => {
-  const { control, setValue, watch } = useFormContext();
+  const { control, setValue } = useFormContext();
   const [loading, setLoading] = useState<boolean>(false);
-  const selectedFile = watch(name);
 
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -103,16 +102,22 @@ const DocUploader = ({
               </Typography>
             ) : (
               <>
-                {uploadedFile && (
+                {(uploadedFile || upload_file) && (
                   <Box mt={2}>
-                    <Typography component="h2">
-                      Document Uploaded Successfully
-                    </Typography>
+                    <Box mt={2}>
+                      <iframe
+                        src={uploadedFile || upload_file}
+                        width="100%"
+                        height="100%"
+                        title="Uploaded Document"
+                        className=" overflow-hidden"
+                      />
+                    </Box>
                   </Box>
                 )}
               </>
             )}
-            {uploadedFile && (
+            {(uploadedFile || upload_file) && (
               <Box mt={2}>
                 <label
                   htmlFor="files"

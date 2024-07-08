@@ -66,15 +66,13 @@ const ProfileMemebershipForm = () => {
   const [errorMessage, setErrorMessage] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [uploadedFile, setUploadedFile] = useState<string>("");
-
-  const [uploadedImage, setUploadedImage] = useState<string>("");
-  const [userType, setUserType] = useState("business_owner");
-  const token = getCookie("mui-token");
-  const router = useRouter();
   const params = useSearchParams();
-
   const member_type = params.get("member_type");
   const id = params.get("id");
+
+  const [userType, setUserType] = useState(member_type || "");
+  const token = getCookie("mui-token");
+  const router = useRouter();
 
   const {
     data: memberShipData,
@@ -84,8 +82,6 @@ const ProfileMemebershipForm = () => {
     token,
     id,
   });
-
-  console.log(memberShipData);
 
   const defaultValues = {
     profile_pic: memberShipData?.user?.profile_pic || "",
@@ -162,9 +158,7 @@ const ProfileMemebershipForm = () => {
     }
   };
 
-  const [value, setValue] = useState("1");
-
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleChange = (_: React.SyntheticEvent, newValue: string) => {
     setUserType(newValue);
   };
   const buttonStyle = {
@@ -316,12 +310,12 @@ const ProfileMemebershipForm = () => {
                           </Grid>
                           <Box>
                             <DocUploader
-                              sx={{ fontSize:'20px' }}
+                              sx={{ fontSize: "20px" }}
                               setUploadedFile={setUploadedFile}
                               uploadedFile={uploadedFile}
                               name="upload_file"
+                              upload_file={memberShipData?.upload_file}
                             />
-
 
                             <div className="my-1">
                               {successMessage && (
@@ -421,10 +415,11 @@ const ProfileMemebershipForm = () => {
                             }}
                           >
                             <DocUploader
-                              sx={{ fontSize:'20px' }}
+                              sx={{ fontSize: "20px" }}
                               setUploadedFile={setUploadedFile}
                               uploadedFile={uploadedFile}
                               name="upload_file"
+                              upload_file={memberShipData?.upload_file}
                             />
 
                             <Grid
