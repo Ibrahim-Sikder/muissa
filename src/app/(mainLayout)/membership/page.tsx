@@ -105,7 +105,7 @@ const Membership = () => {
         memberShipData?.length > 0 ? (
           <Container>
 
-            <div className=" mt-14 items-center mx-auto w-[500px]">
+            <div className=" mt-14 items-center mx-auto md:w-[500px]">
               <h3 className="text-[#002140] font-bold">Already you have membership!</h3>
               <MembershipCard />
             </div>

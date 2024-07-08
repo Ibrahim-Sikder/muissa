@@ -200,7 +200,7 @@ const PaymentForm = () => {
           <p className="mb-2">2. Copy Account Pay/অ্যাকাউন্ট পে কপি করুন</p>
           <Grid container spacing={1}>
             <Grid item xs={12} md={12} lg={12}>
-              <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold mb-3 border-[#11111159]">
+              <span className="md:w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold mb-3 border-[#11111159]">
                 {" "}
                 01984673686{" "}
               </span>
@@ -217,7 +217,7 @@ const PaymentForm = () => {
             </Grid>
             <Grid item xs={12} md={12} lg={12}>
            
-              <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold my-2 border-[#11111159]">
+              <span className="md:w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold my-2 border-[#11111159]">
               <del>{discountAmount ? mainAmount : ''}</del> {
                 discountAmount ? <span className="mx-2 block">/ </span> : null
               }
@@ -255,7 +255,7 @@ const PaymentForm = () => {
                 fullWidth
                 margin="normal"
               /> */}
-              <span className="w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold my-2 border-[#11111159]">
+              <span className="md:w-[320px]  h-10 border rounded-md flex items-center p-3 font-bold my-2 border-[#11111159]">
                 {" "}
                 {totalAmount.toString()}
               </span>
