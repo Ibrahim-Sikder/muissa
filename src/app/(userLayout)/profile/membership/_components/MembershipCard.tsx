@@ -7,13 +7,17 @@ import ProfileLoader from "@/components/ProfileLoader";
 import { Button } from "@mui/material";
 import { HiMinus } from "react-icons/hi";
 import Link from "next/link";
-
 import moment from "moment";
+import { toast } from "sonner";
 
 const MembershipCard = () => {
   const token = getCookie("mui-token");
 
-  const { data: memberShipData, isLoading,error } = useGetMemberForPaymentQuery({
+  const {
+    data: memberShipData,
+    isLoading,
+    error,
+  } = useGetMemberForPaymentQuery({
     token,
   });
 
@@ -21,9 +25,19 @@ const MembershipCard = () => {
     return <ProfileLoader />;
   }
   if (error) {
-    return <p>You are no membership!</p>;
+    const errorWithData = error as {
+      message?: string;
+      data?: { message?: string };
+    };
+
+    if (errorWithData.data?.message) {
+      toast.error([errorWithData.data.message]);
+    } else if (errorWithData.message) {
+      toast.error([errorWithData.message]);
+    } else {
+      toast.error(["An unexpected error occurred."]);
+    }
   }
-  console.log(memberShipData)
 
   const formatDate = (dateString: string) => {
     if (!dateString) {
@@ -87,9 +101,11 @@ const MembershipCard = () => {
                 href={`/profile/membership/update?id=${data?._id}&member_type=${data?.member_type}`}
                 sx={{
                   width: {
-                    md: '50px',
-                    xs: '30px'
-                  }, height: "30px", fontSize: "12px"
+                    md: "50px",
+                    xs: "30px",
+                  },
+                  height: "30px",
+                  fontSize: "12px",
                 }}
               >
                 Update
