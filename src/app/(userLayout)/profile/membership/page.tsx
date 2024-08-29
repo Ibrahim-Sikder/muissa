@@ -11,6 +11,7 @@ import { getCookie } from "@/helpers/Cookies";
 import { useSearchParams } from "next/navigation";
 import { useGetMemberForPaymentQuery } from "@/redux/api/memeberApi";
 import { Box } from "@mui/material";
+import Loader from "@/components/Loader";
 
 const Membership = () => {
   const token = getCookie("mui-token");
@@ -23,12 +24,18 @@ const Membership = () => {
     token,
 
   });
+  if (isLoading) {
+    return <Loader />
+  }
+
+
+  console.log(memberShipData.length)
 
 
   return (
     <Container>
       {
-        memberShipData ? (
+        Array.isArray(memberShipData) && memberShipData.length > 0 ? (
           <MembershipCard />
         ) : (
           <Box>

@@ -1,15 +1,13 @@
 "use client";
 
 import React from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import { getCookie } from "@/helpers/Cookies";
 import { useGetMemberForPaymentQuery } from "@/redux/api/memeberApi";
 import ProfileLoader from "@/components/ProfileLoader";
 import { Button } from "@mui/material";
 import { HiMinus } from "react-icons/hi";
 import Link from "next/link";
-import { useMyPaymentQuery } from "@/redux/api/paymentApi";
-import { TPaymentData } from "@/types";
+
 import moment from "moment";
 
 const MembershipCard = () => {

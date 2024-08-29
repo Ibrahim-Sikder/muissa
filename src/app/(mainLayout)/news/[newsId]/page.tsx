@@ -154,6 +154,7 @@ const News = async ({ params }: BlogId) => {
 
   }
 
+  console.log(blogDetails)
 
 
   const formatDate = (dateString: string) => {
@@ -277,7 +278,8 @@ const News = async ({ params }: BlogId) => {
           <div className="lg:col-span-8 ">
             <div >
               <div className="newsDetailsRightSideWrap text-[15px]">
-                <Image src={news} className="rightSideImg" alt="news" />
+
+                <Image src={blog?.data?.blog_image} width={1000} height={300} className="rightSideImg" alt="news" />
                 <div className="my-5 px-5 ">
                   <div className="flex items-center space-x-3 ">
                     <FaCalendarAlt />

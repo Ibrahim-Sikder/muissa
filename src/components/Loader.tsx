@@ -1,11 +1,11 @@
-import { Box, CircularProgress } from "@mui/material";
+import { Box, } from "@mui/material";
 import Image from "next/image";
 import url from "../assets/loader.gif";
 
 const Loader = () => {
   return (
-    <Box className="flex justify-center items-center h-screen bg-white">
-      {/* <CircularProgress /> */}
+    <Box className="flex justify-center  items-center h-screen bg-white">
+  
       <Image
         src={url}
         height={60}
