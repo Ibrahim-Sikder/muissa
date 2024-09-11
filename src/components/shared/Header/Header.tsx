@@ -117,7 +117,7 @@ const Header = () => {
               <FaEnvelope className="headerIcon mr-2" />
               <div>
                 <b className="block text-sm">Mail us for help </b>
-                <small>muissaltd@gmail.com</small>
+                <small>info@muissa.com </small>
               </div>
             </div>
             <div className="flex ">
