@@ -46,7 +46,7 @@ const Footer = async () => {
                 <div className="flex items-center gap-2 justify-center md:justify-start">
                   <EnvelopeIcon className="h-6 w-6" />
                   <a href="mailto:muissaltd@gmail.com" className="text-blue-500">
-                    muissaltd@gmail.com
+                  info@muissa.com
                   </a>
                 </div>
 
