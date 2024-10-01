@@ -42,7 +42,7 @@ const Footer = async () => {
           <div className="flex text-center flex-col md:flex-row justify-center gap-14 md:justify-between  text-white md:text-left">
             <div className="md:w-[500px] w-full px-4">
               <div className="space-y-4">
-                <Image
+                <Image                             
                   className="w-32 mx-auto md:mx-0 md:w-56 "
                   src={logo}
                   alt="logo"
