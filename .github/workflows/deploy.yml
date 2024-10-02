@@ -22,6 +22,11 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Clean server directory
+        run: |
+          echo "Removing old files from server directory..."
+          rm -rf /var/www/html/muissa/*
+
       - name: Deploy and restart with pm2
         run: |
           # Copy all files from the repository root to the server directory
