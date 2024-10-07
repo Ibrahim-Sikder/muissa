@@ -7,6 +7,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { Toaster } from "sonner";
 import dynamic from "next/dynamic";
 import MessageIcons from "@/components/Message/MessageIcons";
+import Script from "next/script"; // use next/script for proper script management
 import Head from "next/head";
 
 const BackTopButton = dynamic(
@@ -35,8 +36,6 @@ export const metadata: Metadata = {
   },
 };
 
-
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -45,18 +44,30 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll="0">
       <Head>
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-5311HCY79B"
-        ></script>
+        <meta name="google-site-verification" content="Yx4A-4On_CHg-sggHL-sdmyUL2Kiw7cOSno1em-fshQ" />
       </Head>
+      {/* Google Analytics script */}
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-5311HCY79B"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-5311HCY79B');
+        `}
+      </Script>
+      
       <Providers>
         <body className={hindiSiliguri.className}>
           <Toaster position="bottom-right" richColors />
           <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+          <MessageIcons />
         </body>
       </Providers>
-      <MessageIcons />
     </html>
   );
 }
