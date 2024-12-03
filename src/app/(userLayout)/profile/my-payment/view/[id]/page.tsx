@@ -127,8 +127,8 @@ const ShowInvoice = () => {
                       <div className="flex flex-col ">
                         <strong>:  Muissa Business Consulting
                           Ltd</strong>
-                        <strong>: muissa@gmail.com</strong>
-                        <strong>: 34567890</strong>
+                        <strong>: info@muissa.com</strong>
+                        <strong>: 01403-852850</strong>
                         <strong>: www.muissa.com</strong>
                         <strong>: House-08, Road-07, Block-C, Banasree,Dhaka-1219</strong>
                       </div>

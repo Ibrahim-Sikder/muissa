@@ -1,6 +1,3 @@
-
-
-
 import { Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,16 +15,23 @@ import NewsLetter from "./NewsLetter";
 import { TServices } from "@/types";
 
 const Footer = async () => {
-
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/services/get-services`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_API_URL}/services/get-services`,
+    {
+      cache: "no-store",
+    }
+  );
   const servicesData = await res.json();
-  const sortedServices: TServices[] = servicesData?.data.services?.sort((a: TServices, b: TServices) => a.priority - b.priority);
+  const sortedServices: TServices[] = servicesData?.data.services?.sort(
+    (a: TServices, b: TServices) => a.priority - b.priority
+  );
 
   if (!sortedServices || !servicesData) {
-    return <h1 className="mt-10 flex items-center justify-center text-3xl capitalize ">Oops! Services data not found! </h1>
-
+    return (
+      <h1 className="mt-10 flex items-center justify-center text-3xl capitalize ">
+        Oops! Services data not found!{" "}
+      </h1>
+    );
   }
 
   return (
@@ -38,15 +42,15 @@ const Footer = async () => {
           <div className="flex text-center flex-col md:flex-row justify-center gap-14 md:justify-between  text-white md:text-left">
             <div className="md:w-[500px] w-full px-4">
               <div className="space-y-4">
-                <Image
+                <Image                             
                   className="w-32 mx-auto md:mx-0 md:w-56 "
                   src={logo}
                   alt="logo"
                 />
                 <div className="flex items-center gap-2 justify-center md:justify-start">
                   <EnvelopeIcon className="h-6 w-6" />
-                  <a href="mailto:muissaltd@gmail.com" className="text-blue-500">
-                  info@muissa.com
+                  <a href="mailto:info@muissa.com" className="text-blue-500">
+                    info@muissa.com
                   </a>
                 </div>
 
@@ -56,7 +60,6 @@ const Footer = async () => {
                     09613244844
                   </a>
                 </div>
-
 
                 <div>
                   <Link
@@ -114,15 +117,66 @@ const Footer = async () => {
             <div className="md:text-left w-full md:w-auto px-4">
               <h4>Services</h4>
               <ul className="space-y-5 mt-5">
-                <li><Link href={`/services?tab=${encodeURIComponent('ফান্ডিং সাপোর্ট')}`}>Funding Support</Link></li>
-                <li><Link href={`/services?tab=${encodeURIComponent('ইনভেস্টমেন্ট সাপোর্ট')}`}>Investment Support</Link></li>
-                <li><Link href={`/services?tab=${encodeURIComponent('মার্কেটিং সাপোর্ট')}`}>Marketing Support</Link></li>
-                <li><Link href={`/services?tab=${encodeURIComponent('আইটি সাপোর্ট')}`}>IT Support</Link></li>
-                <li><Link href={`/services?tab=${encodeURIComponent('প্রোডাক্ট সাপোর্ট')}`}>Product Support</Link></li>
-                <li><Link href={`/services?tab=${encodeURIComponent('সেলস সাপোর্ট')}`}>Sale Support</Link></li>
-                <li><Link href={`/services?tab=${encodeURIComponent('ডেলিভারি সাপোর্ট')}`}>Delivery Supports</Link></li>
+                <li>
+                  <Link
+                    href={`/services?tab=${encodeURIComponent(
+                      "ফান্ডিং সাপোর্ট"
+                    )}`}
+                  >
+                    Funding Support
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={`/services?tab=${encodeURIComponent(
+                      "ইনভেস্টমেন্ট সাপোর্ট"
+                    )}`}
+                  >
+                    Investment Support
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={`/services?tab=${encodeURIComponent(
+                      "মার্কেটিং সাপোর্ট"
+                    )}`}
+                  >
+                    Marketing Support
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={`/services?tab=${encodeURIComponent("আইটি সাপোর্ট")}`}
+                  >
+                    IT Support
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={`/services?tab=${encodeURIComponent(
+                      "প্রোডাক্ট সাপোর্ট"
+                    )}`}
+                  >
+                    Product Support
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={`/services?tab=${encodeURIComponent("সেলস সাপোর্ট")}`}
+                  >
+                    Sale Support
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={`/services?tab=${encodeURIComponent(
+                      "ডেলিভারি সাপোর্ট"
+                    )}`}
+                  >
+                    Delivery Supports
+                  </Link>
+                </li>
               </ul>
-
             </div>
             {/* <div className="md:text-left w-full md:w-auto px-4">
               <h4>Services</h4>
@@ -180,7 +234,11 @@ const Footer = async () => {
 
             <Typography component="p" color="white">
               Technical Support & Maintenance by{" "}
-              <Link href="https://softypy.com/" target="_blank" className="text-white underline">
+              <Link
+                href="https://softypy.com/"
+                target="_blank"
+                className="text-white underline"
+              >
                 SoftyPy
               </Link>
             </Typography>

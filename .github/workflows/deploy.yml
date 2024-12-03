@@ -1,0 +1,44 @@
+name: Deploy to Self-Hosted Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Copy .env file
+        run: cp .env.example .env
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build project
+        run: npm run build
+
+      - name: Clean server directory
+        run: |
+          echo "Removing old files from server directory..."
+          rm -rf /var/www/html/muissa/*
+
+      - name: Deploy and restart with pm2
+        run: |
+          # Copy all files from the repository root to the server directory
+          cp -R * /var/www/html/muissa/  # This will copy everything
+
+          if pm2 list | grep -q muissa-client; then
+            echo "Reloading existing PM2 process for muissa-client..."
+            pm2 reload muissa-client --update-env
+          else
+            echo "Starting new PM2 process for muissa-client..."
+            pm2 start npm --name muissa-client -- start --update-env
+          fi
+
+      - name: Check pm2 status
+        run: pm2 list
