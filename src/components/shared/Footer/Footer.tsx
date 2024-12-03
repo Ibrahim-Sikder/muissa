@@ -110,7 +110,7 @@ const Footer = async () => {
                 </li>
                 <li>Agency partner</li>
                 <li>Case studies</li>
-                <li>Careers</li>
+                <li>Career</li>
               </ul>
             </div>
 
