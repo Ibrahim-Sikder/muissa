@@ -7,7 +7,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { Toaster } from "sonner";
 import dynamic from "next/dynamic";
 import MessageIcons from "@/components/Message/MessageIcons";
-import Script from "next/script";
+import Head from "next/head";
 
 const BackTopButton = dynamic(
   () => import("@/components/BackTopButton/BackTopButton"),
@@ -35,51 +35,28 @@ export const metadata: Metadata = {
   },
 };
 
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
-
-
-
-
   return (
     <html lang="en" data-scroll="0">
-      {/*  GTM initialization script in the */}
-      <head>
-        <Script
-          id="gtm-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-PN7C6NVT');
-            `,
-          }}
-        />
-      </head>
+      <Head>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-5311HCY79B"
+        ></script>
+      </Head>
       <Providers>
         <body className={hindiSiliguri.className}>
-          {/* GTM noscript fallback */}
-          <noscript>
-            <iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-PN7C6NVT"
-              height="0"
-              width="0"
-              style={{ display: "none", visibility: "hidden" }}
-            ></iframe>
-          </noscript>
           <Toaster position="bottom-right" richColors />
           <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
-          <MessageIcons />
         </body>
       </Providers>
+      <MessageIcons />
     </html>
   );
 }
