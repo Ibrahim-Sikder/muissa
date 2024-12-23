@@ -104,3 +104,7 @@ body {
 .socialBg {
   background: rgba(255, 255, 255, 0.2);
 }
+.mui-46bh2p-MuiCardContent-root:last-child {
+  padding-bottom: 24px;
+  background: #3B3A3A;
+}

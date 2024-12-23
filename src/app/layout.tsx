@@ -4,7 +4,6 @@ import "./globals.css";
 import Providers from "@/lib/Providers";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { Toaster } from "sonner";
-import dynamic from "next/dynamic";
 import MessageIcons from "@/components/Message/MessageIcons";
 import Script from "next/script";
 
