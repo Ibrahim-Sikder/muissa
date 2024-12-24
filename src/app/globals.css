@@ -49,8 +49,6 @@ body {
   margin-top: 100px;
 }
 
-
-
 .w-270px {
   width: 270px;
 }
@@ -106,5 +104,10 @@ body {
 }
 .mui-46bh2p-MuiCardContent-root:last-child {
   padding-bottom: 24px;
-  background: #3B3A3A;
+  background: #3b3a3a;
+}
+
+.mui-46bh2p-MuiCardContent-root:last-child {
+  padding-bottom: 24px;
+  background: #1591a3;
 }

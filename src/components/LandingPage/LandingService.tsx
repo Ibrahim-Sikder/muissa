@@ -28,7 +28,7 @@ export default function ServiceCategories() {
 
 
           {/* Left side - Features list */}
-          <div className="space-y-4">
+          <div className="space-y-4 order-2 md:order-1 ">
 
 
             <List sx={{ color: 'white' }}>
@@ -99,7 +99,7 @@ export default function ServiceCategories() {
 
           </div>
           {/* Right side - Service cards */}
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-2 gap-8 order-1 md:order-2">
             <div className='w-[500px] h-[200px] md:h-[500px] rounded-md  overflow-hidden' >
               <Image alt='services' src={company} className='w-full h-full object-cover' />
             </div>

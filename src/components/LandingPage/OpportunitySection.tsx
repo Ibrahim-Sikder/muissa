@@ -23,7 +23,7 @@ export default function NotificationPage() {
     <ThemeProvider theme={darkTheme}>
       <Box
         sx={{
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%)',
+
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -70,13 +70,13 @@ export default function NotificationPage() {
                 fontSize: '1rem',
                 textTransform: 'none',
                 borderRadius: 1,
-                backgroundColor: '#ff3d3d',
+                backgroundColor: '#1591A3',
                 '&:hover': {
                   backgroundColor: '#ff2424'
                 }
               }}
             >
-             Get Your Membership Today 
+              Get Your Membership Today
             </Button>
           </Box>
         </Container>

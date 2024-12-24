@@ -37,20 +37,6 @@ const testimonials = [
     rating: 5,
     avatar: '/placeholder.svg?height=60&width=60',
   },
-  {
-    name: 'তাহমিনা খান',
-    role: 'মালিক, ক্রিয়েটিভ সলিউশনস',
-    comment: "Muissa এর ফান্ডিং সাপোর্ট এবং ইনভেস্টমেন্ট সাপোর্ট আমাদের স্টার্টআপকে দাঁড়াতে সাহায্য করেছে। তাদের পরামর্শ এবং সমর্থন ছাড়া আমরা এই সফলতা অর্জন করতে পারতাম না। আমি তাদের সেবার প্রতি কৃতজ্ঞ।",
-    rating: 5,
-    avatar: '/placeholder.svg?height=60&width=60',
-  },
-  {
-    name: 'তাহমিনা খান',
-    role: 'মালিক, ক্রিয়েটিভ সলিউশনস',
-    comment: "Muissa এর ফান্ডিং সাপোর্ট এবং ইনভেস্টমেন্ট সাপোর্ট আমাদের স্টার্টআপকে দাঁড়াতে সাহায্য করেছে। তাদের পরামর্শ এবং সমর্থন ছাড়া আমরা এই সফলতা অর্জন করতে পারতাম না। আমি তাদের সেবার প্রতি কৃতজ্ঞ।",
-    rating: 5,
-    avatar: '/placeholder.svg?height=60&width=60',
-  },
 ]
 
 export default function Testimonials() {
@@ -61,7 +47,7 @@ export default function Testimonials() {
   }, [])
 
   return (
-    <Box py={8} >
+    <Box py={8}>
       <Typography
         variant="h4"
         component="h2"
@@ -76,7 +62,7 @@ export default function Testimonials() {
             sm: '2rem',
             md: '3rem',
             lg: '3.5rem',
-          }
+          },
         }}
       >
         আমাদের গ্রাহকদের মতামত
@@ -103,29 +89,45 @@ export default function Testimonials() {
         >
           {testimonials.map((testimonial, index) => (
             <SwiperSlide key={index}>
-              <Card sx={{
-                height: '100%',
-                bgcolor: '#2C2C2C',
-                color: 'white',
-                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Initial shadow
-                transition: 'box-shadow 0.3s ease', // Smooth transition
-                '&:hover': {
-                  boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.2)', // Shadow on hover
-                },
-              }}>
+              <Card
+                sx={{
+                  height: '100%',
+                  background: 'red', // Card background color set to red
+                  color: 'white',
+                  boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+                  transition: 'box-shadow 0.3s ease',
+                  '&:hover': {
+                    boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.2)',
+                  },
+                }}
+              >
                 <CardContent>
                   <Box display="flex" alignItems="center" mb={2}>
-                    <Avatar src={testimonial.avatar} sx={{ width: 60, height: 60, mr: 2 }} />
+                    <Avatar
+                      src={testimonial.avatar}
+                      sx={{ width: 60, height: 60, mr: 2 }}
+                    />
                     <Box>
-                      <Typography variant="h6" component="h3" sx={{ color: 'white' }}>
+                      <Typography
+                        variant="h6"
+                        component="h3"
+                        sx={{ color: 'white' }}
+                      >
                         {testimonial.name}
                       </Typography>
-                      <Typography variant="body2" sx={{ color: 'white', opacity: 0.8 }}>
+                      <Typography
+                        variant="body2"
+                        sx={{ color: 'white', opacity: 0.8 }}
+                      >
                         {testimonial.role}
                       </Typography>
                     </Box>
                   </Box>
-                  <Typography variant="body2" paragraph sx={{ color: 'white', opacity: 0.9 }}>
+                  <Typography
+                    variant="body2"
+                    paragraph
+                    sx={{ color: 'white', opacity: 0.9 }}
+                  >
                     {testimonial.comment}
                   </Typography>
                   <Rating value={testimonial.rating} readOnly />
@@ -138,4 +140,3 @@ export default function Testimonials() {
     </Box>
   )
 }
-

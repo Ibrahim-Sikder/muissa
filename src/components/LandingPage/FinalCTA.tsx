@@ -23,7 +23,7 @@ export default function NotificationPage() {
     <ThemeProvider theme={darkTheme}>
       <Box
         sx={{
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%)',
+        
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -70,10 +70,10 @@ export default function NotificationPage() {
               Get Your Membership Today
             </Button> */}
             <div className="flex flex-wrap gap-2 items-center justify-center">
-              <span className="bg-[#FF0000] text-white px-4 py-1 rounded">
+              <span className="bg-[#1591A3] text-white px-4 py-1 rounded">
                 GET FREE CONSULTANCY
               </span>
-              <span className="bg-[#FF0000] text-white px-4 py-1 rounded">
+              <span className="bg-[#1591A3] text-white px-4 py-1 rounded">
                 09613-244444
               </span>
             </div>

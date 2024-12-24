@@ -16,7 +16,7 @@ import WhyOurService from "./WhyOurService";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-zinc-900 text-white">
+    <div className="min-h-screen bg-[#00305C] text-white">
       <main className="container mx-auto px-4">
 
         <LandingHero />

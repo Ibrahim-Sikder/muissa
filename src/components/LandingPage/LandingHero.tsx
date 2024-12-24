@@ -35,7 +35,7 @@ const slides = [
 export default function TaxTalksLanding() {
 
   return (
-    <div className=" bg-zinc-900 text-white relative overflow-hidden">
+    <div className="  text-white relative overflow-hidden">
 
 
       {slides.map((slide, index) => (
@@ -43,7 +43,7 @@ export default function TaxTalksLanding() {
           <div className="space-y-8">
             {/* Red banner */}
             <div className="relative">
-              <div className="absolute -left-4 top-0 bg-red-500 text-white py-2 px-4 transform -rotate-12">
+              <div className="absolute -left-4 top-0 bg-[#1591A3] text-white py-2 px-4 transform -rotate-12">
                 <p className="text-sm font-medium">MUISSA</p>
               </div>
             </div>
@@ -61,7 +61,7 @@ export default function TaxTalksLanding() {
             <Button
               variant="contained"
               sx={{
-                backgroundColor: '#EF4444',
+                backgroundColor: '#1591A3',
                 '&:hover': {
                   backgroundColor: 'darkred',
                 },

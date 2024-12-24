@@ -5,12 +5,8 @@ import {
   Box,
   Button,
   Container,
-  Radio,
-  RadioGroup,
   TextField,
   Typography,
-  FormControlLabel,
-  FormControl,
 } from '@mui/material'
 import { Person, Email, Phone, Home, Apartment } from '@mui/icons-material'
 
@@ -21,7 +17,7 @@ export default function QuoteRequestForm() {
     <Container
       maxWidth={false}
       sx={{
-        bgcolor: '#1a1a2e',
+        bgcolor: '#',
 
       }}
     >
@@ -29,7 +25,7 @@ export default function QuoteRequestForm() {
         sx={{
           bgcolor: 'white',
           borderRadius: '20px',
-          p:4,
+          p: { xs: 2, sm: 4,md: 4 },
           width: '100%',
           maxWidth: '500px',
           boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
@@ -41,10 +37,10 @@ export default function QuoteRequestForm() {
           sx={{
             fontWeight: 700,
             mb: 1,
-            color: 'black', // Define color here
+            color: '#1591A3',
             fontSize: {
-              xs: '1.3rem', 
-              sm: '2rem',    
+              xs: '1.3rem',
+              sm: '2rem',
             },
           }}
         >
@@ -127,9 +123,10 @@ export default function QuoteRequestForm() {
             fullWidth
             variant="contained"
             sx={{
-              bgcolor: '#ff6347',
+              bgcolor: '#1591A3',
               color: 'white',
-              py: 1.5,
+          
+              py: { xs: 1, sm: 1,md: 1.5 },
               borderRadius: '25px',
               textTransform: 'none',
               fontSize: '1rem',

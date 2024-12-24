@@ -23,7 +23,7 @@ export default function BusinessSection() {
   ]
 
   return (
-    <div className="mt-[60px] bg-gray-950 text-white py-8 md:px-4 relative overflow-hidden">
+    <div className="mt-[60px]  text-white py-8 md:px-4 relative overflow-hidden">
       {/* Background pattern */}
       <div
         className="absolute inset-0 opacity-10"
