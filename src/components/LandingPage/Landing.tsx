@@ -10,7 +10,6 @@ import ServiceCategories from "./LandingService";
 import OpportunitySection from "./OpportunitySection";
 import RegistrationForm from "./RegForm";
 import ServiceHighlights from "./ServiceHighlight";
-import TaxExperBanner from "./TaxExperBanner";
 import Testimonials from "./Testimonial";
 import WhyOurService from "./WhyOurService";
 
@@ -21,18 +20,17 @@ export default function LandingPage() {
       <main className="container mx-auto px-4">
 
         <LandingHero />
-        <LandingPageService />
-        <WhyOurService />
+        <WhyOurService/>
         <Benefits />
         <ServiceCategories />
-        {/* <FeatureSection /> */}
         <OpportunitySection />
-        <ServiceHighlights />
-        <LandingPageFAQ />
+        {/* <ServiceHighlights /> */}
+        {/* <LandingPageService /> */}
+        {/* <FeatureSection /> */}
+        {/* <LandingPageFAQ /> */}
         <Testimonials />
         <FinalCTA />
-        <RegistrationForm />
-        <LandingFooter />
+        {/* <LandingFooter /> */}
       </main>
 
     </div>

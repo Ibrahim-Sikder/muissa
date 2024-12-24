@@ -1,82 +1,148 @@
 'use client'
 
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import MenuItem from '@mui/material/MenuItem'
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
-import Paper from '@mui/material/Paper'
-import Stack from '@mui/material/Stack'
+import { useState } from 'react'
+import {
+  Box,
+  Button,
+  Container,
+  Radio,
+  RadioGroup,
+  TextField,
+  Typography,
+  FormControlLabel,
+  FormControl,
+} from '@mui/material'
+import { Person, Email, Phone, Home, Apartment } from '@mui/icons-material'
 
-export default function RegistrationForm() {
+export default function QuoteRequestForm() {
+  const [consultMethod, setConsultMethod] = useState('virtual')
+
   return (
-    <Box py={8}>
-      <Typography variant="h4" component="h2" textAlign="center" gutterBottom fontWeight="bold">
-        ফর্ম পূরণ করে রেজিস্ট্রেশন করুন
-      </Typography>
-      <Paper
-        component="form"
+    <Container
+      maxWidth={false}
+      sx={{
+        bgcolor: '#1a1a2e',
+
+      }}
+    >
+      <Box
         sx={{
-          maxWidth: 600,
-          mx: 'auto',
-          p: 4,
+          bgcolor: 'white',
+          borderRadius: '20px',
+          p:4,
+          width: '100%',
+          maxWidth: '500px',
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
         }}
       >
-        <Stack spacing={3}>
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{
+            fontWeight: 700,
+            mb: 1,
+            color: 'black', // Define color here
+            fontSize: {
+              xs: '1.3rem', 
+              sm: '2rem',    
+            },
+          }}
+        >
+          Request Membership
+        </Typography>
+
+        <Typography
+          variant="subtitle1"
+          sx={{
+            color: 'text.secondary',
+            mb: 4,
+            fontSize: { xs: '0.875rem', sm: '1rem' },
+          }}
+        >
+          Marketing Business campaign
+        </Typography>
+
+        <Box component="form" noValidate autoComplete="off">
           <TextField
             fullWidth
-            label="আপনার নাম"
+            placeholder=" Name"
             variant="outlined"
+            sx={{ mb: 3 }}
+            InputProps={{
+              startAdornment: (
+                <Person sx={{ color: 'text.secondary', mr: 1 }} />
+              ),
+            }}
           />
+
           <TextField
             fullWidth
-            label="ইমেইল এড্রেস"
+            placeholder="Email Address"
+            variant="outlined"
             type="email"
+            sx={{ mb: 3 }}
+            InputProps={{
+              startAdornment: (
+                <Email sx={{ color: 'text.secondary', mr: 1 }} />
+              ),
+            }}
+          />
+
+          <TextField
+            fullWidth
+            placeholder="Phone No"
             variant="outlined"
+            sx={{ mb: 3 }}
+            InputProps={{
+              startAdornment: (
+                <Phone sx={{ color: 'text.secondary', mr: 1 }} />
+              ),
+            }}
           />
           <TextField
             fullWidth
-            label="মোবাইল নাম্বার"
-            type="tel"
+            placeholder="Business Name"
             variant="outlined"
+            sx={{ mb: 3 }}
+            InputProps={{
+              startAdornment: (
+                <Apartment sx={{ color: 'text.secondary', mr: 1 }} />
+              ),
+            }}
           />
           <TextField
             fullWidth
-            select
-            label="বিজনেস টাইপ"
+            placeholder="Business Address"
             variant="outlined"
-          >
-            <MenuItem value="llc">LLC</MenuItem>
-            <MenuItem value="corporation">Corporation</MenuItem>
-          </TextField>
-          <TextField
-            fullWidth
-            select
-            label="Company Formation Status"
-            variant="outlined"
-          >
-            <MenuItem value="new">New Company</MenuItem>
-            <MenuItem value="existing">Existing Company</MenuItem>
-          </TextField>
-          <TextField
-            fullWidth
-            label="আপনার মেসেজ"
-            multiline
-            rows={4}
-            variant="outlined"
+            sx={{ mb: 3 }}
+            InputProps={{
+              startAdornment: (
+                <Home sx={{ color: 'text.secondary', mr: 1 }} />
+              ),
+            }}
           />
+
+
           <Button
             fullWidth
             variant="contained"
-            color="primary"
-            size="large"
-            type="submit"
+            sx={{
+              bgcolor: '#ff6347',
+              color: 'white',
+              py: 1.5,
+              borderRadius: '25px',
+              textTransform: 'none',
+              fontSize: '1rem',
+              '&:hover': {
+                bgcolor: '#ff4f33',
+              },
+            }}
           >
-            সাবমিট
+            Get Membership
           </Button>
-        </Stack>
-      </Paper>
-    </Box>
+        </Box>
+      </Box>
+    </Container>
   )
 }
 

@@ -76,7 +76,7 @@ export default function NotificationPage() {
                 }
               }}
             >
-              আমাদের সাথে যুক্ত হোন
+             Get Your Membership Today 
             </Button>
           </Box>
         </Container>

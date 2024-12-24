@@ -1,8 +1,12 @@
 'use client'
 
-import { Card } from '@mui/material'
-import { LightbulbIcon, Building2Icon, FileTextIcon, CoinsIcon } from 'lucide-react'
-
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import Image from 'next/image';
+import company from '../../../src/assets/invest/ivestment4.jpg'
 export default function BusinessSection() {
   const features = [
     " ব্যবসায়ের জরুরী ফান্ড তৈরিতে পরামর্শ ও সহযোগিতা করা।",
@@ -18,27 +22,8 @@ export default function BusinessSection() {
     "বিজ্ঞাপন সেবা (All type of social media marketing, google ads marketing and many more) পাচ্ছেন আমাদের প্লাটফর্মে।"
   ]
 
-  const services = [
-    {
-      icon: <LightbulbIcon className="w-8 h-8 text-yellow-400" />,
-      title: "ব্যবসায়িক আইডিয়া"
-    },
-    {
-      icon: <Building2Icon className="w-8 h-8 text-blue-400" />,
-      title: "গ্লোবালকোম্পানি ফর্মেশন"
-    },
-    {
-      icon: <FileTextIcon className="w-8 h-8 text-green-400" />,
-      title: "ফান্ডিং সাপোর্ট"
-    },
-    {
-      icon: <CoinsIcon className="w-8 h-8 text-red-400" />,
-      title: "ইনভেস্টমেন্ট সাপোর্ট"
-    }
-  ]
-
   return (
-    <div className="mt-[60px] bg-gray-950 text-white py-16 px-4 relative overflow-hidden">
+    <div className="mt-[60px] bg-gray-950 text-white py-8 md:px-4 relative overflow-hidden">
       {/* Background pattern */}
       <div
         className="absolute inset-0 opacity-10"
@@ -48,51 +33,77 @@ export default function BusinessSection() {
       />
 
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-16">
-          Muissa-তে আপনি যা পাবেন
-        </h1>
+
 
         <div className="grid md:grid-cols-2 gap-16 items-start">
-          {/* Left side - Features list */}
-          <div className="space-y-4">
-            {features.map((feature, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <div className="rounded-full bg-red-500 p-1 mt-1">
-                  <div className="w-2 h-2" />
-                </div>
-                <p className="text-lg">{feature}</p>
-              </div>
-            ))}
 
-            <button className="mt-8 bg-red-500 text-white px-8 py-3 rounded-md hover:bg-red-600 transition-colors">
-              রেজিস্ট্রেশন করুন
-            </button>
-          </div>
 
           {/* Right side - Service cards */}
-          <div className="grid grid-cols-2 gap-8">
-            {services.map((service, index) => (
-              <div key={index} className="relative group">
-                {/* Arrow */}
-                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-blue-400 opacity-60">
-                  ▼
-                </div>
+          <div className="grid grid-cols-2 gap-3  md:gap-8">
+            <div className='w-[500px] h-[200px] md:h-[500px] rounded-md  overflow-hidden' >
+              <Image alt='services' src={company} className='w-full h-full object-cover' />
+            </div>
+          </div>
+          {/* Left side - Features list */}
+          <div className="space-y-4">
+            <h1 className="text-2xl md:text-5xl font-bold mb-5">
+              About Our Business
+            </h1>
 
-                {/* Card */}
-                <Card className="relative p-6 flex flex-col items-center text-center bg-gray-900/50 border-gray-800 group-hover:border-blue-500/50 transition-all duration-300">
-                  {/* Glowing effect */}
-                  <div className="absolute inset-0 bg-blue-500/5 rounded-lg filter blur-xl group-hover:bg-blue-500/10 transition-all duration-300" />
+            <List sx={{ color: 'white' }}>
+              <ListItem>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <CheckCircleIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primaryTypographyProps={{ style: { color: 'white' } }}
+                  primary="Customizable funding strategies tailored to your business needs."
+                />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <CheckCircleIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primaryTypographyProps={{ style: { color: 'white' } }}
+                  primary="End-to-end support in creating and submitting funding proposals."
+                />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <CheckCircleIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primaryTypographyProps={{ style: { color: 'white' } }}
+                  primary="Expert guidance in preparing essential business documentation for funding."
+                />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <CheckCircleIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primaryTypographyProps={{ style: { color: 'white' } }}
+                  primary="Personalized investor pitch preparation and consultation for maximum impact."
+                />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <CheckCircleIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primaryTypographyProps={{ style: { color: 'white' } }}
+                  primary="In-depth market analysis to identify and secure potential funding opportunities."
+                />
+              </ListItem>
 
-                  {/* Content */}
-                  <div className="relative z-10">
-                    <div className="p-3 rounded-full bg-gray-800/50 mb-4">
-                      {service.icon}
-                    </div>
-                    <p className="text-sm whitespace-pre-line">{service.title}</p>
-                  </div>
-                </Card>
-              </div>
-            ))}
+
+            </List>
+
+            <p>ব্যবসায়ের জরুরি ফান্ড তৈরির পরামর্শ থেকে শুরু করে প্রতিষ্ঠানের কাগজপত্র প্রস্তুত, ফান্ডিং প্রোপোজাল ও শক্তিশালী বক্তব্য তৈরিতে সহায়তা প্রদান; মার্কেট অ্যানালাইসিসের মাধ্যমে বাজার তৈরি, প্রতিষ্ঠানের অ্যানালাইসিস ও মনিটরিং রিপোর্ট প্রস্তুত, এবং কার্যপদ্ধতি নির্ধারণে পরামর্শ প্রদানের মাধ্যমে আমরা ব্যবসায়িক সমাধানে নির্ভরযোগ্য সেবা প্রদান করি।</p>
+
+
+
           </div>
         </div>
       </div>
