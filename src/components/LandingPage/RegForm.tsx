@@ -35,7 +35,6 @@ const mettingSchema = z.object({
   mettingTopic: z.string({ required_error: 'Metting topic is required' }),
 });
 
-// const MUISelect = dynamic(() => import('../Forms/select'), { ssr: false })
 type propsType = {
   onClose: any
 }

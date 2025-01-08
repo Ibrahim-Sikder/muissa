@@ -20,7 +20,6 @@ import 'moment/locale/bn';
 
 const ThankYouPage = () => {
 
-  
     const theme = useTheme();
     const searchParams = useSearchParams();
     const id = searchParams.get('id');
@@ -35,9 +34,9 @@ const ThankYouPage = () => {
             try {
                 let url = '';
                 if (id) {
-                    url = `http://localhost:5000/api/v1/metting/consultancy-book/${id}`;
+                    url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/metting/consultancy-book/${id}`;
                 } else if (mettingId) {
-                    url = `http://localhost:5000/api/v1/metting/${mettingId}`;
+                    url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/metting/${mettingId}`;
                 }
 
                 if (url) {
