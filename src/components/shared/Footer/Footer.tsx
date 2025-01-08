@@ -6,7 +6,13 @@ const Footer = () => {
   const pathname = usePathname()
 
   return (
-    <footer className={pathname == '/investment' || 'investment/one-to-one-consultancy-book-metting' || '/thank-you-consultant' ? 'hidden' : 'block'}>
+    <footer className={
+      pathname === '/investment' ||
+        pathname === '/investment/one-to-one-consultancy-book-metting' ||
+        pathname === '/thank-you-consultant'
+        ? 'hidden'
+        : 'block'
+    }>
       <FooterData />
     </footer>
   );

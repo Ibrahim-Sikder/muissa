@@ -95,14 +95,19 @@ export default function ApplyButton() {
                 animate={controls}
                 style={{ display: 'inline-block' }}
             >
-                <Button
-                    component={Link}
-                    href='/investment/one-to-one-consultancy-book-metting'
-                    variant="contained"
-                    sx={btnStyle}
-                >
-                    ONE TO ONE CONSULTANCY BOOK
-                </Button>
+              <motion.div
+                animate={controls}
+                style={{ display: 'inline-block' }}
+            >
+                <Link href='/investment/one-to-one-consultancy-book-metting' passHref>
+                    <Button
+                        variant="contained"
+                        sx={btnStyle}
+                    >
+                        ONE TO ONE CONSULTANCY BOOK
+                    </Button>
+                </Link>
+            </motion.div>
             </motion.div>
 
 

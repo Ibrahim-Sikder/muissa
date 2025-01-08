@@ -54,7 +54,7 @@ const MeetingBooking = () => {
                 `${process.env.NEXT_PUBLIC_BASE_API_URL}/metting/consultancy-book`,
                 data
             );
-      
+
             if (res.status === 200 || res.status === 201) {
                 const meetingId = res.data?.data._id;
                 toast.success('Meeting booked successfully!', {
@@ -103,7 +103,7 @@ const MeetingBooking = () => {
                 <Container maxWidth="lg">
                     <Stack spacing={1} alignItems="center">
 
-                        <Box sx={{ textAlign: 'center' }}>
+                        <Box sx={{ textAlign: 'center', marginBottom: '50px', }}>
                             <Typography
                                 variant="h2"
                                 sx={{
@@ -125,6 +125,7 @@ const MeetingBooking = () => {
                                     color: 'white',
                                     maxWidth: '600px',
                                     mx: 'auto',
+
                                 }}
                             >
                                 A meeting is when two or more people come together to discuss
@@ -133,6 +134,7 @@ const MeetingBooking = () => {
                         </Box>
 
                         <Paper
+
                             elevation={24}
                             sx={{
                                 borderRadius: 4,
@@ -144,6 +146,7 @@ const MeetingBooking = () => {
                                 flexDirection: { xs: 'column', md: 'row' },
                                 maxWidth: 900,
                                 width: '100%',
+
                             }}
                         >
                             <Box

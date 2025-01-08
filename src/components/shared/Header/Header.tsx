@@ -85,7 +85,13 @@ const Header = () => {
 
 
   return (
-    <header className={pathname == '/investment' || 'investment/one-to-one-consultancy-book-metting' || '/thank-you-consultant' ? 'hidden' : 'block'}>
+    <header className={
+      pathname === '/investment' ||
+        pathname === '/investment/one-to-one-consultancy-book-metting' ||
+        pathname === '/thank-you-consultant'
+        ? 'hidden'
+        : 'block'
+    }>
       <TopBar />
       <Container className="headerWrap ">
         <div className=" flex items-center justify-between px-5 xl:px-0  ">
