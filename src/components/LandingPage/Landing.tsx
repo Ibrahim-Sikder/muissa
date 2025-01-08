@@ -1,36 +1,33 @@
+import ApplyButton from "./ApplyButton";
 import Benefits from "./Benefits";
-import LandingPageService from "./LandingPageService";
-import FeatureSection from "./FeatureSection";
 import FinalCTA from "./FinalCTA";
-import LandingFooter from "./LandingFooter";
+import Footer from "./Footer";
+import InvestmentSection from "./InvestmentSection";
 import LandingHero from "./LandingHero";
-import LandingPageFAQ from "./LandingPageFAQ";
-import LandingService from "./LandingService";
+import LandingPageHeader from "./landingPageHeader/Header";
 import ServiceCategories from "./LandingService";
-import OpportunitySection from "./OpportunitySection";
-import RegistrationForm from "./RegForm";
-import ServiceHighlights from "./ServiceHighlight";
+import ComparionSection from "./ResultSection";
 import Testimonials from "./Testimonial";
-import WhyOurService from "./WhyOurService";
-
-
+import VideoSection from "./VideoSection";
+import WhyChooseUs from "./WhyChooseUs";
 export default function LandingPage() {
-  return (
-    <div className="min-h-screen bg-[#00305C] text-white">
-      <main className="container mx-auto px-4">
 
+
+  return (
+    <div className="min-h-screen bg-[#00305C]  text-white">
+      <LandingPageHeader />
+      <main className="container mx-auto px-4 pt-3 md:pt-0 ">
         <LandingHero />
-        <WhyOurService/>
+        <VideoSection />
+        <ApplyButton />
         <Benefits />
         <ServiceCategories />
-        <OpportunitySection />
-        {/* <ServiceHighlights /> */}
-        {/* <LandingPageService /> */}
-        {/* <FeatureSection /> */}
-        {/* <LandingPageFAQ /> */}
+        <InvestmentSection />
+        <WhyChooseUs />
+        <ComparionSection />
         <Testimonials />
         <FinalCTA />
-        {/* <LandingFooter /> */}
+        <Footer />
       </main>
 
     </div>

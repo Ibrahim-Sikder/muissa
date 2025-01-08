@@ -44,60 +44,35 @@ body {
     @apply text-sm md:text-xl font-semibold;
   }
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 .sectionMargin {
   margin-top: 100px;
 }
 
-.w-270px {
-  width: 270px;
+.divider {
+  width: 3px;
+  height: 300px;
+  background: white;
 }
-
-.space-links {
-  transition: 0.3s;
+@media only screen and (max-width: 768px) {
+  .sectionMargin {
+    margin-top: 30px;
+  }
 }
-
-.featureShadow {
-  box-shadow: 0px 72px 129px rgba(0, 0, 0, 0.1);
-}
-
-.space-links:hover {
-  letter-spacing: 1px;
-}
-
-@media (min-width: 800px) {
-  .lh-133 {
-    line-height: 133.5% !important;
+@media only screen and (max-width: 500px) {
+  .divider {
+    width: 3px;
+    height: 150px;
   }
 }
 
-.lh-143 {
-  line-height: 143.5% !important;
-}
 
-.lh-173 {
-  line-height: 173.5% !important;
-}
 
-.pricing-bg {
-  background: linear-gradient(180deg, #d4f2ff 0%, rgba(212, 242, 255, 0) 100%);
-}
-
-.bxshd {
-  box-shadow: 0px 72px 129px rgba(0, 0, 0, 0.1);
-}
-
-.footer-icons {
-  transition: 0.5s;
-}
-
-.footer-icons:hover {
-  transform: translateY(-8px);
-}
-
-.footer-icons:hover > .sepiaa {
-  filter: invert(100.1);
-}
 
 .socialBg {
   background: rgba(255, 255, 255, 0.2);
@@ -111,3 +86,5 @@ body {
   padding-bottom: 24px;
   background: #1591a3;
 }
+
+

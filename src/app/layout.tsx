@@ -65,7 +65,7 @@ export default function RootLayout({
             ></iframe>
           </noscript>
 
-          <Toaster position="bottom-right" richColors />
+          <Toaster position="top-center" richColors />
           <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
           <MessageIcons />
         </body>

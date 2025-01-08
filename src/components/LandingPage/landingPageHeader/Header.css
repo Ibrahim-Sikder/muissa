@@ -1,0 +1,30 @@
+.topBar {
+  width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: #fff;
+}
+.headerIcon {
+  font-size: 30px;
+  color: #1591a3;
+}
+
+.headerWrap {
+  height: 150px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .topBar {
+    width: 100%;
+  }.headerWrap {
+    height: auto;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .headerWrap {
+    height: auto;
+  }
+}

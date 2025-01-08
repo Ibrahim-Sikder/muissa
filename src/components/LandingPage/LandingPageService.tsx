@@ -1,7 +1,7 @@
 'use client'
 
-import { Card, Typography, Button, Box, Avatar, Stack, AvatarGroup } from '@mui/material'
-import { CalendarToday, AccessTime, CheckCircle, ProductionQuantityLimits } from '@mui/icons-material'
+import { CheckCircle } from '@mui/icons-material'
+import { Card, Typography, Button, Box, Stack, } from '@mui/material'
 
 export default function LandingPageService() {
   const webinars = [
@@ -51,17 +51,10 @@ export default function LandingPageService() {
   ]
 
   const iconStyle = { color: '#fff', fontSize: '1rem' }
-  const iconStyle2 = {
-    fontSize: {
-      lg: "75px",
-      md: "60px",
-      sm: "40px",
-      xs: "20px",
-      color: 'white'
-    },
-  };
+ 
   return (
-    <Box sx={{ bgcolor: '#1a1a1a', py: 6, marginTop: '60px' }}>
+    <div className='sectionMargin'>
+      <Box sx={{ bgcolor: '#1a1a1a', py: 6}}>
       <Typography
         variant="h3"
         align="center"
@@ -159,6 +152,7 @@ export default function LandingPageService() {
         ))}
       </Box>
     </Box>
+    </div>
   )
 }
 

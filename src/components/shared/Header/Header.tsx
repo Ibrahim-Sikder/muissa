@@ -85,7 +85,7 @@ const Header = () => {
 
 
   return (
-    <header>
+    <header className={pathname == '/investment' || 'investment/one-to-one-consultancy-book-metting' || '/thank-you-consultant' ? 'hidden' : 'block'}>
       <TopBar />
       <Container className="headerWrap ">
         <div className=" flex items-center justify-between px-5 xl:px-0  ">
@@ -97,12 +97,7 @@ const Header = () => {
                 alt="logo"
               />
 
-              <div>
-                {/* <h3 className="text-sm md:text-xl lg:text-2xl">Muissa</h3> */}
-                {/* <small className="md:mt-0 -mt-2 ">
-                  Business Consulting Ltd.
-                </small> */}
-              </div>
+
             </div>
           </Link>
           <div className="xl:flex items-center  space-x-6  hidden ">
