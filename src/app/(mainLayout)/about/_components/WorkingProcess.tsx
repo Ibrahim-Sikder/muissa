@@ -1,11 +1,9 @@
 import React from "react";
-import { FaArtstation } from "react-icons/fa";
 import "../../about/about.css";
 import icon from "../../../../assets/about/icon2.png";
 import icon2 from "../../../../assets/about/icon3.png";
 import icon3 from "../../../../assets/about/icon4.png";
 import icon4 from "../../../../assets/about/icon5.png";
-import icon5 from "../../../../assets/about/icon6.png";
 import icon6 from "../../../../assets/about/icon.png";
 import icon7 from "../../../../assets/about/call-center.png";
 import icon8 from "../../../../assets/about/funding.png";

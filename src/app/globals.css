@@ -6,9 +6,11 @@
   --icon-fontSize-md: 1.25rem;
   --icon-fontSize-lg: 1.5rem;
 }
+
 .ql-editor {
   min-height: 200px;
 }
+
 *:focus-visible {
   outline: 2px solid transparent;
 }
@@ -16,11 +18,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 /* html,
 body {
   scroll-behavior: smooth;
@@ -28,22 +32,29 @@ body {
 body {
   overflow-x: hidden;
   font-size: 16px;
+  font-family: "Baloo Da 2", serif;
+  font-optical-sizing: auto;
 }
 
 @layer base {
   h1 {
-    @apply text-2xl md:text-4xl  font-bold;
+    @apply text-2xl md:text-4xl font-bold;
   }
+
   h2 {
     @apply text-2xl md:text-3xl font-semibold;
   }
+
   h3 {
     @apply text-2xl font-semibold;
   }
+
   h4 {
     @apply text-sm md:text-xl font-semibold;
   }
 }
+
+
 * {
   margin: 0;
   padding: 0;
@@ -59,11 +70,13 @@ body {
   height: 300px;
   background: white;
 }
+
 @media only screen and (max-width: 768px) {
   .sectionMargin {
     margin-top: 30px;
   }
 }
+
 @media only screen and (max-width: 500px) {
   .divider {
     width: 3px;
@@ -77,6 +90,7 @@ body {
 .socialBg {
   background: rgba(255, 255, 255, 0.2);
 }
+
 .mui-46bh2p-MuiCardContent-root:last-child {
   padding-bottom: 24px;
   background: #3b3a3a;
@@ -88,3 +102,25 @@ body {
 }
 
 
+.cursor-dot,
+.cursor-outline {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #1591a3;
+  border-radius: 50%;
+}
+
+.cursor-outline {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #1591a3;
+  border-radius: 50%;
+  transition: transform 0.2s ease-out;
+}

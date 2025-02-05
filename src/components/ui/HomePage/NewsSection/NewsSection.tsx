@@ -87,7 +87,7 @@ const NewsSection = () => {
         }}
       >
         {blogData && blogData?.blogs?.map((blog: any) => (
-          <SwiperSlide key={blog.id}>
+          <SwiperSlide key={blog._id}>
             <div className="newsWraps">
               <div className="newsCard flex flex-col justify-between">
                 <div>

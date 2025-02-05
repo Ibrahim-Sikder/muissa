@@ -12,27 +12,10 @@ import {
     FaWhatsapp,
 } from "react-icons/fa";
 import NewsLetter from "./NewsLetter";
-import { TServices } from "@/types";
+import FooterService from "./FooterService";
 
-const FooterData = async () => {
-    const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_API_URL}/services/get-services`,
-        {
-            cache: "no-store",
-        }
-    );
-    const servicesData = await res.json();
-    const sortedServices: TServices[] = servicesData?.data.services?.sort(
-        (a: TServices, b: TServices) => a.priority - b.priority
-    );
+const FooterData = () => {
 
-    if (!sortedServices || !servicesData) {
-        return (
-            <h1 className="mt-10 flex items-center justify-center text-3xl capitalize ">
-                Oops! Services data not found!{" "}
-            </h1>
-        );
-    }
 
     return (
         <>
@@ -103,114 +86,40 @@ const FooterData = async () => {
                         </div>
 
                         <div className="md:text-left w-full md:w-auto px-4">
-                            <h4>Our Company</h4>
+                            <h4>আমাদের প্রতিষ্ঠান</h4>
                             <ul className="space-y-5 mt-5">
                                 <li>
-                                    <Link href="/about">About Us</Link>
+                                    <Link href="/about">আমাদের সম্পর্কে</Link>
                                 </li>
-                                <li>Agency partner</li>
-                                <li>Case studies</li>
-                                {/* <li>Career</li> */}
+                                <li>এজেন্সি পার্টনার</li>
+                                <li>কেস স্টাডি</li>
+                                {/* <li>ক্যারিয়ার</li> */}
                             </ul>
                         </div>
 
+
+                        <FooterService />
                         <div className="md:text-left w-full md:w-auto px-4">
-                            <h4>Services</h4>
+                            <h4>রিসোর্স</h4>
                             <ul className="space-y-5 mt-5">
                                 <li>
-                                    <Link
-                                        href={`/services?tab=${encodeURIComponent(
-                                            "ফান্ডিং সাপোর্ট"
-                                        )}`}
-                                    >
-                                        Funding Support
-                                    </Link>
+                                    <Link href="/contact">যোগাযোগ করুন</Link>
                                 </li>
                                 <li>
-                                    <Link
-                                        href={`/services?tab=${encodeURIComponent(
-                                            "ইনভেস্টমেন্ট সাপোর্ট"
-                                        )}`}
-                                    >
-                                        Investment Support
-                                    </Link>
+                                    <Link href={`/news/667a5187e2981142105e84b8`}>ব্লগ</Link>
                                 </li>
                                 <li>
-                                    <Link
-                                        href={`/services?tab=${encodeURIComponent(
-                                            "মার্কেটিং সাপোর্ট"
-                                        )}`}
-                                    >
-                                        Marketing Support
-                                    </Link>
+                                    <Link href="/faq">প্রশ্নোত্তর</Link>
                                 </li>
                                 <li>
-                                    <Link
-                                        href={`/services?tab=${encodeURIComponent("আইটি সাপোর্ট")}`}
-                                    >
-                                        IT Support
-                                    </Link>
+                                    <Link href="/privacy-policy">গোপনীয়তা নীতি</Link>
                                 </li>
                                 <li>
-                                    <Link
-                                        href={`/services?tab=${encodeURIComponent(
-                                            "প্রোডাক্ট সাপোর্ট"
-                                        )}`}
-                                    >
-                                        Product Support
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        href={`/services?tab=${encodeURIComponent("সেলস সাপোর্ট")}`}
-                                    >
-                                        Sale Support
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        href={`/services?tab=${encodeURIComponent(
-                                            "ডেলিভারি সাপোর্ট"
-                                        )}`}
-                                    >
-                                        Delivery Supports
-                                    </Link>
+                                    <Link href="/terms-conditions">শর্তাবলী</Link>
                                 </li>
                             </ul>
                         </div>
-                        {/* <div className="md:text-left w-full md:w-auto px-4">
-              <h4>Services</h4>
 
-              {
-                sortedServices.map((data) => (
-                  <ul key={data._id} className="space-y-5 mt-5">
-                    <Link href={`/services/${data._id}`}>  <li>{data?.category}</li></Link>
-                  </ul>
-                ))
-
-              }
-
-            </div> */}
-                        <div className="md:text-left w-full md:w-auto px-4">
-                            <h4>Resources</h4>
-                            <ul className="space-y-5 mt-5">
-                                <li>
-                                    <Link href="/contact">Contact Us</Link>
-                                </li>
-                                <li>
-                                    <Link href={`/news/667a5187e2981142105e84b8`}>Blog</Link>
-                                </li>
-                                <li>
-                                    <Link href="/faq">FAQs</Link>
-                                </li>
-                                <li>
-                                    <Link href="/privacy-policy">Privacy Policy</Link>
-                                </li>
-                                <li>
-                                    <Link href="/terms-conditions">Terms & Conditions</Link>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                     <Box
                         sx={{
@@ -229,19 +138,25 @@ const FooterData = async () => {
                         textAlign="center"
                     >
                         <Typography component="p" color="white">
-                            &copy;2024 Muissa Business Consulting Ltd. All Rights Reserved.
+                            &copy;২০২৪ মুইসা বিজনেস কনসাল্টিং লিমিটেড। সর্বস্বত্ব সংরক্ষিত।
                         </Typography>
 
-                        <Typography component="p" color="white">
-                            Technical Support & Maintenance by{" "}
-                            <Link
-                                href="https://softypy.com/"
-                                target="_blank"
-                                className="text-white underline"
-                            >
-                                SoftyPy
-                            </Link>
-                        </Typography>
+                        <Box display='flex' gap={1}>
+                            <Typography component="p" color="white">
+
+                                <Link
+                                    href="https://softypy.com/"
+                                    target="_blank"
+                                    className="text-white underline"
+                                >
+                                    SoftyPy
+                                </Link>
+                            </Typography>
+                            <Typography component="p" color="white">
+
+                                দ্বারা প্রযুক্তিগত সহায়তা ও রক্ষণাবেক্ষণ
+                            </Typography>
+                        </Box>
                     </Stack>
                 </Container>
             </Box>

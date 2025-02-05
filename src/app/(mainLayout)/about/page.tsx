@@ -2,7 +2,6 @@ import Container from "@/components/ui/HomePage/Container/Container";
 import "./about.css";
 import consult from "../../../assets/team/team6.png";
 import Image from "next/image";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import CircleProgressBar from "./_components/CircleProgressBar";
 import BrandSection from "@/components/ui/HomePage/BrandSection/BrandSection";
 import Company from "@/components/ui/HomePage/Company/Company";

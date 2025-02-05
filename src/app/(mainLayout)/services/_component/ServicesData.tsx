@@ -151,7 +151,7 @@ function CustomTabPanel(props: TabPanelProps) {
     );
 }
 
-const ServicesData2 = () => {
+const ServicesData = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const tab = searchParams.get('tab');
@@ -175,14 +175,15 @@ const ServicesData2 = () => {
         setValue(newValue);
         router.push(`?tab=${serviceData.services[newValue].category}`);
     };
+    if (isLoading) {
+        return <Loader />;
+    }
 
     if (!serviceData || error) {
         return <h1 className="mt-10 flex items-center justify-center text-3xl capitalize ">Oops! Services data not found! </h1>;
     }
 
-    if (isLoading) {
-        return <Loader />;
-    }
+
 
 
     // console.log('services data ', serviceData)
@@ -248,4 +249,4 @@ const ServicesData2 = () => {
     );
 };
 
-export default ServicesData2;
+export default ServicesData;

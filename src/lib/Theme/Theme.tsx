@@ -1,8 +1,8 @@
 import { createTheme, Theme as MuiTheme } from "@mui/material/styles";
-import { PaletteOptions, } from "@mui/material/styles";
+import { PaletteOptions } from "@mui/material/styles";
 
 // Extend the MUI theme to include custom components
-declare module '@mui/material/styles' {
+declare module "@mui/material/styles" {
   interface Theme {
     customComponents?: {
       MuiPickersCalendarHeader?: {
@@ -44,6 +44,7 @@ const palette: PaletteOptions = {
 };
 
 const typography = {
+  fontFamily: "'Baloo Da 2', 'Roboto', 'Arial', sans-serif",
   body1: {
     color: "#0B1134CC",
   },
@@ -89,7 +90,7 @@ export const theme = createTheme({
   customComponents,
 });
 
+// Customize shadow
 theme.shadows[1] = "0px 5px 22px lightgray";
 
 export type Theme = typeof theme;
-

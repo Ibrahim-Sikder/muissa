@@ -6,11 +6,11 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { Toaster } from "sonner";
 import MessageIcons from "@/components/Message/MessageIcons";
 import Script from "next/script";
+import { Noto_Sans_Bengali, Baloo_Da_2 } from "next/font/google";
 
-
-const hindiSiliguri = Hind_Siliguri({
-  subsets: ["bengali"],
-  weight: ["300", "400", "500", "600"],
+const balooDa2 = Baloo_Da_2({
+  subsets: ["latin", "bengali"],
+  weight: ["400", "500", "700"],
   display: "swap",
 });
 
@@ -54,7 +54,7 @@ export default function RootLayout({
         />
       </head>
       <Providers>
-        <body className={hindiSiliguri.className}>
+        <body className={balooDa2.className}>
           {/* Google Tag Manager (noscript) */}
           <noscript>
             <iframe
