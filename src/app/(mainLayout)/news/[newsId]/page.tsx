@@ -1,12 +1,8 @@
 import Image from "next/image";
-import news from "../../../../assets/news/news5.jpg";
 import "../../news/news.css";
 import Container from "@/components/ui/HomePage/Container/Container";
 import { Button, Divider, Grid } from "@mui/material";
 import { FaCalendarAlt, FaUser } from "react-icons/fa";
-import facebook from "../../../../assets/icon/facebook.png";
-import linkedIn from "../../../../assets/icon/linkedin.png";
-import instagram from "../../../../assets/icon/instagram.png";
 import { HiChevronRight } from "react-icons/hi";
 
 import React from "react";
@@ -40,6 +36,7 @@ export async function generateMetadata({ params }: BlogId): Promise<Metadata> {
     keywords: blog?.data?.seo_keyword || "Muissa Consulting, Blog, News, Consulting insights, Business updates",
   };
 }
+
 
 const renderContent = (content: string) => {
   const parsedContent = ReactHtmlParser(content);

@@ -51,7 +51,7 @@ const FooterData = () => {
                                     >
                                         <div className="flex items-center gap-2 justify-center md:justify-start">
                                             <FaWhatsapp size={24} />
-                                            <p>01403-852850</p>
+                                            <p>01337486528</p>
                                         </div>
                                     </Link>
                                 </div>

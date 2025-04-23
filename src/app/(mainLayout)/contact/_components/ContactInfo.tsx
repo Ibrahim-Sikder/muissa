@@ -41,7 +41,7 @@ const ContactInfo = () => {
           </div>
           <div>
             <h3 className="block text-3xl font">Call for help:</h3>
-            <span>01403-852850</span>
+            <span>01337486528</span>
           </div>
         </div>
       </div>

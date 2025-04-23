@@ -18,12 +18,6 @@ import { useGetMemberForPaymentQuery } from "@/redux/api/memeberApi";
 import MembershipCard from "@/app/(userLayout)/profile/membership/_components/MembershipCard";
 import Loader from "@/components/Loader";
 
-// export const metadata: Metadata = {
-//   title: "Muissa Consulting | Membership ",
-//   description: '"Explore membership opportunities at Muissa Consulting. Learn about our exclusive benefits, resources, and how membership can enhance your business strategies. Join our community to access premium consulting services and industry insights."',
-//   keywords: "Muissa Consulting, Membership benefits, Join Muissa, Business membership, Consulting services, Exclusive benefits, Industry insights, Premium services, Business strategies, Community membership ",
-// };
-
 const Membership = () => {
   const token = getCookie("mui-token");
 
@@ -86,7 +80,6 @@ const Membership = () => {
     },
   ];
 
-console.log(memberShipData.length)
 
   return (
     <section>

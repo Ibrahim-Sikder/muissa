@@ -128,7 +128,7 @@ const ShowInvoice = () => {
                         <strong>:  Muissa Business Consulting
                           Ltd</strong>
                         <strong>: info@muissa.com</strong>
-                        <strong>: 01403-852850</strong>
+                        <strong>: 01337486528</strong>
                         <strong>: www.muissa.com</strong>
                         <strong>: House-08, Road-07, Block-C, Banasree,Dhaka-1219</strong>
                       </div>
